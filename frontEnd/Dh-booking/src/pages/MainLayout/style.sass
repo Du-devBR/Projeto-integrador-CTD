@@ -1,0 +1,80 @@
+@use '../../Style/variables'
+@use '../../Style/mixins'
+
+.container
+  display: flex
+  flex-direction: column
+
+  .container-header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    position: fixed
+    background-color: blue
+    width: 100%
+    height: 80px
+    padding: 0 2rem
+
+    .container-logo
+      display: flex
+      gap: 0.5rem
+      align-items: center
+
+      .slogan
+        font-size: variables.$h2-20px
+        font-weight: variables.$font-sm
+        color: variables.$gray800
+
+    .container-menu-nav
+      display: flex
+      gap: 1rem
+
+      .btn-signIn, .btn-signUp
+        @include mixins.button-not-bgColor
+
+      .user-logged
+        display: flex
+        gap: 1rem
+
+        .avatar-user
+          display: flex
+          align-items: center
+          justify-content: center
+          width: 2.31rem
+          height: 2.31rem
+          background-color: variables.$primary-color
+          border-radius: 50%
+
+          span
+            font-size: variables.$h2-20px
+            color: variables.$gray0
+            text-transform: uppercase
+
+        .name-user
+          display: flex
+          flex-direction: column
+
+          span
+            color: variables.$gray800
+            font-size: variables.$h3-16px
+            font-weight: variables.$font-xs
+
+          :nth-child(2)
+            color: variables.$primary-color
+
+        .btn-logout
+          background-color: variables.$gray0
+          border: none
+          width: 0.125rem
+          height: 1rem
+          transform: rotate(45deg)
+          margin: 0 0 0 1rem
+          cursor: pointer
+
+        .btn-logout::before
+          display: inline-block
+          content: ''
+          width: 0.125rem
+          height: 1rem
+          background-color: variables.$gray0
+          transform: rotate(90deg)
