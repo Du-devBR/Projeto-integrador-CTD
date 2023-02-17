@@ -1,6 +1,7 @@
 import './style.sass'
 import logotipo from '../../assets/img/logo.svg'
 import { useState } from 'react'
+import { Login } from '../Login'
 
 export function MainLayout(){
 
@@ -47,10 +48,10 @@ export function MainLayout(){
         </nav>
       </header>
       <section>
-
+          <Login />
       </section>
       <footer>
-
+          
       </footer>
     </div>
   )
