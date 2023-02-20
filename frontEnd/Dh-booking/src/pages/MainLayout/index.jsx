@@ -58,6 +58,7 @@ export function MainLayout(){
                   </div>
                 ):(
                   <>
+                  {/* incrementar rota ao clicar em login ou cadastrar, utlizar react-router-dom */}
                     <button className='btn-signIn'>Login</button>
                     <button className='btn-signUp'>Cadastrar</button>
                   </>
@@ -68,9 +69,9 @@ export function MainLayout(){
         {
           isMobile
             &&
-            <nav className={toggle ? 'container-nav-open' : 'container-nav'} onClick={menuToggle}>
-              <div className='hamburgue-mobile'></div>
-              <div>
+            <nav className={toggle ? 'container-nav-open' : 'container-nav'}>
+              <div className='hamburgue-mobile'  onClick={menuToggle}></div>
+              <div className='info-use-logged'>
               {
                 logged && toggle ? (
                   <div className="user-logged">
@@ -82,36 +83,45 @@ export function MainLayout(){
                       <span>Olá,</span>
                       <span>Eduardo Ananias</span>
                     </div>
-                    <button
-                      className='btn-logout'
-                      onClick={logout}
-                      >
+                    <div className="button-logout">
+                      <span>Deseja</span>
+                      <button
+                        className='btn-logout'
+                        onClick={logout}
+                        >
+                          encerrar a sessão?
                     </button>
+                    </div>
                   </div>
                 ):(
                   <>
                     {
                       toggle
                         &&
-                        <h1>Menu</h1>
-
-                        // adionar botões de login **************
+                        <div className='menu-nav-mobile'>
+                          <h1>Menu</h1>
+                          <ul className='nav-list'>
+                            <li>
+                              <button className='btn-signIn'>Login</button>
+                            </li>
+                            <li>
+                              <button className='btn-signUp'>Cadastrar</button>
+                            </li>
+                          </ul>
+                        </div>
                     }
-                    {/* <button className='btn-signIn'>Login</button>
-                    <button className='btn-signUp'>Cadastrar</button> */}
                   </>
                 )
               }
               </div>
             </nav>
-
         }
       </header>
       <section>
-          <Login />
+
       </section>
       <footer>
-
+        <p>fotter</p>
       </footer>
     </div>
   )
