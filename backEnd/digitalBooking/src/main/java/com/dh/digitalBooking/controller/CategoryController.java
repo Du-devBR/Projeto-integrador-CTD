@@ -54,7 +54,7 @@ public class CategoryController {
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
     }
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateCategory(@PathVariable("id") Long id,
                                @Valid @RequestBody CategoryDTO categoryDTO) {
