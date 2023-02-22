@@ -2,8 +2,8 @@ import './style.sass'
 import './responsive.sass'
 import logotipo from '../../assets/img/logo.svg'
 import { useState } from 'react'
-import { Login } from '../Login'
 import { useMediaQuery } from 'react-responsive'
+import { Home } from '../Home'
 
 export function MainLayout(){
 
@@ -26,11 +26,9 @@ export function MainLayout(){
     }
   }
 
-  console.log(toggle)
-
   return(
     <div className={toggle && isMobile ? 'container-active' : 'container'}>
-      <header className= 'container-header'>
+      <header className= {isMobile ? 'container-header-mobile' : 'container-header'}>
         <div className={toggle && isMobile ? 'container-logo-noVisibility' : 'container-logo-visibility'}>
           <img className='img-logo' src={logotipo} alt="" />
           <span className='slogan'>Lorem, ipsum dolor.</span>
@@ -117,9 +115,13 @@ export function MainLayout(){
             </nav>
         }
       </header>
-      <section>
-
-      </section>
+      {
+        !toggle
+          &&
+          <section>
+            <Home />
+          </section>
+      }
       <footer>
         <p>fotter</p>
       </footer>
