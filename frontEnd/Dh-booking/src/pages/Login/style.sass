@@ -1,30 +1,33 @@
-.loginPage
-    height:100vh
+.login-container
+    display: flex
+    flex-direction: row
+    width: 100%
+    height: calc(100vh - 80px)
+    justify-content: space-between
+    align-item: center
+    background-color: cyan
+    padding: 32px
+    gap: 32px
+    
+    .image-container
+        width: 100%
 
-.loginArea
-    height:100vh
-    flex-direction:row
-    flex-wrap:nowrap
+        img
+            width:100%
+    
+    .form-container
+        display: flex
+        flex-direction: column
+        width: 100%
+        gap: 10px
+    
+        .register
+            display: flex
+            align-items: center
+            gap: 4px
 
-.loginForm 
-    display:flex
-    align-items:center
-    justify-content:center
-
-.loginPageImage
-    display:flex
-    width:50vw
-
-.loginPageImage img
-    width:50%
-    height:50%
-
-.formTextInput
-    margin:10px
-
-.form-label
-    margin:5px
-
-.loginFormButton
-    alig-self:center
-    width:30%
+            .register-button
+                background: none
+                border: none
+                font-size: inherit
+                color: red
