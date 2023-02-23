@@ -2,7 +2,8 @@ import './style.sass'
 import './responsive.sass'
 import logotipo from '../../assets/img/logo.svg'
 import { useState } from 'react'
-import { Login } from '../Login'
+//import { Login } from '../Login'
+import { Register } from '../Register'
 import { useMediaQuery } from 'react-responsive'
 
 export function MainLayout(){
@@ -108,7 +109,7 @@ export function MainLayout(){
         }
       </header>
       <section>
-          <Login />
+          <Register />
       </section>
       <footer>
 

@@ -1,3 +1,5 @@
+@use '../../Style/mixins'
+
 .login-container
     display: flex
     flex-direction: row
@@ -20,6 +22,9 @@
         flex-direction: column
         width: 100%
         gap: 10px
+
+        .login-button
+            @include mixins.button-bgColor         
     
         .register
             display: flex
