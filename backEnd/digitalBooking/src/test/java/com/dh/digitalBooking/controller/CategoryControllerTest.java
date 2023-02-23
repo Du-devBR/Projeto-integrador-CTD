@@ -91,7 +91,7 @@ public class CategoryControllerTest {
 
 
     @Test
-    @WithMockUser(username="user", roles= "ADMIN")
+    @WithMockUser(username="user")
     public void testSaveCategory() throws Exception {
         CategoryDTO category = new CategoryDTO(1L, "1", "Category 1", "http://link.test.com/1");
 
@@ -114,7 +114,7 @@ public class CategoryControllerTest {
     }
 
     @Test
-    @WithMockUser(username="user", roles= "ADMIN")
+    @WithMockUser(username="admin")
     public void testDeleteCategory() throws Exception {
         Category category = new Category(1L, "1", "Category 1", "http://link.test.com/1");
 
