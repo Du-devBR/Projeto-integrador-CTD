@@ -7,6 +7,7 @@
   background-color: #c2c2c2
 
   .container-search-motor
+    width: 100%
     display: flex
     background-color: variables.$second-color
     padding: 2rem
@@ -27,17 +28,40 @@
       .inputs-search
         display: flex
         width: 100%
+        height: 100%
         gap: 0.5rem
 
-        .input-select-location
-          padding: 0.75rem
+        .select-location
           width: 100%
-          border-radius: 0.313rem
-          color: variables.$gray800
-          font-size: variables.$p-14px
-          font-weight: variables.$font-md
-          border: none
+          height: 100%
+          position: relative
 
+          input
+            width: 100%
+            height: 100%
+            padding: 0.75rem
+            margin: 0 0 0.5rem 0
+            border-radius: 0.313rem
+            color: variables.$gray800
+            font-size: variables.$p-14px
+            font-weight: variables.$font-md
+            border: none
+
+          .container-location-open
+            width: 100%
+            // height: 100%
+            background: red
+            position: absolute
+            opacity: 1
+            transition: opacity 0.9s
+            border-radius: 0.313rem
+
+          .container-location-close
+            width: 0%
+            height: 0
+            background: red
+            position: absolute
+            opacity: 0
 
         ::placeholder
           color: variables.$gray800
@@ -53,7 +77,7 @@
           height: 100%
           position: relative
 
-          input, select
+          input
             padding: 0.75rem
             width: 100%
             height: 100%
@@ -82,8 +106,3 @@
             width: 0%
             position: absolute
             transition: 1.6s
-
-  .teste
-    width: 100%
-    // height: 100%
-    background-color: green

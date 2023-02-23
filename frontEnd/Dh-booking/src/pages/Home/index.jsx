@@ -3,12 +3,17 @@ import './responsive.sass'
 import { useState } from 'react'
 import 'react-calendar/dist/Calendar.css';
 import { Calender } from '../../components/Calender';
+import css from '@emotion/styled';
+import { SelectLocation } from '../../components/Select';
+
+
 
 export function Home(){
 
   const [startDate, setStartDate] = useState([null, null])
   const [selectDate, setSelectDate] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
+  const [toggleLocation, setToggleLocation] = useState(false)
 
 
 // dados apenas para teste de no input location, será substituido pelo dados vindo da api
@@ -31,9 +36,16 @@ export function Home(){
     },
   ]
 
-
   function toggleCalendar(){
     setShowCalendar(!showCalendar)
+  }
+
+  function toogleLocationContainerOpen(){
+    setToggleLocation(true)
+  }
+
+  function toogleLocationContainerClose(){
+    setToggleLocation(false)
   }
 
   const dataSelecionada = (range) => {
@@ -61,21 +73,26 @@ export function Home(){
         <div className="content-search">
           <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
           <div className="inputs-search">
-            {/* ********* verificar react-select para substituir o select e option ************** */}
-            <select className='input-select-location' type="text" placeholder='Buenos Aires, Argentina'>
-              {
-                locations.map((options)=>(
-                  <option className='teste' key={options.city}
-                    value={options.city}
-                      >
-                        <div className="travel-location">
-                          <span className='option-city'>{options.city}</span>
-                          <span className='option-country'>{options.country}</span>
-                        </div>
-                  </option>
-                ))
-              }
-            </select>
+            <div className="select-location">
+              <input
+                className='input-select-location'
+                onFocus={toogleLocationContainerOpen}
+                onBlur={toogleLocationContainerClose}
+                placeholder='Escolha seu destino'
+              />
+                  <div className={toggleLocation ? 'container-location-open' : 'container-location-close'}>
+                    {
+                      toggleLocation
+                      &&
+                        locations.map((location, index) =>(
+                          <SelectLocation
+                            id={index}
+                            data={location}
+                          />
+                        ))
+                    }
+                  </div>
+            </div>
             <div className="input-calendar">
               <input
                 onClick={toggleCalendar}
@@ -88,6 +105,7 @@ export function Home(){
                     showCalendar
                       &&
                       <Calender
+                        id={startDate}
                         onSelectedData={dataSelecionada}
                         selectedRange={startDate}
                       />
