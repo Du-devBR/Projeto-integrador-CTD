@@ -12,14 +12,25 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ * Esta classe representa o controlador responsável por gerenciar as requisições relacionadas a Categoria.
+ * O controlador fornece rotas para listar todas as categorias, encontrar uma categoria por ID, salvar uma
+ * nova categoria, atualizar uma categoria existente e excluir uma categoria existente.
+ * As rotas fornecidas neste controlador são acessíveis através da API REST usando o protocolo HTTP.
+ */
 @Slf4j
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/Categoria")
+@RequestMapping("/api/categoria")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    /**
+     Rota para salvar uma nova categoria.
+     @param categoryDTO um objeto CategoryDTO representando a categoria a ser salva.
+     @return um objeto CategoryDTO representando a categoria salva.
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryDTO save(@Valid @RequestBody CategoryDTO categoryDTO) {
@@ -27,6 +38,10 @@ public class CategoryController {
         return categoryService.save(categoryDTO);
     }
 
+    /**
+     Rota para listar todas as categorias.
+     @return uma lista de objetos CategoryDTO representando todas as categorias.
+     */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<CategoryDTO> listCategories(){
@@ -34,6 +49,12 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
+    /**
+     Rota para encontrar uma categoria por ID.
+     @param id um Long representando o ID da categoria a ser encontrada.
+     @return um objeto CategoryDTO representando a categoria encontrada.
+     @throws ResponseStatusException se a categoria não for encontrada.
+     */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CategoryDTO findCategoryById(@PathVariable("id") Long id) {
@@ -43,6 +64,11 @@ public class CategoryController {
                 .orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
     }
 
+    /**
+     Rota para excluir uma categoria existente.
+     @param id um Long representando o ID da categoria a ser excluída.
+     @throws ResponseStatusException se a categoria não for encontrada.
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable("id") Long id) {
@@ -54,6 +80,12 @@ public class CategoryController {
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
     }
 
+    /**
+     Rota para atualizar uma categoria existente.
+     @param id um Long representando o ID da categoria a ser atualizada.
+     @param categoryDTO um objeto CategoryDTO representando a categoria atualizada.
+     @throws ResponseStatusException se a categoria não for encontrada.
+     */
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateCategory(@PathVariable("id") Long id,
