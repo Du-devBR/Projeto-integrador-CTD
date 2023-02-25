@@ -5,10 +5,13 @@ import 'react-calendar/dist/Calendar.css';
 import { Calender } from '../../components/Calender';
 import css from '@emotion/styled';
 import { SelectLocation } from '../../components/Select';
+import { CardCategoria } from '../../components/CardCategoria';
 
 //****** */ imports para teste sem api ******
 import {category} from '../../assets/js-mock/category'
-import { CardCategoria } from '../../components/CardCategoria';
+import { product } from '../../assets/js-mock/products'
+import { CardProduct } from '../../components/CardProduto';
+
 
 export function Home(){
 
@@ -155,6 +158,19 @@ export function Home(){
               <CardCategoria
                 id={index}
                 data={categories}
+              />
+            ))
+          }
+        </div>
+      </section>
+      <section className='container-product'>
+        <h2>Lista de produtos</h2>
+        <div className="list-products">
+          {
+            product.map((products, index) => (
+              <CardProduct
+                id={index}
+                data={products}
               />
             ))
           }
