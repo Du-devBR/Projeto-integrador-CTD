@@ -6,7 +6,9 @@ import { Calender } from '../../components/Calender';
 import css from '@emotion/styled';
 import { SelectLocation } from '../../components/Select';
 
-
+//****** */ imports para teste sem api ******
+import {category} from '../../assets/js-mock/category'
+import { CardCategoria } from '../../components/CardCategoria';
 
 export function Home(){
 
@@ -145,9 +147,19 @@ export function Home(){
           </div>
         </div>
       </div>
-      <div className='teste'>
-
-      </div>
+      <section className='container-category'>
+        <h2>Buscar por tipo de acomodação</h2>
+        <div className="list-categories">
+          {
+            category.map((categories, index) => (
+              <CardCategoria
+                id={index}
+                data={categories}
+              />
+            ))
+          }
+        </div>
+      </section>
     </div>
   )
 }
