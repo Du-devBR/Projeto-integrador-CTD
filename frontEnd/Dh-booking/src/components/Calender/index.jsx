@@ -12,12 +12,15 @@ export function Calender(props){
 
   }
 
+  const minDate = new Date()
+
   return(
 
         <Calendar
           onChange={handleDateChange}
           value={selectedRange}
           selectRange={true}
+          minDate={minDate}
         />
   )
 }

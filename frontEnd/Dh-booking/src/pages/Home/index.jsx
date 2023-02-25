@@ -13,17 +13,23 @@ export function Home(){
   const [startDate, setStartDate] = useState([null, null])
   const [selectDate, setSelectDate] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
-  const [toggleLocation, setToggleLocation] = useState(false)
+  const [showDestination, setShowDestination] = useState(false)
+  const [destination, setDestination] = useState(null)
+  const [searchDestination, setSearchDestination] = useState({})
+
+  // console.log(destination)
+  // console.log(startDate)
+  console.log(searchDestination)
 
 
-// dados apenas para teste de no input location, será substituido pelo dados vindo da api
+// ******* dados apenas para teste de no input location, será substituido pelo dados vindo da api
   const locations = [
     {
-      city: 'sao paulo',
-      country:'brazil'
+      city: 'São Paulo',
+      country:'Brazil'
     },
     {
-      city: 'new york',
+      city: 'New York',
       country:'USA'
     },
     {
@@ -36,16 +42,36 @@ export function Home(){
     },
   ]
 
+  // ******** dados que irá ser enviado a api para buscar os hoteis
+
+  const searchDestinationWithData = (event) => {
+    event.preventDefault()
+    if(destination !== null || '' && startDate !== [null, null]){
+      setSearchDestination({
+        city: destination.city,
+        country: destination.country,
+        dataInitial: startDate[0].toISOString(),
+        dataFinal: startDate[1].toISOString()
+      })
+      setSelectDate(false)
+    }else{
+      console.log('errro')
+    }
+  }
+
   function toggleCalendar(){
     setShowCalendar(!showCalendar)
+    setShowDestination(false)
   }
 
-  function toogleLocationContainerOpen(){
-    setToggleLocation(true)
+  function toogleLocation(){
+    setShowDestination(!showDestination)
   }
 
-  function toogleLocationContainerClose(){
-    setToggleLocation(false)
+  const selectDestination = (location) => {
+    if(location !== null || ''){
+      return `${location.city}, ${location.country}`
+    }
   }
 
   const dataSelecionada = (range) => {
@@ -76,19 +102,22 @@ export function Home(){
             <div className="select-location">
               <input
                 className='input-select-location'
-                onFocus={toogleLocationContainerOpen}
-                onBlur={toogleLocationContainerClose}
+                onClick={toogleLocation}
                 placeholder='Escolha seu destino'
+                value={selectDestination(destination)}
               />
-                  <div className={toggleLocation ? 'container-location-open' : 'container-location-close'}>
+                  <div className={showDestination ? 'container-location-open' : 'container-location-close'}>
                     {
-                      toggleLocation
+                      showDestination
                       &&
                         locations.map((location, index) =>(
-                          <SelectLocation
-                            id={index}
-                            data={location}
-                          />
+                          <div className="location-list">
+                            <SelectLocation
+                              id={index}
+                              data={location}
+                              onSelectDestination={currentDestination => setDestination(currentDestination)}
+                            />
+                          </div>
                         ))
                     }
                   </div>
@@ -112,7 +141,7 @@ export function Home(){
                   }
                 </div>
             </div>
-            <button className='submit-search'>Pesquisar</button>
+            <button className='submit-search' onClick={event => searchDestinationWithData(event)}>Pesquisar</button>
           </div>
         </div>
       </div>
