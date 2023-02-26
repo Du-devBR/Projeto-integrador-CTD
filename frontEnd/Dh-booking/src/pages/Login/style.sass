@@ -1,0 +1,41 @@
+<<<<<<< HEAD
+=======
+@use '../../Style/mixins'
+
+.login-container
+    display: flex
+    flex-direction: row
+    width: 100%
+    height: calc(100vh - 80px)
+    justify-content: space-between
+    align-item: center
+    background-color: cyan
+    padding: 32px
+    gap: 32px
+    
+    .image-container
+        width: 100%
+
+        img
+            width:100%
+    
+    .form-container
+        display: flex
+        flex-direction: column
+        width: 100%
+        gap: 10px
+
+        .login-button
+            @include mixins.button-bgColor         
+    
+        .register
+            display: flex
+            align-items: center
+            gap: 4px
+
+            .register-button
+                background: none
+                border: none
+                font-size: inherit
+                color: red
+>>>>>>> frontLogin
