@@ -10,7 +10,7 @@ export function MainLayout(){
 
   const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
 
-  const [logged, setLogged] = useState(true)
+  const [logged, setLogged] = useState(false)
   const [toggle, setToggle] = useState(false)
 
   // função para limpar o token e colocar o useState(logged) como false
@@ -101,10 +101,10 @@ export function MainLayout(){
                           <h1>Menu</h1>
                           <ul className='nav-list'>
                             <li>
-                              <button className='btn-signIn'>Login</button>
+                              <Link to={'login'} onClick={menuToggle} className='btn-signIn'>Login</Link>
                             </li>
                             <li>
-                              <button className='btn-signUp'>Cadastrar</button>
+                              <Link to={'register'} onClick={menuToggle} className='btn-signUp'>Cadastrar</Link>
                             </li>
                           </ul>
                         </div>
