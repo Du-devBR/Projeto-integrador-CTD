@@ -7,10 +7,7 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
-  security:
-    user:
-      name: admin
-      roles: ADMIN, USER
+
 server:
   error:
     include-message: always
