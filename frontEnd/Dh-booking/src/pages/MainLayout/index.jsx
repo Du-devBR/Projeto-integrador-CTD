@@ -4,6 +4,7 @@ import logotipo from '../../assets/img/logo.svg'
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { Home } from '../Home'
+import { Link, Outlet } from 'react-router-dom'
 
 export function MainLayout(){
 
@@ -29,10 +30,10 @@ export function MainLayout(){
   return(
     <div className={toggle && isMobile ? 'container-active' : 'container'}>
       <header className= {isMobile ? 'container-header-mobile' : 'container-header'}>
-        <div className={toggle && isMobile ? 'container-logo-noVisibility' : 'container-logo-visibility'}>
+        <Link to={''} className={toggle && isMobile ? 'container-logo-noVisibility' : 'container-logo-visibility'}>
           <img className='img-logo' src={logotipo} alt="" />
           <span className='slogan'>Lorem, ipsum dolor.</span>
-        </div>
+        </Link>
         {
           !isMobile
             &&
@@ -57,8 +58,8 @@ export function MainLayout(){
                 ):(
                   <>
                   {/* incrementar rota ao clicar em login ou cadastrar, utlizar react-router-dom */}
-                    <button className='btn-signIn'>Login</button>
-                    <button className='btn-signUp'>Cadastrar</button>
+                    <Link to={'login'} className='btn-signIn'>Login</Link>
+                    <Link to={'register'} className='btn-signUp'>Cadastrar</Link>
                   </>
                 )
               }
@@ -119,7 +120,7 @@ export function MainLayout(){
         !toggle
           &&
           <section>
-            <Home />
+            <Outlet />
           </section>
       }
       <footer>
