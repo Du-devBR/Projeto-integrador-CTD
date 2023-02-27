@@ -4,6 +4,12 @@ import logotipo from '../../assets/img/logo.svg'
 import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { Link, Outlet } from 'react-router-dom'
+import twitter from '../../assets/img/twitter.svg'
+import linkedn from '../../assets/img/linkedn.svg'
+import instagram from '../../assets/img/instagram.svg'
+import facebook from '../../assets/img/facebook.svg'
+import copyright from '../../assets/img/copyright.svg'
+
 
 export function MainLayout(){
 
@@ -141,8 +147,20 @@ export function MainLayout(){
             <Outlet />
           </section>
       }
-      <footer>
-        <p>fotter</p>
+      <footer className='container-footer'>
+        <div className="footer-copyright">
+          <div className="copyright">
+            <img src={copyright} alt="" />
+            {/* <span>copy</span> */}
+            {/* <span>2023</span> */}
+          </div>
+          <ul className='nav-social-newtork'>
+            <li><img src={facebook} alt="" /></li>
+            <li><img src={twitter} alt="" /></li>
+            <li><img src={linkedn} alt="" /></li>
+            <li><img src={instagram} alt="" /></li>
+          </ul>
+        </div>
       </footer>
     </div>
   )

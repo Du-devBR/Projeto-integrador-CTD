@@ -1,4 +1,5 @@
 import './style.sass'
+import './responsive.sass'
 
 export function CardProduct(props){
   return(

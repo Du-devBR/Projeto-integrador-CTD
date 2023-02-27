@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './style.sass'
+import './responsive.sass'
 
 export function Register(){
 
