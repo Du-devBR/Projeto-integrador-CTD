@@ -1,23 +1,35 @@
 variable "name" {
-  default = "T5-Grupo5-PI-DigitalBookinga"
+  default = "${var.NAME}"
 }
 variable "region" {
-  default = "us-east-1"
+  default = "${var.AWS_DEFAULT_REGION}"
 }
 variable "access_key" {
-  default = "AKIAV4YTWNKPP4SJXBOX"
+  default = "${var.AWS_ACCESS_KEY_ID}"
 }
 variable "secret_key" {
-  default = "tpufaG+8fizynw9fB3BK1U7UPLnTW2VWZ9183STu"
+  default = "${var.AWS_SECRET_ACCESS_KEY}"
 }
 variable "token" {
-  default = "SESSION-TOKEN"
+  default = "${var.TOKEN}"
 }
 variable "ssh_key_name" {
-  default = "t5-grupo5"
+  default = "${var.SSH_KEY_NAME}"
 }
-variable "vpc_cidr_block" {
-  default = "0.0.0.0/0"
+variable "vpc_cidr" {
+  default = "${var.VPC_CIDR}"
+}
+variable "vpc_cidr_private_a" {
+  default = "${var.VPC_CIDR_PRIVATE_A}"
+}
+variable "vpc_cidr_private_b" {
+  default = "${var.VPC_CIDR_PRIVATE_B}"
+}
+variable "vpc_cidr_public_a" {
+  default = "${var.VPC_CIDR_PUBLIC_A}"
+}
+variable "vpc_cidr_puplic_b" {
+  default = "${var.VPC_CIDR_PUBLIC_B}"
 }
 variable "ami-type" {
   default = "ami-0dfcb1ef8550277af"
@@ -26,11 +38,11 @@ variable "ec2-type" {
   default = "t2.micro"
 }
 variable "mysql-instance" {
-  default = "DigitalBooking"
+  default = "${var.MYSQL_INSTANCE}"
 }
 variable "mysql-user" {
-  default = "userAPI"
+  default = "${var.MYSQL_USER}"
 }
 variable "mysql-password" {
-  default = "tchotchozaManda"
+  default = "${var.MYSQL_PASSWORD}"
 }
