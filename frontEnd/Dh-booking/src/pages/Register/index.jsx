@@ -1,20 +1,79 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './style.sass'
 
 export function Register(){
+
+    const [erroInput, setErrorInput] = useState(false)
+    const [messageError, setMessageError] = useState(false)
+    const [name, setName] = useState('')
+    const [lastname, setLastname] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
     return(
     <div className="register-container">
-        <div className='image-container'>
-            <img src="https://static.vecteezy.com/ti/vetor-gratis/p2/620372-aeronave-aviao-rotulo-de-logotipo-de-companhia-aerea-viagem-viagens-aereas-simbolo-de-aviao-ilustracaoial-gratis-vetor.jpg" />
-        </div>
-        <form className='form-container'>
-            <label for='register-email'>E-mail</label>
-            <input type="email" id='register-email'/>
-            <label for='register-password'>Senha</label>
-            <input type="password" id='register-password'/>
-            <label for='register-confirm-password'>Confirmar senha</label>
-            <input type="password" id='register-confirm-password'/>
-            <div className='checkbox-input'><input type="checkbox" id="check"/> <label for="check">Lembrar-me</label></div>
-            <button className='register-button'>Cadastrar</button>
+        <form className='form-container' onSubmit="{submitForm}">
+            <h1>Criar Conta</h1>
+            <div className="name-user">
+                <div className="input-name-user">
+                    <label htmlFor="">Nome</label>
+                    <input
+                        onChange={(event) => setName(event.target.value)}
+                        type="text"
+                        placeholder='John'
+                    />
+                </div>
+                <div className="input-lastname-user">
+                    <label htmlFor="">Sobrenome</label>
+                    <input
+                        onChange={(event) => setLastname(event.target.value)}
+                        type="text"
+                        placeholder='Doe'
+                    />
+                </div>
+
+            </div>
+            <div className="input-email">
+                <label htmlFor="">Email</label>
+                <input
+                    onChange={(event) => setEmail(event.target.value)}
+                    className={erroInput ? 'input-error' : ''}
+                    type="email"
+                    placeholder='projeto-integrador@dh.com.br'
+                />
+            </div>
+            <div className="input-password">
+                <label htmlFor="">Senha</label>
+                <input
+                    onChange={(event) => setPassword(event.target.value)}
+                    className={erroInput ? 'input-error' : ''}
+                    type="password"
+                    placeholder='******'
+                    minLength={6}
+                />
+            </div>
+            <div className="input-confirm-password">
+                <label htmlFor="">Confirma senha</label>
+                <input
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                    className={erroInput ? 'input-error' : ''}
+                    type="password"
+                    placeholder='******'
+                    minLength={6}
+                />
+            </div>
+            <button className='login-button'>Entrar</button>
+            <div className='register'>
+                <span>Ainda não possui uma conta?</span>
+                <Link
+                    to={'/login'}
+                    className='register-button'
+                    >
+                        Iniciar sessão
+                </Link>
+            </div>
         </form>
     </div>
     )

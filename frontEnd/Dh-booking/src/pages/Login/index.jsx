@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './style.sass'
 import {userTeste} from '../../assets/js-mock/userTeste'
 
 export function Login(){
 
     const [erroInput, setErrorInput] = useState(false)
+    const [messageError, setMessageError] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userLogin, setUserLogin] = useState([{}])
+    const navigate = useNavigate()
 
     const submitForm = (event) => {
         event.preventDefault()
@@ -23,14 +25,26 @@ export function Login(){
     }
 
     useEffect(() => {
-
         if(userLogin.email === userTeste.email && userLogin.password === userTeste.password){
-            localStorage.setItem('user', JSON.stringify(userTeste.name + ' ' +  userTeste.lastname))
+            localStorage.setItem('user', JSON.stringify(userTeste))
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
         }
-
     }, [userLogin])
 
-    console.log(userTeste)
+    useEffect(() => {
+        const userLocalStorage = localStorage.getItem('user')
+
+        if(userLocalStorage === null){
+
+        }else{
+            setTimeout(() => {
+                navigate("/")
+            }, 2000);
+        }
+    })
+
     return(
     <div className="login-container">
         <form className='form-container' onSubmit={submitForm}>

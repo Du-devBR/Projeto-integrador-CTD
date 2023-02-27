@@ -1,9 +1,8 @@
 import './style.sass'
 import './responsive.sass'
 import logotipo from '../../assets/img/logo.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import { Home } from '../Home'
 import { Link, Outlet } from 'react-router-dom'
 
 export function MainLayout(){
@@ -12,11 +11,14 @@ export function MainLayout(){
 
   const [logged, setLogged] = useState(false)
   const [toggle, setToggle] = useState(false)
+  const [userLogged, setUserLogged] = useState({})
+
 
   // função para limpar o token e colocar o useState(logged) como false
 
   function logout(){
     setLogged(false)
+    localStorage.removeItem('user')
   }
 
   function menuToggle(){
@@ -26,6 +28,22 @@ export function MainLayout(){
       setToggle(true)
     }
   }
+
+  useEffect(() => {
+    const value = localStorage.getItem('user')
+    if(value === null){
+      // console.log('local storage vazio')
+    }else{
+      setLogged(true)
+    }
+  }, [userLogged])
+
+  useEffect(() => {
+    const user = localStorage.getItem('user')
+    setUserLogged(JSON.parse(user))
+  }, [])
+
+  console.log(logged)
 
   return(
     <div className={toggle && isMobile ? 'container-active' : 'container'}>
@@ -42,12 +60,12 @@ export function MainLayout(){
                 logged ? (
                   <div className="user-logged">
                     <div className="avatar-user">
-                      <span>E</span>
-                      <span>A</span>
+                      <span>{userLogged.name.substr(0, 1)}</span>
+                      <span>{userLogged.lastname.substr(0, 1)}</span>
                     </div>
                     <div className="name-user">
                       <span>Olá,</span>
-                      <span>Eduardo Ananias</span>
+                      <span>{`${userLogged.name} ${userLogged.lastname}`}</span>
                     </div>
                     <button
                       className='btn-logout'
