@@ -8,8 +8,6 @@ variables:
 stages:
   - terraform-plan
   - terraform-apply
-  - build
-  - deploy
 
 terraform-plan:
   stage: terraform-plan
