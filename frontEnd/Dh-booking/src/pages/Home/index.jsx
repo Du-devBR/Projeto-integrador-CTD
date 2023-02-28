@@ -102,7 +102,7 @@ export function Home(){
     <div className='container-home'>
       <div className="container-search-motor">
         <div className="content-search">
-          <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
+          <h1>Buscar ofertas em hotéis, pousadas e muito mais.</h1>
           <div className="inputs-search">
             <div className="select-location">
               <input

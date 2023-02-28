@@ -11,12 +11,14 @@ export function Login(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userLogin, setUserLogin] = useState([{}])
+    const [enableLogin, setEnableLogin] = useState(false)
     const navigate = useNavigate()
 
     const submitForm = (event) => {
         event.preventDefault()
         if(email === '' || password === ''){
             setErrorInput(true)
+
         }else{
             setUserLogin({
                 'email': email,
@@ -25,14 +27,31 @@ export function Login(){
         }
     }
 
-    useEffect(() => {
-        if(userLogin.email === userTeste.email && userLogin.password === userTeste.password){
-            localStorage.setItem('user', JSON.stringify(userTeste))
-            setTimeout(() => {
-                window.location.reload()
-            }, 1000);
+     const error = (event) => {
+        // event.preventDefault()
+        if(userLogin.email !== userTeste.email && userLogin.password !== userTeste.password){
+            setMessageError(true)
+            setErrorInput(true)
+        }else{
+            setMessageError(false)
+            setEnableLogin(true)
         }
-    }, [userLogin])
+    }
+
+    useEffect(() => {
+        if(enableLogin) {
+            if(userLogin.email === userTeste.email && userLogin.password === userTeste.password){
+                localStorage.setItem('user', JSON.stringify(userTeste))
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000);
+            }
+        }
+    }, [userLogin, enableLogin])
+
+    useEffect(() => {
+        console.log('erro: '+ messageError)
+    }, [messageError])
 
     useEffect(() => {
         const userLocalStorage = localStorage.getItem('user')
@@ -67,13 +86,24 @@ export function Login(){
                     type="password"
                     placeholder='******'
                     minLength={6}
+                    onKeyDown={() =>setErrorInput(false)}
                 />
             </div>
+            {
+                messageError
+                &&
+                <span className='message-error'>Email ou senha divergente</span>
+            }
             <div className='checkbox-input'>
                 <input type="checkbox" id="check"/>
                 <label for="check">Lembrar-me</label>
             </div>
-            <button className='login-button'>Entrar</button>
+            <button
+                onClick={(event) => error(event)}
+                className='login-button'
+                >
+                    Entrar
+            </button>
             <div className='register'>
                 <span>Ainda não possui uma conta?</span>
                 <Link

@@ -46,6 +46,10 @@
             input::placeholder
                 color: variables.$gray300
 
+            input:focus
+                border: solid 2px variables.$primary-color
+                outline: none
+
             label
                 font-size: variables.$p-12px
                 font-weight: variables.$font-md
@@ -54,6 +58,10 @@
             .input-error
                 background: variables.$erro-opacity
                 border: solid 1px variables.$error
+
+        .message-error
+            font-size: variables.$p-12px
+            color: variables.$error
 
         .checkbox-input
             width: 100%
