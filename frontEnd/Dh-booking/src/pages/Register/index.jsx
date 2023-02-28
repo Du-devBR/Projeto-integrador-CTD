@@ -67,7 +67,7 @@ export function Register(){
             </div>
             <button className='login-button'>Entrar</button>
             <div className='register'>
-                <span>Ainda não possui uma conta?</span>
+                <span>Já tem conta?</span>
                 <Link
                     to={'/login'}
                     className='register-button'
