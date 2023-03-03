@@ -5,12 +5,13 @@
     display: flex
     flex-direction: column
     width: 100%
-    height: calc( 100vh - 140px )
+    min-height: calc( 100vh - 145px )
     justify-content: center
     align-item: center
     background-color: variables.$gray100
     align-items: center
-    z-index: 10
+    // padding: 56px 0
+    // z-index: 10
 
     .form-container
         display: flex
@@ -18,7 +19,7 @@
         justify-content: center
         align-item: center
         width: 500px
-        height: auto
+        // height: 100%
         gap: 1rem
         padding: 1rem
 
@@ -78,6 +79,10 @@
         .login-button
             @include mixins.button-bgColor
             cursor: pointer
+
+        .login-button[disabled]
+            opacity: 0.5
+            cursor: not-allowed
 
         .register
             display: flex

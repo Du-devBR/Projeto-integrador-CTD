@@ -56,7 +56,7 @@ export function MainLayout(){
       <header className= {isMobile ? 'container-header-mobile' : 'container-header'}>
         <Link to={''} className={toggle && isMobile ? 'container-logo-noVisibility' : 'container-logo-visibility'}>
           <img className='img-logo' src={logotipo} alt="" />
-          <span className='slogan'>Lorem, ipsum dolor.</span>
+          <span className='slogan'>Reserve seu proximo destino.</span>
         </Link>
         {
           !isMobile

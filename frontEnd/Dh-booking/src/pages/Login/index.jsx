@@ -6,19 +6,26 @@ import {userTeste} from '../../assets/js-mock/userTeste'
 
 export function Login(){
 
-    const [erroInput, setErrorInput] = useState(false)
+    const [errorEmailInput, setErrorEmailInput] = useState(false)
+    const [errorPasswordInput, setErrorPasswordInput] = useState(false)
     const [messageError, setMessageError] = useState(false)
+    const [messageEmailError, setMessageEmailError] = useState(false)
+    const [messagePasswordError, setMessagePasswordError] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userLogin, setUserLogin] = useState([{}])
     const [enableLogin, setEnableLogin] = useState(false)
     const navigate = useNavigate()
 
+    const isFormValid = email && password
+
     const submitForm = (event) => {
         event.preventDefault()
-        if(email === '' || password === ''){
-            setErrorInput(true)
+        if(email === ''){
+            setErrorEmailInput(true)
 
+        }if(password === ''){
+            setErrorPasswordInput(true)
         }else{
             setUserLogin({
                 'email': email,
@@ -28,15 +35,35 @@ export function Login(){
     }
 
      const error = (event) => {
-        // event.preventDefault()
-        if(userLogin.email !== userTeste.email && userLogin.password !== userTeste.password){
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        if(userLogin.email !== userTeste.email || userLogin.password !== userTeste.password){
             setMessageError(true)
-            setErrorInput(true)
-        }else{
-            setMessageError(false)
+        }if (!emailRegex.test(email)) {
+            setMessageEmailError(true)
+
+        }if(password.length < 6){
+            setMessagePasswordError(true)
+        } else{
             setEnableLogin(true)
         }
     }
+
+    const countKeyUpPassword = (value) =>{
+        if (value.target.value.length >= 6) {
+          setMessagePasswordError(false)
+          setErrorPasswordInput(false)
+        }
+      }
+
+    const verifyEmailInput = (event) => {
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
+        if (emailRegex.test(email)) {
+            setMessageEmailError(false)
+            setErrorEmailInput(false)
+          }
+    }
+
 
     useEffect(() => {
         if(enableLogin) {
@@ -49,9 +76,6 @@ export function Login(){
         }
     }, [userLogin, enableLogin])
 
-    useEffect(() => {
-        console.log('erro: '+ messageError)
-    }, [messageError])
 
     useEffect(() => {
         const userLocalStorage = localStorage.getItem('user')
@@ -73,26 +97,36 @@ export function Login(){
                 <label htmlFor="">Email</label>
                 <input
                     onChange={(event) => setEmail(event.target.value)}
-                    className={erroInput ? 'input-error' : ''}
-                    type="email"
+                    className={errorEmailInput ? 'input-error' : ''}
                     placeholder='projeto-integrador@dh.com.br'
+                    onBlur={verifyEmailInput}
                 />
             </div>
             <div className="input-password">
                 <label htmlFor="">Password</label>
                 <input
                     onChange={(event) => setPassword(event.target.value)}
-                    className={erroInput ? 'input-error' : ''}
+                    className={errorPasswordInput ? 'input-error' : ''}
                     type="password"
                     placeholder='******'
-                    minLength={6}
-                    onKeyDown={() =>setErrorInput(false)}
+                    minLength={() => setMessagePasswordError(false)}
+                    onKeyUp={countKeyUpPassword}
                 />
             </div>
             {
                 messageError
                 &&
                 <span className='message-error'>Email ou senha divergente</span>
+            }
+            {
+                messageEmailError
+                &&
+                <span className='message-error'>Formato de email incorreto</span>
+            }
+            {
+                messagePasswordError
+                &&
+                <span className='message-error'>Senha precisa ser maior que 6 digitos</span>
             }
             <div className='checkbox-input'>
                 <input type="checkbox" id="check"/>
@@ -101,6 +135,7 @@ export function Login(){
             <button
                 onClick={(event) => error(event)}
                 className='login-button'
+                disabled={!isFormValid}
                 >
                     Entrar
             </button>
