@@ -1,5 +1,6 @@
 import './style.sass'
 import './responsive.sass'
+import { Link } from 'react-router-dom'
 
 export function CardProduct(props){
   return(
@@ -26,7 +27,7 @@ export function CardProduct(props){
           <p>{props.data.description}</p>
           <button className='btn-view-more-description'>...mais</button>
         </div>
-        <button className='btn-view-more-product'>Ver mais</button>
+        <Link to={`/produto/${props.data.id}`} className='btn-view-more-product'>Ver mais</Link>
       </div>
     </div>
   )

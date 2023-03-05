@@ -1,7 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import { Home } from "./pages/Home"
 import { Login } from "./pages/Login"
 import { MainLayout } from "./pages/MainLayout"
+import { Product } from "./pages/Product"
 import { Register } from "./pages/Register"
 
 
@@ -13,7 +14,11 @@ export function Routes(){
       children: [
         {
           path: '',
-          element: <Home />
+          element: <Navigate to="/home" replace={true} />
+        },
+        {
+          path: 'home',
+          element: <Home />,
         },
         {
           path: 'login',
@@ -22,6 +27,9 @@ export function Routes(){
         {
           path: 'register',
           element: <Register />
+        },{
+          path:'produto/:id',
+          element: <Product />
         }
       ]
     }
@@ -29,5 +37,6 @@ export function Routes(){
 
   return (
     <RouterProvider router={appRouter} />
+
   )
 }
