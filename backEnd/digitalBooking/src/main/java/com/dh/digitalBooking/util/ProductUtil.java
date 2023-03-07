@@ -11,6 +11,6 @@ public class ProductUtil {
     public static ProductDTO convertToDTO(Product product){ return MODEL_MAPPER.map(product, ProductDTO.class);}
 
     public static Product convertToEntity(ProductDTO productDTO){
-        return MODEL_MAPPER.map(productDTO, Product.class)
+        return MODEL_MAPPER.map(productDTO, Product.class);
     }
 }
