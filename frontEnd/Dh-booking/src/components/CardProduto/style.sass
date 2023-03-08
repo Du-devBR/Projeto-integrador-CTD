@@ -84,13 +84,7 @@
         color: variables.$gray800
 
       .btn-location-map
-        font-size: variables.$p-14px
-        font-weight: variables.$font-md
-        color: variables.$primary-color
-        text-transform: uppercase
-        background: none
-        border: none
-        cursor: pointer
+        @include mixins.button-location
 
     .description-product
 
@@ -102,12 +96,11 @@
         overflow: hidden
 
       .btn-view-more-description
-        background: none
-        border: none
-        font-size: variables.$btn-14px
+        @include mixins.button-view-more
         color: variables.$primary-color
-        cursor: pointer
+
 
     .btn-view-more-product
       @include mixins.button-bgColor
       cursor: pointer
+      text-align: center

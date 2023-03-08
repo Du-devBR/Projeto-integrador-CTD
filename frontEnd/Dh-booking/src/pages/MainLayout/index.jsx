@@ -151,8 +151,6 @@ export function MainLayout(){
         <div className="footer-copyright">
           <div className="copyright">
             <img src={copyright} alt="" />
-            {/* <span>copy</span> */}
-            {/* <span>2023</span> */}
           </div>
           <ul className='nav-social-newtork'>
             <li><img src={facebook} alt="" /></li>
