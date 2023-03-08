@@ -143,11 +143,11 @@ export function MainLayout(){
       {
         !toggle
           &&
-          <section>
+          <section className={isMobile ? 'section-mobile' : 'section-desktop'}>
             <Outlet />
           </section>
       }
-      <footer className='container-footer'>
+      <footer className={isMobile ? 'container-footer-mobile' :'container-footer-desktop'}>
         <div className="footer-copyright">
           <div className="copyright">
             <img src={copyright} alt="" />

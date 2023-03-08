@@ -1,12 +1,18 @@
 import './style.sass'
 import {ArrowUUpLeft, ShareNetwork, Heart, MapPin} from 'phosphor-react'
 import './responsive.sass'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { ModalProduto } from '../../components/ModalProduto'
+import { product } from '../../assets/js-mock/products'
+
 export function Product(){
 
   const [openModal, setOpenModal] = useState(false)
+  const {id} = useParams()
+
+  console.log(id)
+
   console.log(openModal)
 
   return(
@@ -17,8 +23,8 @@ export function Product(){
         <>
           <div className="header-product-detail">
             <div className="title-product-detail">
-              <span>Hotel</span>
-              <h1>Hotel brasil</h1>
+              <span>{product[`${id}` - 1].category}</span>
+              <h1>{product[`${id}` - 1].title}</h1>
             </div>
             <div className="header-links">
               <span><Heart size={24} color="#fafafa" weight="light" /></span>
@@ -34,7 +40,7 @@ export function Product(){
             <div className="location-product">
               <MapPin size={24} color="#005df4" weight="duotone" />
               <div className="location-data">
-                <span>Jalan Pantai Nusa Dua, 123</span>
+                <span>{product[`${id}` - 1].location}</span>
                 <button className='button-view-location-map'>ver no mapa</button>
               </div>
             </div>
@@ -46,12 +52,15 @@ export function Product(){
             </div>
           </div>
           <div className="container-picture-product">
-            <img className='principal-picture-view' src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cm9vbSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
+            {
+              <img className='principal-picture-view' src={product[`${id}` - 1].img} alt="" />
+            }
             <div className="carousel-picture">
-              <img className='first-img' src="https://images.unsplash.com/photo-1550328927-3b33885318fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGJlZCUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
-              <img className='second-img' src="https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
-              <img className='third-img' src="https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
-              <img className='fourth-img' src="https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="" />
+              {
+                product[`${id}` - 1].pictures.map(pictures => (
+                  <img src={pictures} alt="" />
+                ))
+              }
             </div>
             <button
               onClick={() => setOpenModal(!openModal)}
@@ -63,6 +72,7 @@ export function Product(){
         </>
           ):(
             <ModalProduto
+              data={product[`${id}` - 1].pictures}
               onCloseModal={() => setOpenModal(false)}
             />
           )
