@@ -14,14 +14,25 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ A controller class that handles HTTP requests related to roles.
+ Uses SLF4J for logging and enables Cross-Origin Resource Sharing (CORS).
+ */
 @Slf4j
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/funcao")
 public class RoleController {
+    /**
+     Service class that provides business logic related to roles.
+     */
     @Autowired
     private RoleService roleService;
 
+    /**
+     Retrieves a list of all roles.
+     @return a list of RoleDTO objects containing information about each role
+     */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<RoleDTO> listRoles(){
@@ -29,6 +40,11 @@ public class RoleController {
         return roleService.findAll();
     }
 
+    /**
+     Saves a new role.
+     @param roleDTO the RoleDTO object containing information about the role to be saved
+     @return a RoleDTO object containing information about the newly saved role
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RoleDTO save(@Valid @RequestBody RoleDTO roleDTO){
@@ -36,6 +52,12 @@ public class RoleController {
         return roleService.save(roleDTO);
     }
 
+    /**
+     Retrieves information about a specific role.
+     @param id the ID of the role to retrieve
+     @return a RoleDTO object containing information about the role
+     @throws ResponseStatusException if the specified role cannot be found
+     */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public RoleDTO findRoleById(@PathVariable("id") Long id){
@@ -45,6 +67,11 @@ public class RoleController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Role not found"));
     }
 
+    /**
+     Deletes a specific role.
+     @param id the ID of the role to delete
+     @throws ResponseStatusException if the specified role cannot be found
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable("id") Long id) {
@@ -56,6 +83,12 @@ public class RoleController {
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Role not found"));
     }
 
+    /**
+     Updates a specific role.
+     @param id the ID of the role to update
+     @param roleDTO the RoleDTO object containing updated information about the role
+     @throws ResponseStatusException if the specified role cannot be found
+     */
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateCategory(@PathVariable("id") Long id,
