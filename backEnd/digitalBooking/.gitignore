@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/logs/application-debug.log
+/logs/application-debug.log.2023-02-21.0.gz
