@@ -29,10 +29,10 @@ public class Category implements Serializable {
     private Long id;
 
     /**
-     A brief description of the category.
+     A name of the category.
      */
     @Column(name = "Nome")
-    private String description;
+    private String name;
 
     /**
      The URL of the category's image.

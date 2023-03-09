@@ -20,9 +20,9 @@ public class CategoryDTO {
     private Long id;
 
     /**
-     A brief description of the category.
+     A name of the category.
      */
-    private String description;
+    private String name;
 
     /**
      The URL of the category's image.
