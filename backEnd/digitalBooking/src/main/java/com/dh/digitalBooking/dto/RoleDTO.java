@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategoryDTO {
+public class RoleDTO {
     private Long id;
-
-    private String description;
-
-    private String imageURL;
+    private String Name;
+    private String Description;
 }

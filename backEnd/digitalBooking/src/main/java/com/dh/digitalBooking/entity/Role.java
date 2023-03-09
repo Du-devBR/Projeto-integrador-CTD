@@ -13,17 +13,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "CATEGORIA")
-public class Category implements Serializable {
+@Table(name = "FUNCAO")
+public class Role implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CategoriaID")
+    @GeneratedValue
+    @Column(name = "FuncaoID")
     private Long id;
 
     @Column(name = "Nome")
-    private String description;
+    private String Name;
 
-    @Column(name = "UrlImg")
-    private String imageURL;
-
+    @Column(name = "Descricao")
+    private String Description;
 }
