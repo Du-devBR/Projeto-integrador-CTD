@@ -12,9 +12,6 @@ public class AddDAtaOnDB implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        categoryRepository.save(Category.builder()
-                .description("Teste")
-                .qualification("3")
-                .imageURL("https://giphy.com/embed/gw3IWyGkC0rsazTi").build());
+
     }
 }

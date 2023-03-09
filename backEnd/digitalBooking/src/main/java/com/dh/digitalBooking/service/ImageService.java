@@ -1,7 +1,7 @@
 package com.dh.digitalBooking.service;
 
 import com.dh.digitalBooking.dto.ImageDTO;
-import com.dh.digitalBooking.entity.ImageModel;
+import com.dh.digitalBooking.entity.Image;
 import com.dh.digitalBooking.repository.ImageRepository;
 import com.dh.digitalBooking.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ public class ImageService {
     private ImageRepository imageRepository;
 
     public ImageDTO save(ImageDTO imageDTO){
-        ImageModel imageModel = ImageUtil.convetToEntity(imageDTO);
-        return ImageUtil.convertToDTO(imageRepository.save(imageModel));
+        Image image = ImageUtil.convetToEntity(imageDTO);
+        return ImageUtil.convertToDTO(imageRepository.save(image));
     }
 
     public List<ImageDTO> findAll(){
@@ -29,7 +29,7 @@ public class ImageService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<ImageModel> findById(Long id){
+    public Optional<Image> findById(Long id){
         return imageRepository.findById(id);
     }
 

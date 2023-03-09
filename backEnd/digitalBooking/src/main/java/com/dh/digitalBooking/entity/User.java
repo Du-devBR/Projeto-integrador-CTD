@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ The User class represents a user in the application. It is used to store user data in the database.
+ The class is annotated with @Data, @AllArgsConstructor, @NoArgsConstructor, @Builder, @Entity, and @Table annotations.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,21 +17,43 @@ import lombok.NoArgsConstructor;
 @Table(name = "USUARIO")
 public class User {
 
+    /**
+     The id of the user.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UsuarioID")
     private Long id;
 
-    @Column(name = "Nome")
+    /**
+     The name of the user.
+     */
+    @Column(name = "Nome", length = 250)
     private String name;
 
-    @Column(name = "Sobrenome")
+    /**
+     The last name of the user.
+     */
+    @Column(name = "Sobrenome", length = 250)
     private String lastName;
 
-    @Column(name = "Email")
+    /**
+     The email of the user.
+     */
+    @Column(name = "Email", length = 250)
     private String email;
 
+    /**
+     The image URL of the user.
+     */
+    @ManyToOne
+    @JoinColumn(name = "UrlImg", referencedColumnName = "ImagemID")
+    private Image imageURL;
+
+    /**
+     The role of the user.
+     */
     @ManyToOne
     @JoinColumn(name = "RoleID", referencedColumnName = "FuncaoID")
-    private Role funcao;
+    private Role role;
 }

@@ -31,12 +31,12 @@ public class Role implements Serializable {
     /**
      The name of the role.
      */
-    @Column(name = "Nome")
+    @Column(name = "Nome", length = 40)
     private String Name;
 
     /**
      A brief description of the role.
      */
-    @Column(name = "Descricao")
+    @Column(name = "Descricao", length = 200)
     private String Description;
 }

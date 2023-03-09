@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ImageDTO {
     private Long id;
 
-    private String title;
+    private String description;
 
     private String url;
 }

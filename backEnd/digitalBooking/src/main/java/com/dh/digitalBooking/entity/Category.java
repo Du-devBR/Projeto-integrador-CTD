@@ -31,13 +31,14 @@ public class Category implements Serializable {
     /**
      A name of the category.
      */
-    @Column(name = "Nome")
+    @Column(name = "Nome", length = 250)
     private String name;
 
     /**
      The URL of the category's image.
      */
-    @Column(name = "UrlImg")
-    private String imageURL;
+    @ManyToOne
+    @JoinColumn(name = "UrlImg", referencedColumnName = "ImagemID")
+    private Image imageURL;
 
 }

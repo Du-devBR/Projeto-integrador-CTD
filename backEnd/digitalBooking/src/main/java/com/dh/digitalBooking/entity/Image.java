@@ -1,9 +1,6 @@
 package com.dh.digitalBooking.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,12 +13,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-public class ImageModel implements Serializable {
+@Table(name = "IMAGEM")
+public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ImagemID")
     private Long id;
 
-    private String title;
+    @Column(name = "Descricao", length = 250)
+    private String description;
 
+    @Column(name = "urlIMG")
     private String url;
 }

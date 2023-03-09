@@ -37,7 +37,7 @@ public class ImageController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ImageDTO save(@Valid @RequestBody ImageDTO imageDTO){
-        log.info("Creating Image: %s".formatted(imageDTO.getTitle()));
+        log.info("Creating Image: %s".formatted(imageDTO.getDescription()));
         return imageService.save(imageDTO);
     }
 
