@@ -32,4 +32,23 @@ public class UserDTO {
      */
     private String lastName;
 
+    /**
+     The email of the user.
+     */
+    private String email;
+
+    /**
+     * The Password
+     */
+    private String password;
+
+    /**
+     The image's Id of the user.
+     */
+    private Long imageId;
+
+    /**
+     The role's ID of the user.
+     */
+    private Long roleId;
 }

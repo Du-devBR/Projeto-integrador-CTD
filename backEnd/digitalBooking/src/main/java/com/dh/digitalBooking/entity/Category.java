@@ -38,7 +38,7 @@ public class Category implements Serializable {
      The URL of the category's image.
      */
     @ManyToOne
-    @JoinColumn(name = "UrlImg", referencedColumnName = "ImagemID")
+    @JoinColumn(name = "url_img", referencedColumnName = "ImagemID")
     private Image imageURL;
 
 }

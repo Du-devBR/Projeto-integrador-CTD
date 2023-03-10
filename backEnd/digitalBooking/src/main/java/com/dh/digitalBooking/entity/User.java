@@ -44,16 +44,23 @@ public class User {
     private String email;
 
     /**
+     * The Password on Hash
+     */
+    @Column(name = "senha_hash", nullable = false)
+    private String passwordHash;
+
+
+    /**
      The image URL of the user.
      */
-    @ManyToOne
-    @JoinColumn(name = "UrlImg", referencedColumnName = "ImagemID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "url_img", referencedColumnName = "ImagemID")
     private Image imageURL;
 
     /**
      The role of the user.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RoleID", referencedColumnName = "FuncaoID")
     private Role role;
 }

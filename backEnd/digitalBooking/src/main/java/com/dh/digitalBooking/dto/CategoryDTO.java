@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 
 /**
  A DTO (Data Transfer Object) class representing a category.
- Contains basic information about the category, including its ID, description, and image URL.
+ Contains basic information about the category, including
+ its ID, description, and image URL.
  */
 @Data
 @AllArgsConstructor
@@ -27,5 +28,5 @@ public class CategoryDTO {
     /**
      The URL of the category's image.
      */
-    private String imageURL;
+    private Long imageID;
 }

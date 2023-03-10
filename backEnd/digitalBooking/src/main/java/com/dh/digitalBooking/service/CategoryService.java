@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    @Autowired private CategoryUtil categoryUtil;
+    @Autowired private CategoryRepository categoryRepository;
 
     /**
      Saves the given CategoryDTO entity to the database.
@@ -26,7 +26,7 @@ public class CategoryService {
      @return the CategoryDTO entity after being saved to the database.
      */
     public CategoryDTO save(CategoryDTO categoryDTO){
-        Category category = CategoryUtil.convertToEntity(categoryDTO);
+        Category category = categoryUtil.convertToEntity(categoryDTO);
         return CategoryUtil.convertToDTO(categoryRepository.save(category));
     }
 

@@ -5,6 +5,7 @@ import com.dh.digitalBooking.entity.User;
 import com.dh.digitalBooking.repository.UserRepository;
 import com.dh.digitalBooking.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,10 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private UserRepository userRepository;
+
+    @Autowired private UserUtil userUtil;
 
     /**
      Saves a new user to the database.
@@ -27,7 +30,8 @@ public class UserService {
      @return a UserDTO object representing the saved user.
      */
     public UserDTO save(UserDTO userDTO){
-        User user = UserUtil.convertToEntity(userDTO);
+        User user = userUtil.convertToEntity(userDTO);
+        user.setPasswordHash(passwordEncoder.encode(userDTO.getPassword()));
         return UserUtil.convertToDTO(userRepository.save(user));
     }
 
