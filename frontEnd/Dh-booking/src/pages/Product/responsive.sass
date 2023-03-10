@@ -10,6 +10,15 @@
       .principal-picture-view
         width: 60%
 
+    .container-product-policies
+
+      .product-policies
+        grid-template-columns: repeat(2, 1fr)
+        gap: 2rem
+
+        .rules, .healths, .cancellation
+          gap: 1rem
+
 @media screen and (max-width: 501px)
 
   .container-product-detail
@@ -31,6 +40,31 @@
       .view-more-picture
         bottom: 1rem
         right: 1.5rem
+
+    .container-characteristics
+
+      ul
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        gap: 2rem
+
+
+    .container-schedule
+
+      .container-calendar
+        flex-direction: column
+
+        .start-reservation
+          width: 100%
+
+    .container-product-policies
+
+      .product-policies
+        grid-template-columns: repeat(1, 1fr)
+        gap: 2rem
+
+        .rules, .healths, .cancellation
+          gap: 1rem
 
   .container-open-modal
     width: 100%

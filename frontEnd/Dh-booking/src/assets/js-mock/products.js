@@ -11,7 +11,13 @@ export const product = [
       'https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-    ]
+    ],
+    offers: ['wi-fi', 'Ar-condicionado', 'TV', 'Pet', 'Carro'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
   {
     id: 2,
@@ -25,7 +31,13 @@ export const product = [
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cm9vbSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-    ]
+    ],
+    offers: ['wi-fi', 'TV', 'Pet'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
   {
     id: 3,
@@ -39,7 +51,13 @@ export const product = [
       'https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-    ]
+    ],
+    offers: ['wi-fi', 'Ar-condicionado', 'TV', 'Carro', 'Café da manha'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
   {
     id: 4,
@@ -53,7 +71,13 @@ export const product = [
       'https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-    ]
+    ],
+    offers: ['wi-fi', 'Ar-condicionado', 'TV', 'Carro', 'Barco', 'Bicicleta'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
   {
     id: 5,
@@ -67,7 +91,13 @@ export const product = [
       'https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-    ]
+    ],
+    offers: ['wi-fi', 'Ar-condicionado', 'Pet'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
   {
     id: 6,
@@ -81,7 +111,13 @@ export const product = [
       'https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-    ]
+    ],
+    offers: ['wi-fi', 'Ar-condicionado', 'TV', 'Café'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
   {
     id: 7,
@@ -95,7 +131,13 @@ export const product = [
       'https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-    ]
+    ],
+    offers: ['wi-fi', 'Ar-condicionado', 'TV', 'Pet', 'Barco'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
   {
     id: 8,
@@ -109,6 +151,12 @@ export const product = [
       'https://images.unsplash.com/photo-1584574985243-44c6422969bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmZXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1477120128765-a0528148fed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBzY2luYSUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
       'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJhdGhyb29tJTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-    ]
+    ],
+    offers: ['wi-fi', 'Ar-condicionado', 'TV', 'Pet', 'Bicicleta'],
+    policies: {
+      rules:['Check-out 10:00', 'Não é permitido festas', 'Não fumar'],
+      health:['Diretrizes de distanciamento social realacionado ao Coronavirus', 'Detector de fumaças', 'Cameras em areas externas'],
+      cancellation:['Adicione as datas da viagem para obter detalhes de cancelamento']
+    }
   },
 ]

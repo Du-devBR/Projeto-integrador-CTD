@@ -91,7 +91,7 @@
     display: flex
     position: relative
     width: 100%
-    height:  calc( 100% - 180px)
+    // height:  calc( 100% - 180px)
     padding: 2rem
     background: variables.$gray0
     justify-content: space-between
@@ -100,7 +100,6 @@
 
     .principal-picture-view
       width: 100%
-      height: 100%
       border-radius: 0.5rem
 
     .carousel-picture
@@ -110,7 +109,6 @@
       width: 100%
       height: 100%
       gap: 0.5rem
-      // overflow: hidden
 
       img
         width: 100%
@@ -132,6 +130,147 @@
       color: variables.$primary-color
       transition: 0.6s
       transform: scale(1.1)
+
+  .container-description
+    display: flex
+    flex-direction: column
+    position: relative
+    width: 100%
+    padding: 4rem 2rem
+    gap: 1rem
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray800
+
+    p
+      font-size: variables.$p-14px
+      font-weight: variables.$font-md
+      color: variables.$gray600
+      letter-spacing: 1px
+
+    p:first-letter
+      text-transform: capitalize
+
+  .container-characteristics
+    display: flex
+    flex-direction: column
+    position: relative
+    width: 100%
+    padding: 4rem 2rem
+    gap: 1rem
+    background: variables.$gray0
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray800
+      border-bottom: solid 1px variables.$primary-color
+      padding-bottom: 1rem
+
+    ul
+      display: grid
+      grid-template-columns: repeat(4, 1fr)
+      gap: 2rem
+
+      li
+        font-size: variables.$p-14px
+        font-weight: variables.$font-md
+        color: variables.$gray600
+        letter-spacing: 1px
+
+  .container-schedule
+    display: flex
+    width: 100%
+    height: auto
+    flex-direction: column
+    padding: 4rem 2rem
+    gap: 1rem
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      padding-bottom: 1rem
+
+    .container-calendar
+      display: flex
+      width: 100%
+      height: 100%
+      align-items: center
+      gap: 2rem
+
+      .calendar
+        display: flex
+        width: 100%
+        gap: 0.313rem
+
+        .react-calendar
+          width: 100%
+          height: 100%
+
+      .start-reservation
+        display: flex
+        width: 50%
+        height: 100%
+        flex-direction: column
+        padding: 2rem 1rem
+        background: variables.$gray100
+        border-radius: 0.5rem
+        gap: 1rem
+
+        .btn-reservation
+          @include mixins.button-bgColor
+          cursor: pointer
+
+  .container-map
+    width: 100%
+    // height: 400px
+    justify-content: center
+    display: flex
+    flex-direction: column
+    // background: variables.$gray300
+    padding:  2rem
+
+  .container-product-policies
+    display: flex
+    width: 100%
+    height: auto
+    flex-direction: column
+    padding: 4rem 2rem
+    background: variables.$gray100
+    gap: 1rem
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray800
+      border-bottom: solid 1px variables.$primary-color
+      padding-bottom: 1rem
+
+    .product-policies
+      display: grid
+      grid-template-columns: repeat(3, 1fr)
+
+      .rules, .healths, .cancellation
+        display: flex
+        flex-direction: column
+        gap: 2rem
+
+        h3
+          font-size: variables.$h3-16px
+          font-weight: variables.$font-xs
+          color: variables.$gray700
+
+        ul
+          display: flex
+          flex-direction: column
+          gap: 1rem
+
+          p
+            font-size: variables.$p-14px
+            color: variables.$gray600
+            font-weight: variables.$font-md
 
 .container-open-modal
   width: 100%
