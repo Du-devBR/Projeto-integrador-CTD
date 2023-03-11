@@ -2,6 +2,9 @@ package com.dh.digitalBooking.repository;
 
 import com.dh.digitalBooking.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
 /**
 
  The UserRepository interface extends JpaRepository to provide CRUD functionality for User entities.
@@ -14,4 +17,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByLogin(String login);
 }

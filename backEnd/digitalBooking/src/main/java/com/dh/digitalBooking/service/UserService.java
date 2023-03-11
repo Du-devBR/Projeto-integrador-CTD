@@ -31,7 +31,7 @@ public class UserService {
      */
     public UserDTO save(UserDTO userDTO){
         User user = userUtil.convertToEntity(userDTO);
-        user.setPasswordHash(passwordEncoder.encode(userDTO.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         return UserUtil.convertToDTO(userRepository.save(user));
     }
 
