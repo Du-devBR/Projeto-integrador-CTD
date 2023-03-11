@@ -5,6 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+
 /**
  The User class represents a user in the application. It is used to store user data in the database.
  The class is annotated with @Data, @AllArgsConstructor, @NoArgsConstructor, @Builder, @Entity, and @Table annotations.
@@ -15,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "USUARIO")
-public class User {
+public class User implements UserDetails {
 
     /**
      The id of the user.
@@ -41,13 +48,13 @@ public class User {
      The email of the user.
      */
     @Column(name = "Email", length = 250)
-    private String email;
+    private String login;
 
     /**
      * The Password on Hash
      */
     @Column(name = "senha_hash", nullable = false)
-    private String passwordHash;
+    private String password;
 
 
     /**
@@ -63,4 +70,39 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RoleID", referencedColumnName = "FuncaoID")
     private Role role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.getName()));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

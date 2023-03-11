@@ -1,12 +1,16 @@
 package com.dh.digitalBooking.security;
 
+import com.dh.digitalBooking.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -30,26 +34,30 @@ public class SecurityConfiguration {
     /**
      The PasswordEncoder object used to encode and decode user passwords.
      */
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    @Autowired private PasswordEncoder passwordEncoder;
+
+    @Autowired private AuthService authService;
 
     /**
-     Registers in-memory users and roles with the AuthenticationManagerBuilder.
-     Configures two users: "user" with role "USER" and "admin" with role "ADMIN".
-     User passwords are encoded using the PasswordEncoder object.
-     @param auth the AuthenticationManagerBuilder object to use for registration
+     Creates and returns an AuthenticationManager bean that uses the AuthenticationManagerBuilder
+     to authenticate users.
+     */
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
+        return auth.getAuthenticationManager();
+    }
+
+    /**
+     Registers the authentication manager builder with the provided authentication service and password encoder.
+     The authentication manager builder is used to configure in-memory users and roles.
+     User details are retrieved from the provided authentication service and password encoder is used to encode user passwords.
+     @param auth the AuthenticationManagerBuilder object to register
      @throws Exception if an error occurs while registering users
      */
     @Autowired
     public void regiterGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder.encode("123456"))
-                .roles("USER")
-                .and()
-                .withUser("admin")
-                .password(passwordEncoder.encode("tchothcozaManda"))
-                .roles("ADMIN");
+        auth.userDetailsService(authService)
+                .passwordEncoder(passwordEncoder);
     }
 
     /**
@@ -61,16 +69,14 @@ public class SecurityConfiguration {
      */
      @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        return http.csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
+                    .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER", "ADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
-                    .anyRequest().authenticated()
-                    .and()
-                .httpBasic()
-                    .and()
-                .csrf().disable()
+                    .requestMatchers(HttpMethod.POST, "/api/**").permitAll()
+                    .requestMatchers(HttpMethod.DELETE, "/api/**").permitAll()
+                    .anyRequest().authenticated().and()
                 .build();
     }
 }

@@ -35,7 +35,7 @@ public class UserDTO {
     /**
      The email of the user.
      */
-    private String email;
+    private String login;
 
     /**
      * The Password

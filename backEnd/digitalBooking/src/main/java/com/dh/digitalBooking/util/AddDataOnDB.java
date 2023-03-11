@@ -77,8 +77,8 @@ public class AddDataOnDB implements ApplicationRunner {
                     .id(1L)
                     .name("Tchotchoza")
                     .lastName("Tchan")
-                    .email("admin@teste.com")
-                    .passwordHash(passwordEncoder.encode("tchotchozaManda"))
+                    .login("admin@teste.com")
+                    .password(passwordEncoder.encode("tchotchozaManda"))
                     .imageURL(imageService.findById(1L).get())
                     .role(roleService.findById(1L).get()).build());
 
@@ -87,8 +87,8 @@ public class AddDataOnDB implements ApplicationRunner {
                     .id(2L)
                     .name("Doginho")
                     .lastName("Caramelo")
-                    .email("doginho@teste.com")
-                    .passwordHash(passwordEncoder.encode("123456"))
+                    .login("doginho@teste.com")
+                    .password(passwordEncoder.encode("123456"))
                     .imageURL(imageService.findById(2L).get())
                     .role(roleService.findById(2L).get()).build());
 
