@@ -2,12 +2,14 @@ package com.dh.digitalBooking.controller;
 
 
 import com.dh.digitalBooking.dto.ProductDTO;
+import com.dh.digitalBooking.entity.Product;
 import com.dh.digitalBooking.service.ProductService;
 import com.dh.digitalBooking.util.ProductUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -105,5 +107,24 @@ public class ProductController {
                     productService.save(productDTO);
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+    }
+
+    @GetMapping("/buscarPorCidade")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDTO findProductByCity(@PathVariable("name") String name){
+        log.info("Find Product by City: %d".formatted(name));
+        return productService.findByCityName(name)
+                .map(ProductUtil::convertToDTO)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found "));
+
+    }
+
+    @GetMapping("/buscarPorCategoria")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDTO findProductByCategory(@PathVariable("name") String name){
+        log.info("Find Product by Category: %d".formatted(name));
+        return productService.findByCategoryName(name)
+                .map(ProductUtil::convertToDTO)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
     }
 }
