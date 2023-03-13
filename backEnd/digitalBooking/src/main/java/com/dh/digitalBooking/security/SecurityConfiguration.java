@@ -35,11 +35,17 @@ public class SecurityConfiguration {
     /**
      The PasswordEncoder object used to encode and decode user passwords.
      */
-    @Autowired private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired private AuthService authService;
+    private final AuthService authService;
 
-    @Autowired private FilterToken filterToken;
+    private final FilterToken filterToken;
+
+    public SecurityConfiguration(PasswordEncoder passwordEncoder, AuthService authService, FilterToken filterToken) {
+        this.passwordEncoder = passwordEncoder;
+        this.authService = authService;
+        this.filterToken = filterToken;
+    }
 
     /**
      Creates and returns an AuthenticationManager bean that uses the AuthenticationManagerBuilder
@@ -78,7 +84,8 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
-                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("ADMIN")
                     .anyRequest().authenticated().and()
                 .addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)
                 .build();

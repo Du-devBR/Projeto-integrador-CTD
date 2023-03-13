@@ -15,17 +15,38 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 
+/**
+ This class represents a filter to extract the JWT token from the Authorization header and authenticate the user
+ using Spring Security.
+ It extends OncePerRequestFilter class from Spring Security.
+ */
 @Component
 public class FilterToken extends OncePerRequestFilter {
 
     private final TokenService tokenService;
     private final UserRepository userRepository;
 
+    /**
+
+     Constructor of the FilterToken class that initializes the TokenService and UserRepository fields.
+     @param tokenService the service used to generate and verify JWT tokens.
+     @param userRepository the repository used to retrieve user data from the database.
+     */
     public FilterToken(TokenService tokenService, UserRepository userRepository) {
         this.tokenService = tokenService;
         this.userRepository = userRepository;
     }
 
+    /**
+
+     Method responsible for extracting the JWT token from the Authorization header and authenticating the user
+     using Spring Security.
+     @param request the current HTTP request.
+     @param response the current HTTP response.
+     @param filterChain the chain of filters to be applied to the request.
+     @throws ServletException in case of any servlet exception.
+     @throws IOException in case of any I/O exception.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
