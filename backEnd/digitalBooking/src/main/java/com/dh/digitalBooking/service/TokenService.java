@@ -24,4 +24,10 @@ public class TokenService {
                         .toInstant(ZoneOffset.of("-03:00")))
                 .sign(Algorithm.HMAC256(jwtSecrets));
     }
+
+    public String getSubject(String token) {
+        return JWT.require(Algorithm.HMAC256(jwtSecrets))
+                .withIssuer("DigitalBooking")
+                .build().verify(token).getSubject();
+    }
 }

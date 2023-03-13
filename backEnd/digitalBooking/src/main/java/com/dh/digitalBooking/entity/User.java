@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 /**
  The User class represents a user in the application. It is used to store user data in the database.
@@ -61,19 +61,20 @@ public class User implements UserDetails {
      The image URL of the user.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "url_img", referencedColumnName = "ImagemID")
+    @JoinColumn(name = "url_img", referencedColumnName = "imagemid")
     private Image imageURL;
 
     /**
      The role of the user.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RoleID", referencedColumnName = "FuncaoID")
+    @JoinColumn(name = "roleid", referencedColumnName = "funcaoid")
     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.getName()));
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.getName());
+        return Collections.singleton(simpleGrantedAuthority);
     }
 
     @Override

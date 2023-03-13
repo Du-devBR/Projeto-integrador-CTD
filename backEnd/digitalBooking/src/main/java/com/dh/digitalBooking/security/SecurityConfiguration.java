@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  A configuration class that provides basic security configuration for the application.
@@ -37,6 +38,8 @@ public class SecurityConfiguration {
     @Autowired private PasswordEncoder passwordEncoder;
 
     @Autowired private AuthService authService;
+
+    @Autowired private FilterToken filterToken;
 
     /**
      Creates and returns an AuthenticationManager bean that uses the AuthenticationManagerBuilder
@@ -74,9 +77,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                     .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/**").permitAll()
-                    .requestMatchers(HttpMethod.DELETE, "/api/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
+                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                     .anyRequest().authenticated().and()
+                .addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
