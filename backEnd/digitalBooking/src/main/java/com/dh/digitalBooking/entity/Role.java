@@ -17,7 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "FUNCAO")
+@Table(name = "funcao")
 public class Role implements Serializable {
 
     /**
@@ -25,18 +25,18 @@ public class Role implements Serializable {
     */
     @Id
     @GeneratedValue
-    @Column(name = "FuncaoID")
+    @Column(name = "funcaoid")
     private Long id;
 
     /**
      The name of the role.
      */
-    @Column(name = "Nome", length = 40)
+    @Column(name = "nome", length = 40)
     private String Name;
 
     /**
      A brief description of the role.
      */
-    @Column(name = "Descricao", length = 200)
+    @Column(name = "descricao", length = 200)
     private String Description;
 }

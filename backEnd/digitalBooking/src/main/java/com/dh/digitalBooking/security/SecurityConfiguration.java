@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  A configuration class that provides basic security configuration for the application.
@@ -34,9 +35,17 @@ public class SecurityConfiguration {
     /**
      The PasswordEncoder object used to encode and decode user passwords.
      */
-    @Autowired private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired private AuthService authService;
+    private final AuthService authService;
+
+    private final FilterToken filterToken;
+
+    public SecurityConfiguration(PasswordEncoder passwordEncoder, AuthService authService, FilterToken filterToken) {
+        this.passwordEncoder = passwordEncoder;
+        this.authService = authService;
+        this.filterToken = filterToken;
+    }
 
     /**
      Creates and returns an AuthenticationManager bean that uses the AuthenticationManagerBuilder
@@ -74,9 +83,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                     .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/**").permitAll()
-                    .requestMatchers(HttpMethod.DELETE, "/api/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
+                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("ADMIN")
                     .anyRequest().authenticated().and()
+                .addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
