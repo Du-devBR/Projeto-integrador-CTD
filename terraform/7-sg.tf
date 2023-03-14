@@ -1,6 +1,6 @@
 resource "aws_security_group" "react_sg" {
   name_prefix = "react_sg"
-  description = "Allow SSH and 80"
+  description = "Allow HTTP"
   ingress {
     description = "ssh port"
     from_port = 22
@@ -26,7 +26,7 @@ resource "aws_security_group" "react_sg" {
 
 resource "aws_security_group" "spring_sg" {
   name_prefix = "spring_sg"
-  description = "Allow SSH and 80"
+  description = "Allow 8080"
   ingress {
     description = "ssh port"
     from_port = 22
@@ -47,5 +47,29 @@ resource "aws_security_group" "spring_sg" {
   }
   tags = {
     Name = "spring_sg"
+  }
+}
+
+resource "aws_security_group" "sg_acesso_ssh_publico" {
+  description = "Libera porta SSH para Internet"
+
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "porta ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+  }
+
+  egress {
+    description = "porta SSH"
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    "Name" = "ssh-sg"
   }
 }

@@ -6,7 +6,7 @@ variable "region" {
   default = "us-east-1"
 }
 variable "ssh_key_name" {
-  default = "t5-grupo5"
+  default = "t5-grupo5-aws"
 }
 
 variable "ami-type" {

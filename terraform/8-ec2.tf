@@ -6,7 +6,8 @@ resource "aws_instance" "react_lc" {
   associate_public_ip_address = true
   user_data                   = var.ansible_install_script
   vpc_security_group_ids = [
-    aws_security_group.react_sg.id
+    aws_security_group.react_sg.id,
+    aws_security_group.sg_acesso_ssh_publico.id
   ]
   tags = {
     "Name" = "grupo05-front-ec2"
@@ -20,7 +21,9 @@ resource "aws_instance" "spring_lc" {
   associate_public_ip_address = true
   user_data                   = var.ansible_install_script
   vpc_security_group_ids = [
-    aws_security_group.spring_sg.id
+    aws_security_group.spring_sg.id,
+    aws_security_group.sg_acesso_ssh_publico.id
+
   ]
   tags = {
     "Name" = "grupo05-back-ec2"
