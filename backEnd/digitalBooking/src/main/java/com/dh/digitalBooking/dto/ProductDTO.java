@@ -1,10 +1,7 @@
 package com.dh.digitalBooking.dto;
 
 
-import com.dh.digitalBooking.entity.Caracteristic;
-import com.dh.digitalBooking.entity.Category;
-import com.dh.digitalBooking.entity.City;
-import com.dh.digitalBooking.entity.Image;
+import com.dh.digitalBooking.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,5 +29,7 @@ public class ProductDTO {
     private List<Category> category;
 
     private List<Caracteristic> caracteristic;
+
+    private Accommodation accommodation;
 
 }
