@@ -1,6 +1,6 @@
 import './style.sass'
 import './responsive.sass'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import 'react-calendar/dist/Calendar.css';
 import { Calender } from '../../components/Calender';
 import css from '@emotion/styled';
@@ -8,7 +8,7 @@ import { SelectLocation } from '../../components/Select';
 import { CardCategoria } from '../../components/CardCategoria';
 
 //****** */ imports para teste sem api ******
-import {category} from '../../assets/js-mock/category'
+// import {category} from '../../assets/js-mock/category'
 import { product } from '../../assets/js-mock/products'
 import { CardProduct } from '../../components/CardProduto';
 
@@ -19,46 +19,118 @@ export function Home(){
   const [selectDate, setSelectDate] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [showDestination, setShowDestination] = useState(false)
-  const [destination, setDestination] = useState(null)
-  const [searchDestination, setSearchDestination] = useState({})
 
-  // console.log(destination)
-  // console.log(startDate)
-  console.log(searchDestination)
+  const [searchDestination, setSearchDestination] = useState('')
+  const [category, setCategory] = useState([])
+  const [location, setLocation] = useState([])
 
+  const [objectFilter, setObjectFilter] = useState([]);
+  const [listProduct, setListProduct] =useState(true)
+  const [selectCity, setSelectCity] = useState(false)
 
-// ******* dados apenas para teste de no input location, será substituido pelo dados vindo da api
-  const locations = [
-    {
-      city: 'São Paulo',
-      country:'Brazil'
-    },
-    {
-      city: 'New York',
-      country:'USA'
-    },
-    {
-      city: 'Denver',
-      country:'USA'
-    },
-    {
-      city: 'Rio de Janeiro',
-      country:'brazil'
-    },
-  ]
+  const [selectCategory, setSelectCategory] = useState(false)
 
-  // ******** dados que irá ser enviado a api para buscar os hoteis
+  const [inputSelect, setInputSelect] = useState(true)
+  const [valueInputSelect, setValueInputSelect] = useState('')
 
-  const searchDestinationWithData = (event) => {
-    event.preventDefault()
-    if(destination !== null || '' && startDate !== [null, null]){
-      setSearchDestination({
-        city: destination.city,
-        country: destination.country,
-        dataInitial: startDate[0].toISOString(),
-        dataFinal: startDate[1].toISOString()
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/categoria')
+    .then(res => {
+      res.json()
+      .then(data => {
+        setCategory(data)
       })
-      setSelectDate(false)
+    })
+  }, [])
+
+  useEffect(() =>{
+    if(showDestination){
+      fetch('http://localhost:8080/api/cidade')
+      .then(res => {
+        res.json()
+        .then(data => {
+          setLocation(data)
+        })
+      })
+    }
+  }, [showDestination])
+
+  // useEffect(() => {
+  //   fetch('http://localhost:8080/api/produto')
+  //   .then(res => [
+  //     res.json()
+  //     .then(data => [
+  //       console.log(data)
+  //       // setProducts(data)
+  //     ])
+  //   ])
+  // }, [])
+
+  const getValueInputSelect = (event) => {
+    setValueInputSelect(event.target.value)
+    if(valueInputSelect.length >= 1 ){
+      setInputSelect(false)
+    }else{
+      setInputSelect(true)
+    }
+  }
+
+  const teste = (nome) => {
+    setValueInputSelect(nome)
+    setShowDestination(false)
+  }
+
+
+  const filterInputSelect = location.filter((object) =>
+    object.name.toLowerCase().includes(valueInputSelect.toLowerCase()) ||
+    object.country.toLowerCase().includes(valueInputSelect.toLowerCase())
+  )
+
+  const filterProductBySelect = () => {
+    const filterObjects = product.filter((object) => object.cidade.toLowerCase().includes(valueInputSelect.toLowerCase()))
+    return filterObjects
+  }
+
+  const filterProductByCategory = (currentCategory) => {
+
+    const filterCategory = product.filter((object) => object.category === currentCategory)
+    setObjectFilter(filterCategory)
+    setListProduct(false)
+    setSelectCategory(true)
+    setSelectCity(false)
+
+  }
+
+  // const searchDestinationWithData = (event) => {
+  //   event.preventDefault()
+  //   if(destination !== null || '' && startDate !== [null, null]){
+  //     setSearchDestination({
+  //       city: destination.city,
+  //       country: destination.country,
+  //       dataInitial: startDate[0].toISOString(),
+  //       dataFinal: startDate[1].toISOString()
+  //     })
+  //     setSelectDate(false)
+  //   }else{
+  //     console.log('errro')
+  //   }
+  // }
+
+  const searchDestinationSelect = (event) => {
+    event.preventDefault()
+    if(valueInputSelect !== null){
+      setSearchDestination(
+        valueInputSelect
+      )
+      const objFilter = filterProductBySelect()
+      setObjectFilter(objFilter)
+      setListProduct(false)
+      setValueInputSelect('')
+      setSelectCity(true)
+      setSelectCategory(false)
+
     }else{
       console.log('errro')
     }
@@ -71,12 +143,6 @@ export function Home(){
 
   function toogleLocation(){
     setShowDestination(!showDestination)
-  }
-
-  const selectDestination = (location) => {
-    if(location !== null || ''){
-      return `${location.city}, ${location.country}`
-    }
   }
 
   const dataSelecionada = (range) => {
@@ -96,7 +162,7 @@ export function Home(){
     const endMonth = range[1].toLocaleString('pt-BR', { month: 'short' });
 
     return `${startDay} de ${startMonth} a ${endDay} de ${endMonth}`;
-  };
+  }
 
   return(
     <div className='container-home'>
@@ -108,22 +174,39 @@ export function Home(){
               <input
                 className='input-select-location'
                 onClick={toogleLocation}
+                onChange={getValueInputSelect}
                 placeholder='Escolha seu destino'
-                value={selectDestination(destination)}
+                value={valueInputSelect}
               />
                   <div className={showDestination ? 'container-location-open' : 'container-location-close'}>
                     {
+                      inputSelect ? (
+                        <h3>Destinos Favoritos</h3>
+                      ):''
+                    }
+                    {
                       showDestination
                       &&
-                        locations.map((location, index) =>(
+                      inputSelect ? (
+                        location.slice(0, 4).map((location, index) =>(
                           <div className="location-list">
                             <SelectLocation
-                              id={index}
+                              id={index.length}
                               data={location}
-                              onSelectDestination={currentDestination => setDestination(currentDestination)}
+                              onSelectDestination={currentDestination => teste(currentDestination)}
                             />
                           </div>
                         ))
+                      ):(
+                        filterInputSelect.slice(0,4).map((filter) =>(
+                          <div className="location-list">
+                            <SelectLocation
+                              data={filter}
+                              onSelectDestination={currentDestination => teste(currentDestination)}
+                            />
+                          </div>
+                        ))
+                      )
                     }
                   </div>
             </div>
@@ -146,7 +229,7 @@ export function Home(){
                   }
                 </div>
             </div>
-            <button className='submit-search' onClick={event => searchDestinationWithData(event)}>Pesquisar</button>
+            <button className='submit-search' onClick={event => searchDestinationSelect(event)}>Pesquisar</button>
           </div>
         </div>
       </div>
@@ -158,18 +241,35 @@ export function Home(){
               <CardCategoria
                 id={index}
                 data={categories}
+                onSelectCategory={currentCategory => filterProductByCategory(currentCategory)}
               />
             ))
           }
         </div>
       </section>
       <section className='container-product'>
-        <h2>Lista de produtos</h2>
+        {
+          listProduct ?
+          (
+            <h2>Lista de produtos</h2>
+          ):selectCategory ? (
+            <h2>{objectFilter[0].category}</h2>
+          ): selectCity ? (
+            <h2>{objectFilter[0].cidade}</h2>
+          ): ''
+        }
         <div className="list-products">
           {
+            listProduct ? (
             product.map((products, index) => (
               <CardProduct
-                id={index}
+                id={index.length}
+                data={products}
+              />
+            ))
+            ):objectFilter.map((products, index) => (
+              <CardProduct
+                id={index.length}
                 data={products}
               />
             ))

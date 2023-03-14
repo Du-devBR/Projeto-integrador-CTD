@@ -109,6 +109,7 @@ export function Product(){
             <div className="container-calendar">
               <div className="calendar">
                 <Calender />
+                {/* <Calender /> */}
               </div>
               <div className='start-reservation'>
                 <span>Adicione as data da sua viagem para obter preços exatos.</span>
