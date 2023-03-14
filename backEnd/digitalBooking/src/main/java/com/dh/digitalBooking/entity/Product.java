@@ -43,4 +43,8 @@ public class Product implements Serializable {
                     inverseJoinColumns = @JoinColumn(name = "id_caracteristic"))
     private List<Caracteristic> caracteristic;
 
+    @ManyToOne
+    @JoinColumn(name="id_accommodation")
+    private Accommodation accommodation;
+
 }
