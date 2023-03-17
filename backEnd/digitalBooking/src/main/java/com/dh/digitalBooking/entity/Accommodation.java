@@ -24,13 +24,13 @@ public class Accommodation implements Serializable {
 
     private String qualification;
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<City> city;
+    @ManyToOne
+    @JoinColumn(name = "id_city")
+    private City city;
 
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<Category> category;
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
 
 }

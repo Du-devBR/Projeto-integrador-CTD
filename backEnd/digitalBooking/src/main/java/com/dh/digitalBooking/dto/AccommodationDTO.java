@@ -20,7 +20,7 @@ public class AccommodationDTO {
 
     private String qualification;
 
-    private List<City> city;
+    private City city;
 
-    private List<Category> category;
+    private Category category;
 }
