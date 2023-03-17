@@ -22,11 +22,7 @@ public class ProductDTO {
 
     private String description;
 
-    private List<City> city;
-
     private List<Image> image;
-
-    private List<Category> category;
 
     private List<Caracteristic> caracteristic;
 

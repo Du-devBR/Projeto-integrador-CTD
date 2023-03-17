@@ -25,20 +25,15 @@ public class Product implements Serializable {
 
     private String description;
 
-    @OneToMany
-    @JoinColumn(name = "id_city")
-    private List<City> city;
-
-    @OneToMany
-    @JoinColumn(name = "id_image")
-    private List<Image> image;
-
-    @OneToMany
-    @JoinColumn(name = "id_category")
-    private List<Category> category;
 
     @ManyToMany
-    @JoinTable(name = "product_carateristic",
+    @JoinTable(name = "produto-imagem",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_image"))
+    private List<Image> image;
+
+    @ManyToMany
+    @JoinTable(name = "produto-caracteristica",
                     joinColumns = @JoinColumn(name = "id"),
                     inverseJoinColumns = @JoinColumn(name = "id_caracteristic"))
     private List<Caracteristic> caracteristic;
