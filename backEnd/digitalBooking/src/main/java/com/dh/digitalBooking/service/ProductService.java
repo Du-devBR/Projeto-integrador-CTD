@@ -40,11 +40,4 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Optional<Product> findByCityName(String name){
-        return productRepository.findByCityName(name);
-    }
-
-    public Optional<Product> findByCategoryName(String name){
-        return productRepository.findByCategoryName(name);
-    }
 }

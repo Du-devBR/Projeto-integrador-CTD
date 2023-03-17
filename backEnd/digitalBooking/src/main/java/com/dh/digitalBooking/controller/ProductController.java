@@ -109,22 +109,4 @@ public class ProductController {
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
     }
 
-    @GetMapping("/buscarPorCidade")
-    @ResponseStatus(HttpStatus.OK)
-    public ProductDTO findProductByCity(@PathVariable("name") String name){
-        log.info("Find Product by City: %d".formatted(name));
-        return productService.findByCityName(name)
-                .map(ProductUtil::convertToDTO)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found "));
-
-    }
-
-    @GetMapping("/buscarPorCategoria")
-    @ResponseStatus(HttpStatus.OK)
-    public ProductDTO findProductByCategory(@PathVariable("name") String name){
-        log.info("Find Product by Category: %d".formatted(name));
-        return productService.findByCategoryName(name)
-                .map(ProductUtil::convertToDTO)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
-    }
 }
