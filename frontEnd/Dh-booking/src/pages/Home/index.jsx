@@ -11,6 +11,7 @@ import { CardCategoria } from '../../components/CardCategoria';
 // import {category} from '../../assets/js-mock/category'
 import { product } from '../../assets/js-mock/products'
 import { CardProduct } from '../../components/CardProduto';
+import {MapPin, Calendar} from 'phosphor-react'
 
 
 export function Home(){
@@ -57,16 +58,15 @@ export function Home(){
     }
   }, [showDestination])
 
-  // useEffect(() => {
-  //   fetch('http://localhost:8080/api/produto')
-  //   .then(res => [
-  //     res.json()
-  //     .then(data => [
-  //       console.log(data)
-  //       // setProducts(data)
-  //     ])
-  //   ])
-  // }, [])
+  useEffect(() => {
+    fetch('http://localhost:8080/api/produto')
+    .then(res => [
+      res.json()
+      .then(data => [
+        setProducts(data)
+      ])
+    ])
+  }, [])
 
   const getValueInputSelect = (event) => {
     setValueInputSelect(event.target.value)
@@ -171,14 +171,17 @@ export function Home(){
           <h1>Buscar ofertas em hotéis, pousadas e muito mais.</h1>
           <div className="inputs-search">
             <div className="select-location">
-              <input
-                className='input-select-location'
-                onClick={toogleLocation}
-                onChange={getValueInputSelect}
-                placeholder='Escolha seu destino'
-                value={valueInputSelect}
-              />
-                  <div className={showDestination ? 'container-location-open' : 'container-location-close'}>
+              <div className="input">
+                <input
+                  className='input-select-location'
+                  onClick={toogleLocation}
+                  onChange={getValueInputSelect}
+                  placeholder='Escolha seu destino'
+                  value={valueInputSelect}
+                />
+                <MapPin className='icon-location' size={24} color="#ff9800" />
+              </div>
+              <div className={showDestination ? 'container-location-open' : 'container-location-close'}>
                     {
                       inputSelect ? (
                         <h3>Destinos Favoritos</h3>
@@ -208,15 +211,18 @@ export function Home(){
                         ))
                       )
                     }
-                  </div>
+              </div>
             </div>
             <div className="input-calendar">
-              <input
-                onClick={toggleCalendar}
-                type="text"
-                placeholder='check in - Check out'
-                value={selectDate ? formatDate(startDate) : ''}
-              />
+              <div className="input">
+                <input
+                  onClick={toggleCalendar}
+                  type="text"
+                  placeholder='check in - Check out'
+                  value={selectDate ? formatDate(startDate) : ''}
+                />
+                <Calendar className='icon-calendar' size={24} color="#ff9800" />
+              </div>
                 <div className={showCalendar ? 'container-calendar-open' : 'container-calendar-close'}>
                   {
                     showCalendar

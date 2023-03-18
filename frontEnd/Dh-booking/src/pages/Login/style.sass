@@ -44,12 +44,24 @@
                 color: variables.$gray800
                 font-size: variables.$p-12px
 
-            input::placeholder
-                color: variables.$gray300
+            .input
+                display: flex
+                position: relative
+                align-items: center
 
-            input:focus
-                border: solid 2px variables.$primary-color
-                outline: none
+                input::placeholder
+                    color: variables.$gray300
+
+                input:focus
+                    border: solid 2px variables.$primary-color
+                    outline: none
+
+                .btn-view-password
+                    right: 1rem
+                    position: absolute
+                    cursor: pointer
+                    border: none
+                    background: none
 
             label
                 font-size: variables.$p-12px

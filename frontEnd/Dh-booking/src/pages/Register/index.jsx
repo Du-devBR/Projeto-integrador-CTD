@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './style.sass'
 import './responsive.sass'
+import {Eye, EyeSlash} from 'phosphor-react'
 
 export function Register(){
 
@@ -19,6 +20,7 @@ export function Register(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [viewPassword, setViewPassword] = useState(false)
 
     const isFormValid = name && lastname && email && password && confirmPassword;
 
@@ -26,12 +28,16 @@ export function Register(){
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         event.preventDefault()
 
-        if(name.length > 2 && lastname.length > 2 && emailRegex.test(email) && password.length >= 6 && (password === confirmPassword)){
+        if(name.length >= 2 && lastname.length >= 2 && emailRegex.test(email) && password.length >= 6 && (password === confirmPassword)){
             alert('cadastrado')
 
         }else{
             error()
         }
+    }
+
+    const toogleViewPassword = () => {
+        setViewPassword(!viewPassword)
     }
 
     const error = (event) => {
@@ -41,7 +47,7 @@ export function Register(){
             setErrorNameInput(true)
             setMessageErrorName(true)
 
-        }if(lastname.length < 3){
+        }if(lastname.length < 2){
             setErrorLastnameInput(true)
             setMessageErrorLastname(true)
 
@@ -61,11 +67,11 @@ export function Register(){
     const verifyEmailInput = (event) => {
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
-        if(name.length > 2){
+        if(name.length >= 2){
             setErrorNameInput(false)
             setMessageErrorName(false)
 
-        }if(lastname.length > 2){
+        }if(lastname.length >= 2){
             setErrorLastnameInput(false)
             setMessageErrorLastname(false)
 
@@ -76,11 +82,14 @@ export function Register(){
         }if(password.length >= 6){
             setErrorPasswordInput(false)
             setMessageErrorPassword(false)
+
         }if(confirmPassword === password){
             setErrorCheckPasswordInput(false)
 
         }
+
     }
+
 
     return(
     <div className="register-container">
@@ -122,7 +131,7 @@ export function Register(){
                 <input
                     onChange={(event) => setEmail(event.target.value)}
                     className={errorEmailInput ? 'input-error' : ''}
-                    type="email"
+                    type="text"
                     placeholder='projeto-integrador@dh.com.br'
                     onBlur={verifyEmailInput}
                 />
@@ -133,13 +142,22 @@ export function Register(){
             </div>
             <div className="input-password">
                 <label htmlFor="">Senha</label>
-                <input
-                    onChange={(event) => setPassword(event.target.value)}
-                    className={errorPasswordInput ? 'input-error' : ''}
-                    type="password"
-                    placeholder='******'
-                    onBlur={verifyEmailInput}
-                />
+                <div className="input">
+                    <input
+                        onChange={(event) => setPassword(event.target.value)}
+                        className={errorPasswordInput ? 'input-error' : ''}
+                        type={!viewPassword ? 'password' : 'text'}
+                        placeholder='******'
+                        onBlur={verifyEmailInput}
+                    />
+                    <span className='btn-view-password'>
+                            {viewPassword ?
+                            <Eye onClick={toogleViewPassword} size={20} color="#ff9800" weight="duotone" />
+                            :
+                            <EyeSlash onClick={toogleViewPassword} size={20} color="#ff9800" weight="duotone" />
+                            }
+                    </span>
+                </div>
                 {
                     messageErrorPassword &&
                     <span className='message-error'>Senha precisa ser maior que 6 digitos</span>
@@ -147,13 +165,22 @@ export function Register(){
             </div>
             <div className="input-confirm-password">
                 <label htmlFor="">Confirma senha</label>
-                <input
-                    onChange={(event) => setConfirmPassword(event.target.value)}
-                    className={errorCheckPasswordInput ? 'input-error' : ''}
-                    type="password"
-                    placeholder='******'
-                    onBlur={verifyEmailInput}
-                />
+                <div className="input">
+                    <input
+                        onChange={(event) => setConfirmPassword(event.target.value)}
+                        className={errorCheckPasswordInput ? 'input-error' : ''}
+                        type={!viewPassword ? 'password' : 'text'}
+                        placeholder='******'
+                        onBlur={verifyEmailInput}
+                    />
+                    <span className='btn-view-password'>
+                                {viewPassword ?
+                                <Eye onClick={toogleViewPassword} size={20} color="#ff9800" weight="duotone" />
+                                :
+                                <EyeSlash onClick={toogleViewPassword} size={20} color="#ff9800" weight="duotone" />
+                                }
+                    </span>
+                </div>
                 {
                     errorCheckPasswordInput &&
                     <span className='message-error'>Senha precisa se igual</span>
@@ -163,7 +190,7 @@ export function Register(){
                 disabled={!isFormValid}
                 className='login-button'
                 >
-                    Entrar
+                    Cadastrar
             </button>
             <div className='register'>
                 <span>Já tem conta?</span>

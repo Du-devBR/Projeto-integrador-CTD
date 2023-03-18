@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './style.sass'
 import './responsive.sass'
 import {userTeste} from '../../assets/js-mock/userTeste'
+import {Eye, EyeSlash} from 'phosphor-react'
 
 export function Login(){
 
@@ -15,17 +16,17 @@ export function Login(){
     const [password, setPassword] = useState('')
     const [userLogin, setUserLogin] = useState([{}])
     const [enableLogin, setEnableLogin] = useState(false)
+    const [viewPassword, setViewPassword] = useState(false)
     const navigate = useNavigate()
 
     const isFormValid = email && password
 
     const submitForm = (event) => {
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         event.preventDefault()
-        if(email === ''){
-            setErrorEmailInput(true)
+        if(!emailRegex.test(email) && password.length < 6){
+            error()
 
-        }if(password === ''){
-            setErrorPasswordInput(true)
         }else{
             setUserLogin({
                 'email': email,
@@ -40,9 +41,11 @@ export function Login(){
             setMessageError(true)
         }if (!emailRegex.test(email)) {
             setMessageEmailError(true)
+            setErrorEmailInput(true)
 
         }if(password.length < 6){
             setMessagePasswordError(true)
+            setErrorPasswordInput(true)
         } else{
             setEnableLogin(true)
         }
@@ -64,6 +67,9 @@ export function Login(){
           }
     }
 
+    const toogleViewPassword = () => {
+        setViewPassword(!viewPassword)
+    }
 
     useEffect(() => {
         if(enableLogin) {
@@ -95,23 +101,34 @@ export function Login(){
             <h1>Iniciar Sessão</h1>
             <div className="input-email">
                 <label htmlFor="">Email</label>
-                <input
-                    onChange={(event) => setEmail(event.target.value)}
-                    className={errorEmailInput ? 'input-error' : ''}
-                    placeholder='projeto-integrador@dh.com.br'
-                    onBlur={verifyEmailInput}
-                />
+                <div className="input">
+                    <input
+                        onChange={(event) => setEmail(event.target.value)}
+                        className={errorEmailInput ? 'input-error' : ''}
+                        placeholder='projeto-integrador@dh.com.br'
+                        onBlur={verifyEmailInput}
+                    />
+                </div>
             </div>
             <div className="input-password">
                 <label htmlFor="">Password</label>
-                <input
-                    onChange={(event) => setPassword(event.target.value)}
-                    className={errorPasswordInput ? 'input-error' : ''}
-                    type="password"
-                    placeholder='******'
-                    minLength={() => setMessagePasswordError(false)}
-                    onKeyUp={countKeyUpPassword}
-                />
+                <div className='input'>
+                    <input
+                        onChange={(event) => setPassword(event.target.value)}
+                        className={errorPasswordInput ? 'input-error' : ''}
+                        type={!viewPassword ? 'password' : 'text'}
+                        placeholder='******'
+                        minLength={() => setMessagePasswordError(false)}
+                        onKeyUp={countKeyUpPassword}
+                    />
+                    <span className='btn-view-password'>
+                        {viewPassword ?
+                        <Eye onClick={toogleViewPassword} size={20} color="#ff9800" weight="duotone" />
+                        :
+                        <EyeSlash onClick={toogleViewPassword} size={20} color="#ff9800" weight="duotone" />
+                        }
+                    </span>
+                </div>
             </div>
             {
                 messageError
