@@ -1,4 +1,5 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
+import { BrowserRouter, createBrowserRouter, Navigate, RouterProvider} from "react-router-dom"
+import { UserProvider } from "./hooks/userLogin"
 import { Home } from "./pages/Home"
 import { Login } from "./pages/Login"
 import { MainLayout } from "./pages/MainLayout"
@@ -36,7 +37,8 @@ export function Routes(){
   ])
 
   return (
-    <RouterProvider router={appRouter} />
-
+      <UserProvider>
+        <RouterProvider router={appRouter} />
+      </UserProvider>
   )
 }
