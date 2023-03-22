@@ -13,11 +13,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "HOSPEDAGEM")
+@Table(name = "hospedagem")
 public class Accommodation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hospedagemid")
+    @Column(name = "id_hospedagem")
     private Long id;
 
     @Column(name="nome")
@@ -27,12 +27,12 @@ public class Accommodation implements Serializable {
     private String qualification;
 
     @ManyToOne
-    @JoinColumn(name = "id_city", referencedColumnName = "cidadeid")
+    @JoinColumn(name = "fk_cidade", referencedColumnName = "id_cidade")
     private City city;
 
 
     @ManyToOne
-    @JoinColumn(name = "id_category", referencedColumnName = "categoriaid")
+    @JoinColumn(name = "fk_categoria", referencedColumnName = "id_categoria")
     private Category category;
 
 }

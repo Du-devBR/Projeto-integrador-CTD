@@ -1,5 +1,6 @@
 package com.dh.digitalBooking.dto;
 
+import com.dh.digitalBooking.entity.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,6 @@ public class CaracteristicDTO {
 
     private String description;
 
-    private String iconUrl;
+    private Image iconUrl;
 
 }

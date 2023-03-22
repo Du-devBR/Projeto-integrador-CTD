@@ -14,11 +14,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "CIDADE")
+@Table(name = "cidade")
 public class City implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    @Column(name = "cidadeid")
+    @Column(name = "id_cidade")
     private Long id;
 
     @Column(name = "nome")

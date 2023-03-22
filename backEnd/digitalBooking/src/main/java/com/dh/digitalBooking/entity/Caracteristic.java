@@ -13,13 +13,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "CARACTERISTICA")
+@Table(name = "caracteristica")
 public class Caracteristic implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_caracteristica")
     private Long id;
 
+    @Column(name = "descricao")
     private String description;
 
-    private String iconUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_imagem", referencedColumnName = "id_imagem")
+    private Image iconUrl;
 }
