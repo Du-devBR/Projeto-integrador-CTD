@@ -14,19 +14,40 @@ import java.time.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "RESERVA")
+@Table(name = "reserva")
 public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ReservaID")
+    @Column(name = "id_reserva")
     private Long id;
 
+    @Column(name = "data_hora_da_reserva")
     private LocalDateTime dateHourReservation;
 
+    @Column(name = "hora_da_reserva")
     private LocalTime hourReservation;
 
+    @Column(name = "data_da_reserva")
     private LocalDate dateReservation;
+
+    @Column(name = "data_hora_final_da_reserva")
+    private LocalDateTime dateHourFinalReservation;
+
+    @Column(name = "hora_final_da_reserva")
+    private LocalTime hourFinalReservation;
+
+    @Column(name = "data_final_da_reserva")
+    private LocalDate dateFinalReservation;
+
+
+    @ManyToOne
+    @JoinColumn(name = "fk_produto", referencedColumnName = "id_produto")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
+    private User user;
 
     public void setDateHourReservation(Timestamp dateHourReservation) {
         this.dateHourReservation = Instant.ofEpochMilli(dateHourReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -36,26 +57,10 @@ public class Reservation {
 
     }
 
-    private LocalDateTime dateHourFinalReservation;
-
-    private LocalTime hourFinalReservation;
-
-    private LocalDate dateFinalReservation;
-
     public void setDateHourFinalReservation(Timestamp dateHourFinalReservation) {
         this.dateHourFinalReservation = Instant.ofEpochMilli(dateHourFinalReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
         this.dateFinalReservation = this.dateHourFinalReservation.toLocalDate();
         this.hourFinalReservation = this.dateHourFinalReservation.toLocalTime();
     }
-
-    @ManyToOne
-    @JoinColumn(name = "id_product")
-    private Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
-
-
 }
