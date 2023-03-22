@@ -17,10 +17,13 @@ import java.io.Serializable;
 public class Accommodation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hospedagemid")
     private Long id;
 
+    @Column(name="nome")
     private String name;
 
+    @Column(name = "qualificacao")
     private String qualification;
 
     @ManyToOne
@@ -29,7 +32,7 @@ public class Accommodation implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_category")
+    @JoinColumn(name = "id_category", referencedColumnName = "categoriaid")
     private Category category;
 
 }
