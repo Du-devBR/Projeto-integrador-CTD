@@ -1023,6 +1023,32 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 2023-03-16 21:47:13,925 INFO  [restartedMain] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
 2023-03-16 21:47:13,970 INFO  [restartedMain] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path ''
 2023-03-16 21:47:13,990 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Started DigitalBookingApplication in 8.775 seconds (process running for 9.879)
+2023-03-22 10:03:22,206 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Starting DigitalBookingApplication using Java 17.0.6 with PID 70480 (/home/carlosfilho/Projetos/CTD_DH/DHBOOKING/backEnd/digitalBooking/target/classes started by carlosfilho in /home/carlosfilho/Projetos/CTD_DH/DHBOOKING/backEnd/digitalBooking)
+2023-03-22 10:03:22,211 DEBUG [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Running with Spring Boot v3.0.2, Spring v6.0.4
+2023-03-22 10:03:22,213 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : No active profile set, falling back to 1 default profile: "default"
+2023-03-22 10:03:22,365 INFO  [restartedMain] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-22 10:03:22,366 INFO  [restartedMain] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-22 10:03:24,032 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-22 10:03:24,182 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 135 ms. Found 8 JPA repository interfaces.
+2023-03-22 10:03:25,333 INFO  [restartedMain] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 8080 (http)
+2023-03-22 10:03:25,346 INFO  [restartedMain] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2023-03-22 10:03:25,347 INFO  [restartedMain] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-22 10:03:25,441 INFO  [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+2023-03-22 10:03:25,442 INFO  [restartedMain] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3075 ms
+2023-03-22 10:03:26,373 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2023-03-22 10:03:27,041 INFO  [restartedMain] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2cde5429
+2023-03-22 10:03:27,048 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2023-03-22 10:03:27,190 INFO  [restartedMain] SQL dialect : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-03-22 10:03:39,045 INFO  [restartedMain] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-22 10:03:39,684 DEBUG [restartedMain] com.dh.digitalBooking.security.FilterToken : Filter 'filterToken' configured for use
+2023-03-22 10:03:40,185 WARN  [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-22 10:03:40,708 INFO  [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6f7255aa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7fc788d5, org.springframework.security.web.context.SecurityContextHolderFilter@38a16e28, org.springframework.security.web.header.HeaderWriterFilter@518afbc6, org.springframework.security.web.authentication.logout.LogoutFilter@2d1b124, com.dh.digitalBooking.security.FilterToken@294a80d4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3bcdab29, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2cdab1eb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3bf383d0, org.springframework.security.web.session.SessionManagementFilter@1ba94850, org.springframework.security.web.access.ExceptionTranslationFilter@6f8e4f0, org.springframework.security.web.access.intercept.AuthorizationFilter@420a55e4]
+2023-03-22 10:03:41,127 INFO  [restartedMain] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2023-03-22 10:03:41,194 INFO  [restartedMain] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-22 10:03:41,207 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Started DigitalBookingApplication in 20.352 seconds (process running for 22.862)
+2023-03-22 10:04:22,500 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-22 10:04:22,509 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2023-03-22 10:04:22,544 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
 2023-03-17 18:30:01,321 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Starting DigitalBookingApplication using Java 17.0.6 with PID 5495 (/home/denis/Área de Trabalho/digitalBooking/grupo-5/backEnd/digitalBooking/target/classes started by denis in /home/denis/Área de Trabalho/digitalBooking/grupo-5/backEnd/digitalBooking)
 2023-03-17 18:30:01,326 DEBUG [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Running with Spring Boot v3.0.2, Spring v6.0.4
 2023-03-17 18:30:01,328 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : No active profile set, falling back to 1 default profile: "default"
@@ -1151,3 +1177,32 @@ Caused by: org.hibernate.query.SemanticException: Attribute [com.dh.digitalBooki
 	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery$CountQueryPreparer.<init>(PartTreeJpaQuery.java:336)
 	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:91)
 	... 65 common frames omitted
+2023-03-22 10:28:30,959 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Starting DigitalBookingApplication using Java 17.0.6 with PID 74679 (/home/carlosfilho/Projetos/CTD_DH/DHBOOKING/backEnd/digitalBooking/target/classes started by carlosfilho in /home/carlosfilho/Projetos/CTD_DH/DHBOOKING/backEnd/digitalBooking)
+2023-03-22 10:28:30,968 DEBUG [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Running with Spring Boot v3.0.2, Spring v6.0.4
+2023-03-22 10:28:30,970 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : No active profile set, falling back to 1 default profile: "default"
+2023-03-22 10:28:31,171 INFO  [restartedMain] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-03-22 10:28:31,172 INFO  [restartedMain] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-03-22 10:28:33,597 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-22 10:28:33,722 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 112 ms. Found 9 JPA repository interfaces.
+2023-03-22 10:28:34,668 INFO  [restartedMain] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 8080 (http)
+2023-03-22 10:28:34,684 INFO  [restartedMain] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2023-03-22 10:28:34,685 INFO  [restartedMain] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-22 10:28:34,764 INFO  [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+2023-03-22 10:28:34,765 INFO  [restartedMain] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3591 ms
+2023-03-22 10:28:35,617 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2023-03-22 10:28:36,288 INFO  [restartedMain] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51806964
+2023-03-22 10:28:36,291 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2023-03-22 10:28:36,375 INFO  [restartedMain] SQL dialect : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-03-22 10:28:42,693 INFO  [restartedMain] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-22 10:28:43,168 DEBUG [restartedMain] com.dh.digitalBooking.security.FilterToken : Filter 'filterToken' configured for use
+2023-03-22 10:28:43,661 WARN  [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-22 10:28:44,079 INFO  [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6b772874, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@515b6287, org.springframework.security.web.context.SecurityContextHolderFilter@4a7dd5f5, org.springframework.security.web.header.HeaderWriterFilter@2dad5d19, org.springframework.security.web.authentication.logout.LogoutFilter@2fefea4f, com.dh.digitalBooking.security.FilterToken@19529e65, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7cec4a5f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@146603ab, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@454c3a56, org.springframework.security.web.session.SessionManagementFilter@6d25c116, org.springframework.security.web.access.ExceptionTranslationFilter@83333ad, org.springframework.security.web.access.intercept.AuthorizationFilter@7f18a1dc]
+2023-03-22 10:28:44,410 INFO  [restartedMain] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2023-03-22 10:28:44,467 INFO  [restartedMain] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-22 10:28:44,481 INFO  [restartedMain] com.dh.digitalBooking.DigitalBookingApplication : Started DigitalBookingApplication in 14.654 seconds (process running for 16.523)
+2023-03-22 10:31:24,278 INFO  [http-nio-8080-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-22 10:31:54,727 INFO  [http-nio-8080-exec-2] com.dh.digitalBooking.controller.ProductController : Find All Products
+2023-03-22 10:32:45,955 INFO  [http-nio-8080-exec-3] com.dh.digitalBooking.controller.ImageController : Find All Images
+2023-03-22 10:33:40,844 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-22 10:33:40,855 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2023-03-22 10:33:41,071 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
