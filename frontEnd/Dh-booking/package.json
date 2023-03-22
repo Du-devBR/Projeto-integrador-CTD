@@ -11,7 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.3",
+    "moment": "^2.29.4",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-calendar": "^4.0.0",
