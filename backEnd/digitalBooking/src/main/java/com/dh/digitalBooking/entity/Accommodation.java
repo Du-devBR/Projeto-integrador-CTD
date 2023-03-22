@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class Accommodation implements Serializable {
     private String qualification;
 
     @ManyToOne
-    @JoinColumn(name = "id_city")
+    @JoinColumn(name = "id_city", referencedColumnName = "cidadeid")
     private City city;
 
 

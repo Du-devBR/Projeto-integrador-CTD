@@ -18,9 +18,15 @@ import java.io.Serializable;
 public class City implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = "cidadeid")
     private Long id;
 
+    @Column(name = "nome")
     private String name;
 
+    @Column(name = "estado")
+    private String state;
+
+    @Column(name = "pais")
     private String country;
 }
