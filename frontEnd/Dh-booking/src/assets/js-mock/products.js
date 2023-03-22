@@ -1,6 +1,7 @@
 export const product = [
   {
     id: 1,
+    date: 'Apr 07 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cXVhcnRvJTIwZGUlMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
     category: 'Hotel',
     title: 'Sun VillageRio',
@@ -22,6 +23,7 @@ export const product = [
   },
   {
     id: 2,
+    date: 'Apr 01 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
     category: 'Hostel',
     title: 'Cristo Hostel Ipanema',
@@ -43,6 +45,7 @@ export const product = [
   },
   {
     id: 3,
+    date: 'Apr 04 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1602882392562-aa0e8fdafddb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGFwYXJ0bWVudCUyMHJvb20lMjBuZXclMjB5b3JrfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
     category: 'Apartamento',
     title: 'Paulista central view',
@@ -64,6 +67,7 @@ export const product = [
   },
   {
     id: 4,
+    date: 'Apr 09 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVzb3J0JTIwbWFsZGl2YXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
     category: 'Resort',
     title: 'Coral Reef Resort Bahia',
@@ -85,6 +89,7 @@ export const product = [
   },
   {
     id: 5,
+    date: 'Mar 28 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1520277739336-7bf67edfa768?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8aG9zdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
     category: 'Hostel',
     title: 'Villa Brasil',
@@ -106,6 +111,7 @@ export const product = [
   },
   {
     id: 6,
+    date: 'Apr 16 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cXVhcnRvJTIwZGUlMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
     category: 'Hotel',
     title: 'The Royal Kensington',
@@ -127,6 +133,7 @@ export const product = [
   },
   {
     id: 7,
+    date: 'Apr 28 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1653780494131-1ee44be88287?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cmVzb3J0JTIwYmFoaWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
     category: 'Resort',
     title: 'Bahia Beach Resort',
@@ -148,6 +155,7 @@ export const product = [
   },
   {
     id: 8,
+    date: 'Mar 30 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
     img: 'https://images.unsplash.com/photo-1585670149967-b4f4da88cc9f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXBhcnRtZW50JTIwcm9vbSUyMHNhbiUyMGZyYW5jaXNjb3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
     category: 'Apartamento',
     title: 'Pacific Heights Oasis',

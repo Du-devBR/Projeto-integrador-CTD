@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './style.sass'
 import './responsive.sass'
 import {userTeste} from '../../assets/js-mock/userTeste'
 import {Eye, EyeSlash} from 'phosphor-react'
+import jwt_decode from 'jwt-decode'
+import { UserContext } from '../../hooks/userLogin'
 
 export function Login(){
 
@@ -14,32 +16,65 @@ export function Login(){
     const [messagePasswordError, setMessagePasswordError] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [userLogin, setUserLogin] = useState([{}])
     const [enableLogin, setEnableLogin] = useState(false)
     const [viewPassword, setViewPassword] = useState(false)
     const navigate = useNavigate()
+
+    const { login } = useContext(UserContext)
 
     const isFormValid = email && password
 
     const submitForm = (event) => {
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
+        const newUser = {
+            login: email,
+            password: password
+        }
+
+        const requestHeaders = {
+            'Content-Type': 'application/json'
+        }
+        const requestConfig = {
+            method: 'POST',
+            body: JSON.stringify(newUser),
+            headers: requestHeaders,
+        }
+
+        console.log(newUser)
         event.preventDefault()
-        if(!emailRegex.test(email) && password.length < 6){
-            error()
+        if(emailRegex.test(email) && password.length >= 6){
+
+            fetch('http://localhost:8080/api/login', requestConfig)
+            .then(res =>{
+                console.log(res)
+                if(res.ok){
+                    setMessageError(false)
+                    res.text()
+                    .then(token => {
+                        const decodeToken = jwt_decode(token)
+                        console.log(decodeToken)
+                        alert('ok')
+                        localStorage.setItem('token', token)
+                        login(decodeToken.nome, decodeToken.sobrenome)
+                        setTimeout(() => {
+                            navigate("/")
+                        }, 1000);
+                    })
+                }else{
+                    setMessageError(true)
+                }
+            })
+
 
         }else{
-            setUserLogin({
-                'email': email,
-                'password': password
-            })
+            error()
         }
     }
 
      const error = (event) => {
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-        if(userLogin.email !== userTeste.email || userLogin.password !== userTeste.password){
-            setMessageError(true)
-        }if (!emailRegex.test(email)) {
+        if (!emailRegex.test(email)) {
             setMessageEmailError(true)
             setErrorEmailInput(true)
 
@@ -70,30 +105,6 @@ export function Login(){
     const toogleViewPassword = () => {
         setViewPassword(!viewPassword)
     }
-
-    useEffect(() => {
-        if(enableLogin) {
-            if(userLogin.email === userTeste.email && userLogin.password === userTeste.password){
-                localStorage.setItem('user', JSON.stringify(userTeste))
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1000);
-            }
-        }
-    }, [userLogin, enableLogin])
-
-
-    useEffect(() => {
-        const userLocalStorage = localStorage.getItem('user')
-
-        if(userLocalStorage === null){
-
-        }else{
-            setTimeout(() => {
-                navigate("/")
-            }, 2000);
-        }
-    })
 
     return(
     <div className="login-container">

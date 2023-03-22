@@ -1,7 +1,7 @@
 import './style.sass'
 import './responsive.sass'
 import logotipo from '../../assets/img/logo.svg'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { Link, Outlet } from 'react-router-dom'
 import twitter from '../../assets/img/twitter.svg'
@@ -9,23 +9,25 @@ import linkedn from '../../assets/img/linkedn.svg'
 import instagram from '../../assets/img/instagram.svg'
 import facebook from '../../assets/img/facebook.svg'
 import copyright from '../../assets/img/copyright.svg'
+import { UserContext } from '../../hooks/userLogin'
 
 
 export function MainLayout(){
 
   const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
-
-  const [logged, setLogged] = useState(false)
   const [toggle, setToggle] = useState(false)
-  const [userLogged, setUserLogged] = useState({})
+  const [nameUser, setNameUser] = useState(null)
+  const [lastNameUser, setLastNameUser] = useState(null)
 
+  const { login, logged, logout } = useContext(UserContext)
 
-  // função para limpar o token e colocar o useState(logged) como false
+  useEffect(() => {
+    const userLocal = localStorage.getItem('nameUser')
+    const lastNameLocal = localStorage.getItem('lastName')
+    setNameUser(JSON.parse(userLocal))
+    setLastNameUser(JSON.parse(lastNameLocal))
+  }, [login])
 
-  function logout(){
-    setLogged(false)
-    localStorage.removeItem('user')
-  }
 
   function menuToggle(){
     if(toggle){
@@ -34,22 +36,6 @@ export function MainLayout(){
       setToggle(true)
     }
   }
-
-  useEffect(() => {
-    const value = localStorage.getItem('user')
-    if(value === null){
-      // console.log('local storage vazio')
-    }else{
-      setLogged(true)
-    }
-  }, [userLogged])
-
-  useEffect(() => {
-    const user = localStorage.getItem('user')
-    setUserLogged(JSON.parse(user))
-  }, [])
-
-  console.log(logged)
 
   return(
     <div className={toggle && isMobile ? 'container-active' : 'container'}>
@@ -66,12 +52,12 @@ export function MainLayout(){
                 logged ? (
                   <div className="user-logged">
                     <div className="avatar-user">
-                      <span>{userLogged.name.substr(0, 1)}</span>
-                      <span>{userLogged.lastname.substr(0, 1)}</span>
+                      {nameUser && <span>{nameUser.charAt(0)}</span>}
+                      {lastNameUser && <span>{lastNameUser.charAt(0)}</span>}
                     </div>
                     <div className="name-user">
                       <span>Olá,</span>
-                      <span>{`${userLogged.name} ${userLogged.lastname}`}</span>
+                      <span>{`${nameUser} ${lastNameUser}`}</span>
                     </div>
                     <button
                       className='btn-logout'
@@ -99,12 +85,12 @@ export function MainLayout(){
                 logged && toggle ? (
                   <div className="user-logged">
                     <div className="avatar-user">
-                      <span>E</span>
-                      <span>A</span>
+                      {nameUser && <span>{nameUser.charAt(0)}</span>}
+                      {lastNameUser && <span>{lastNameUser.charAt(0)}</span>}
                     </div>
                     <div className="name-user">
                       <span>Olá,</span>
-                      <span>Eduardo Ananias</span>
+                      <span>{`${nameUser} ${lastNameUser}`}</span>
                     </div>
                     <div className="button-logout">
                       <span>Deseja</span>

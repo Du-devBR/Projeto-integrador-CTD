@@ -6,6 +6,8 @@ import { Calender } from '../../components/Calender';
 import css from '@emotion/styled';
 import { SelectLocation } from '../../components/Select';
 import { CardCategoria } from '../../components/CardCategoria';
+import moment from 'moment'
+import 'moment/min/locales'
 
 //****** */ imports para teste sem api ******
 // import {category} from '../../assets/js-mock/category'
@@ -34,7 +36,7 @@ export function Home(){
   const [inputSelect, setInputSelect] = useState(true)
   const [valueInputSelect, setValueInputSelect] = useState('')
 
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:8080/api/categoria')
@@ -58,15 +60,15 @@ export function Home(){
     }
   }, [showDestination])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/produto')
-    .then(res => [
-      res.json()
-      .then(data => [
-        setProducts(data)
-      ])
-    ])
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:8080/api/produto')
+  //   .then(res => {
+  //     res.json()
+  //     .then(data => {
+  //       setProducts(data)
+  //     })
+  //   })
+  // }, [])
 
   const getValueInputSelect = (event) => {
     setValueInputSelect(event.target.value)
@@ -103,37 +105,54 @@ export function Home(){
 
   }
 
-  // const searchDestinationWithData = (event) => {
-  //   event.preventDefault()
-  //   if(destination !== null || '' && startDate !== [null, null]){
-  //     setSearchDestination({
-  //       city: destination.city,
-  //       country: destination.country,
-  //       dataInitial: startDate[0].toISOString(),
-  //       dataFinal: startDate[1].toISOString()
-  //     })
-  //     setSelectDate(false)
-  //   }else{
-  //     console.log('errro')
-  //   }
-  // }
+  const searchDestinationWithData = (event) => {
+    // event.preventDefault()
+    const dataInitial = moment(startDate[0], 'YYYY-MM-DD').format('YYYY-MM-DD')
+    const dataFinal = moment(startDate[1], 'YYYY-MM-DD').format('YYYY-MM-DD')
+    const filterProduct = product.filter(result =>
+      moment(result.date, 'MMM DD YYYY HH:mm:ss [GMT]ZZ').isBetween(dataInitial, dataFinal, null, '[]')
+    )
+    setObjectFilter(filterProduct)
+    setListProduct(false)
+  }
+
+  console.log(objectFilter)
 
   const searchDestinationSelect = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     if(valueInputSelect !== null){
       setSearchDestination(
         valueInputSelect
       )
       const objFilter = filterProductBySelect()
-      setObjectFilter(objFilter)
-      setListProduct(false)
-      setValueInputSelect('')
-      setSelectCity(true)
-      setSelectCategory(false)
+        setObjectFilter(objFilter)
+        setListProduct(false)
+        setValueInputSelect('')
+        setSelectCity(true)
+        setSelectCategory(false)
 
     }else{
       console.log('errro')
     }
+  }
+
+  const searchProduct = (event) => {
+    event.preventDefault()
+
+    if(startDate){
+      const objFilterBySelect = filterProductBySelect()
+      const objFilterByDate = searchDestinationWithData(startDate)
+
+      const filteredProducts = objFilterBySelect.filter(product => objFilterByDate.includes(product))
+
+      console.log(filteredProducts)
+      setListProduct(false)
+    }
+    // else if (startDate) {
+    //   searchDestinationWithData()
+    // }else if (valueInputSelect) {
+    //   searchDestinationSelect()
+    // }
   }
 
   function toggleCalendar(){
@@ -149,6 +168,7 @@ export function Home(){
     setStartDate(range)
     setSelectDate(true)
     setShowCalendar(false)
+
   }
 
   const formatDate = (range) => {
@@ -235,7 +255,7 @@ export function Home(){
                   }
                 </div>
             </div>
-            <button className='submit-search' onClick={event => searchDestinationSelect(event)}>Pesquisar</button>
+            <button className='submit-search' onClick={event =>  searchProduct(event)}>Pesquisar</button>
           </div>
         </div>
       </div>

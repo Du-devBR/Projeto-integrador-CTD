@@ -27,13 +27,31 @@ export function Register(){
     const submitNewUser = (event) => {
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         event.preventDefault()
-
+        const newUser = {
+            name: name,
+            lastName: lastname,
+            login: email,
+            password: password
+        }
+        const requestHeaders = {
+            'Content-Type': 'application/json'
+        }
+        const requestConfig = {
+            method: 'POST',
+            body: JSON.stringify(newUser),
+            headers: requestHeaders,
+        }
         if(name.length >= 2 && lastname.length >= 2 && emailRegex.test(email) && password.length >= 6 && (password === confirmPassword)){
-            alert('cadastrado')
-
+            fetch('http://localhost:8080/api/usuario/registro', requestConfig)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
         }else{
             error()
         }
+
+
     }
 
     const toogleViewPassword = () => {
