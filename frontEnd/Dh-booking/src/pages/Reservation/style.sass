@@ -1,0 +1,97 @@
+@use '../../Style/variables'
+@use '../../Style/mixins'
+
+
+.container-reservation
+  width: 100%
+  height: 100%
+  transition: 0.6s
+
+  .header-product-detail
+    display: flex
+    padding: 1rem 2rem
+    background: variables.$second-color
+    justify-content: space-between
+    align-items: center
+
+    .title-product-detail
+      display: flex
+      flex-direction: column
+      gap: 0.313rem
+
+      span
+        color: variables.$gray300
+        font-size: variables.$h4-14px
+        font-weight: variables.$font-xs
+
+      h1
+        color: variables.$gray100
+        font-size: variables.$h1-24px
+        font-weight: variables.$font-xs
+
+  .container-info-reservation
+    width: 100%
+    height: 100%
+    padding: 1rem 2rem
+    background: variables.$gray100
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray800
+
+    .container
+      display: flex
+      justify-content: space-between
+
+      .container-form-reservation
+        display: flex
+        // height: 100%
+        width: 100%
+
+      .container-detail-reservation
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        max-width: 50%
+        // height: 100%
+        padding: 2rem
+        border-radius: 0.5rem
+        background: variables.$gray0
+
+        img
+          width: 100%
+          max-height: 100%
+          border-radius: 0.5rem
+
+        .info-product
+          display: flex
+          flex-direction: column
+          gap: 0.5rem
+
+          span
+            color: variables.$gray300
+            font-size: variables.$h4-14px
+            font-weight: variables.$font-xs
+
+          h2
+            color: variables.$gray100
+            font-size: variables.$h1-24px
+            font-weight: variables.$font-xs
+
+        .info-checkin
+          display: flex
+          align-items: center
+          justify-content: space-between
+
+          h3
+            color: variables.$gray700
+            font-size: variables.$h3-16px
+            font-weight: variables.$font-xs
+
+          span
+            color: variables.$gray600
+            font-size: variables.$h4-14px
+
+        .btn-confirm-reservation
+          @include mixins.button-bgColor
