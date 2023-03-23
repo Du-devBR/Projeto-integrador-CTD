@@ -17,10 +17,8 @@ export function Product(){
 
   console.log(coordinates)
 
-
   const getCoordinates = (event) =>{
     event.preventDefault()
-
       fetch(`https://nominatim.openstreetmap.org/search?q=${product[`${id}` -1].location}&format=json&limit=1`)
       .then((response) => response.json())
       .then((data) => {
@@ -109,11 +107,10 @@ export function Product(){
             <div className="container-calendar">
               <div className="calendar">
                 <Calender />
-                {/* <Calender /> */}
               </div>
               <div className='start-reservation'>
                 <span>Adicione as data da sua viagem para obter preços exatos.</span>
-                <button className='btn-reservation'>Iniciar reserva</button>
+                <Link to={`/produto/${id}/reserva`} className='btn-reservation'>Iniciar reserva</Link>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { Login } from "./pages/Login"
 import { MainLayout } from "./pages/MainLayout"
 import { Product } from "./pages/Product"
 import { Register } from "./pages/Register"
+import { Reservation } from "./pages/Reservation"
 
 
 export function Routes(){
@@ -31,6 +32,9 @@ export function Routes(){
         },{
           path:'produto/:id',
           element: <Product />
+        },{
+          path:'produto/:id/reserva',
+          element: <Reservation />
         }
       ]
     }
