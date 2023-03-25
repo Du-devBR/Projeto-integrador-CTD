@@ -1,18 +1,21 @@
 package com.dh.digitalBooking.dto;
 
-
+import com.dh.digitalBooking.entity.Accommodation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CityDTO {
+public class RegulationDTO {
     private Long id;
-    private String name;
-    private String state;
-    private String country;
+
+    private String description;
+
+    private List<Accommodation> accommodation;
 }

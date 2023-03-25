@@ -18,27 +18,27 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "CATEGORIA")
+@Table(name = "categoria")
 public class Category implements Serializable {
     /**
      The ID of the category.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CategoriaID")
+    @Column(name = "id_categoria")
     private Long id;
 
     /**
      A name of the category.
      */
-    @Column(name = "Nome", length = 250)
+    @Column(name = "nome", length = 250)
     private String name;
 
     /**
      The URL of the category's image.
      */
     @ManyToOne
-    @JoinColumn(name = "url_img", referencedColumnName = "ImagemID")
+    @JoinColumn(name = "fk_imagem", referencedColumnName = "id_imagem")
     private Image imageURL;
 
 }

@@ -5,7 +5,6 @@ import com.dh.digitalBooking.dto.CityDTO;
 import com.dh.digitalBooking.entity.City;
 import com.dh.digitalBooking.repository.CityRepository;
 import com.dh.digitalBooking.util.CityUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class CityService {
 
-    @Autowired
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
+
+    public CityService(CityRepository cityRepository) {
+        this.cityRepository = cityRepository;
+    }
 
     public CityDTO save(CityDTO cityDTO){
         City city = CityUtil.convertToEntity(cityDTO);

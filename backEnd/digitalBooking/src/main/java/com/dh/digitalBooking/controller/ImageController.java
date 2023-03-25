@@ -6,7 +6,6 @@ import com.dh.digitalBooking.service.ImageService;
 import com.dh.digitalBooking.util.ImageUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,12 +21,14 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/imagem")
 public class ImageController {
 
-    @Autowired
-    private ImageService imageService;
+    private final ImageService imageService;
+
+    public ImageController(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
     /**
      Rota para salvar uma nova imagem.

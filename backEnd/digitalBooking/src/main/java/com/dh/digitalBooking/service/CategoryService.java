@@ -4,7 +4,6 @@ import com.dh.digitalBooking.dto.CategoryDTO;
 import com.dh.digitalBooking.entity.Category;
 import com.dh.digitalBooking.repository.CategoryRepository;
 import com.dh.digitalBooking.util.CategoryUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +16,13 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
 
-    @Autowired private CategoryUtil categoryUtil;
-    @Autowired private CategoryRepository categoryRepository;
+    private final CategoryUtil categoryUtil;
+    private final CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryUtil categoryUtil, CategoryRepository categoryRepository) {
+        this.categoryUtil = categoryUtil;
+        this.categoryRepository = categoryRepository;
+    }
 
     /**
      Saves the given CategoryDTO entity to the database.

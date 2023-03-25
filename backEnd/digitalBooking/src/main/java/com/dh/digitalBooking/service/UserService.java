@@ -4,7 +4,6 @@ import com.dh.digitalBooking.dto.UserDTO;
 import com.dh.digitalBooking.entity.User;
 import com.dh.digitalBooking.repository.UserRepository;
 import com.dh.digitalBooking.util.UserUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +18,16 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-    @Autowired private PasswordEncoder passwordEncoder;
-    @Autowired private UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    @Autowired private UserUtil userUtil;
+    private final UserUtil userUtil;
+
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserUtil userUtil) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.userUtil = userUtil;
+    }
 
     /**
      Saves a new user to the database.

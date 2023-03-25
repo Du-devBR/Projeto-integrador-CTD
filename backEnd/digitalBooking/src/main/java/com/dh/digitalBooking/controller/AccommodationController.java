@@ -20,7 +20,6 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/hospedagem")
 public class AccommodationController {
 
@@ -53,7 +52,6 @@ public class AccommodationController {
     /**
      Rota para encontrar uma hospedagens por ID.
      @param id um Long representando o ID da hospedagem a ser encontrada.
-     @return um objeto AccommodationDTO representando a hospedagem encontrada.
      @throws ResponseStatusException se a hospedagem não for encontrada.
      */
     @GetMapping("/{id}")

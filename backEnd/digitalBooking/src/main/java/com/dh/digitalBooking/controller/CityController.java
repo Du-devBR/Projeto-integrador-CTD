@@ -6,7 +6,6 @@ import com.dh.digitalBooking.service.CityService;
 import com.dh.digitalBooking.util.CityUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,12 +21,14 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/cidade")
 public class CityController {
 
-    @Autowired
-    private CityService cityService;
+    private final CityService cityService;
+
+    public CityController(CityService cityService) {
+        this.cityService = cityService;
+    }
 
     /**
      Rota para salvar uma nova cidade.

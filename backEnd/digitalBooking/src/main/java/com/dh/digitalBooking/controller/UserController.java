@@ -6,7 +6,6 @@ import com.dh.digitalBooking.service.UserService;
 import com.dh.digitalBooking.util.UserUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,8 +15,7 @@ import java.util.List;
 /**
 
  The UserController class is responsible for handling all HTTP requests related to User resources.
- It is annotated with @RestController to indicate that it is a RESTful controller, and
- @CrossOrigin to enable cross-origin requests from any domain. The base URL for all requests is /api/usuario.
+ It is annotated with @RestController to indicate that it is a RESTful controller. The base URL for all requests is /api/usuario.
  This class injects a UserService instance using @Autowired, which is responsible for performing business logic operations
  related to User resources.
 
@@ -33,7 +31,6 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/usuario")
 public class UserController {
 
@@ -41,8 +38,11 @@ public class UserController {
      This field is automatically injected with an instance of UserService using @Autowired.
      It is used to perform business logic operations related to User resources.
      */
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      This method creates a new user with the information provided in the request body.

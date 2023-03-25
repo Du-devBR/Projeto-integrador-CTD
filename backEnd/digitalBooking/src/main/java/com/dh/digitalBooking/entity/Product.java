@@ -15,31 +15,36 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "PRODUTO")
+@Table(name = "produto")
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_produto")
     private Long id;
 
+    @Column(name = "nome")
     private String name;
 
+    @Column(name = "descricao")
     private String description;
 
 
     @ManyToMany
     @JoinTable(name = "produto-imagem",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_image"))
+            joinColumns = @JoinColumn(name = "fk_produto"),
+            inverseJoinColumns = @JoinColumn(name = "fk_imagem",
+                            referencedColumnName = "id_imagem"))
     private List<Image> image;
 
     @ManyToMany
     @JoinTable(name = "produto-caracteristica",
-                    joinColumns = @JoinColumn(name = "id"),
-                    inverseJoinColumns = @JoinColumn(name = "id_caracteristic"))
+                    joinColumns = @JoinColumn(name = "fk_produto"),
+                    inverseJoinColumns = @JoinColumn(name = "fk_caracteristica",
+                                    referencedColumnName = "id_caracteristica"))
     private List<Caracteristic> caracteristic;
 
     @ManyToOne
-    @JoinColumn(name="id_accommodation")
+    @JoinColumn(name="fk_hospedagem", referencedColumnName = "id_hospedagem")
     private Accommodation accommodation;
 
 }

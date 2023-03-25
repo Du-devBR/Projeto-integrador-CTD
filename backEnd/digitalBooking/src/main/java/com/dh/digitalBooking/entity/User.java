@@ -21,7 +21,7 @@ import java.util.Collections;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "usuario")
 public class User implements UserDetails {
 
     /**
@@ -29,25 +29,25 @@ public class User implements UserDetails {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UsuarioID")
+    @Column(name = "id_usuario")
     private Long id;
 
     /**
      The name of the user.
      */
-    @Column(name = "Nome", length = 250)
+    @Column(name = "nome", length = 250)
     private String name;
 
     /**
      The last name of the user.
      */
-    @Column(name = "Sobrenome", length = 250)
+    @Column(name = "sobre_nome", length = 250)
     private String lastName;
 
     /**
      The email of the user.
      */
-    @Column(name = "Email", length = 250)
+    @Column(name = "email", length = 250)
     private String login;
 
     /**
@@ -61,14 +61,14 @@ public class User implements UserDetails {
      The image URL of the user.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "url_img", referencedColumnName = "imagemid")
+    @JoinColumn(name = "fk_imagem", referencedColumnName = "id_imagem")
     private Image imageURL;
 
     /**
      The role of the user.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roleid", referencedColumnName = "funcaoid")
+    @JoinColumn(name = "fk_funcao", referencedColumnName = "id_funcao")
     private Role role;
 
     @Override

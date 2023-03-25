@@ -13,16 +13,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "IMAGEM")
+@Table(name = "imagem")
 public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ImagemID")
+    @Column(name = "id_imagem")
     private Long id;
 
-    @Column(name = "Descricao", length = 250)
+    @Column(name = "descricao", length = 250)
     private String description;
 
-    @Column(name = "urlIMG")
+    @Column(name = "url")
     private String url;
 }

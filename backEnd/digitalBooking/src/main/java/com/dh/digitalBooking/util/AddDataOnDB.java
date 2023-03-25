@@ -1,18 +1,8 @@
 package com.dh.digitalBooking.util;
 
-import com.dh.digitalBooking.entity.Category;
-import com.dh.digitalBooking.entity.Image;
-import com.dh.digitalBooking.entity.Role;
-import com.dh.digitalBooking.entity.User;
-import com.dh.digitalBooking.repository.CategoryRepository;
-import com.dh.digitalBooking.repository.ImageRepository;
-import com.dh.digitalBooking.repository.RoleRepository;
-import com.dh.digitalBooking.repository.UserRepository;
-import com.dh.digitalBooking.service.CategoryService;
-import com.dh.digitalBooking.service.ImageService;
-import com.dh.digitalBooking.service.RoleService;
-import com.dh.digitalBooking.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dh.digitalBooking.entity.*;
+import com.dh.digitalBooking.repository.*;
+import com.dh.digitalBooking.service.*;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,19 +11,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddDataOnDB implements ApplicationRunner {
 
-    @Autowired private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
+    private final ImageService imageService;
+    private final RoleRepository roleRepository;
+    private final RoleService roleService;
+    private final UserRepository userRepository;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
+    private final CityService cityService;
+    private final CityRepository cityRepository;
 
-    @Autowired private ImageService imageService;
+    public AddDataOnDB(RoleRepository roleRepository, ImageRepository imageRepository, ImageService imageService, RoleService roleService, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder, CategoryRepository categoryRepository, CategoryService categoryService, CityService cityService, CityRepository cityRepository) {
+        this.roleRepository = roleRepository;
+        this.imageRepository = imageRepository;
+        this.imageService = imageService;
+        this.roleService = roleService;
+        this.userRepository = userRepository;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
+        this.cityService = cityService;
+        this.cityRepository = cityRepository;
+    }
 
-    @Autowired private RoleRepository roleRepository;
-
-    @Autowired private RoleService roleService;
-    @Autowired private UserRepository userRepository;
-    @Autowired private UserService userService;
-    @Autowired private PasswordEncoder passwordEncoder;
-    @Autowired private CategoryRepository categoryRepository;
-
-    @Autowired private CategoryService categoryService;
     @Override
     public void run(ApplicationArguments args) {
 
@@ -97,5 +100,20 @@ public class AddDataOnDB implements ApplicationRunner {
                     .id(1L)
                     .name("Hotel")
                     .imageURL(imageService.findById(3L).get()).build());
+
+        if(cityService.findById(1L).isEmpty())
+            cityRepository.save(City.builder()
+                    .id(1L)
+                    .name("Rio de Janeiro")
+                    .state("RJ")
+                    .country("Brasil").build());
+
+        if(cityService.findById(1L).isEmpty())
+            cityRepository.save(City.builder()
+                    .id(2L)
+                    .name("São Paulo")
+                    .state("SP")
+                    .country("Brasil").build());
+
     }
 }

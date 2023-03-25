@@ -4,7 +4,6 @@ import com.dh.digitalBooking.dto.RoleDTO;
 import com.dh.digitalBooking.entity.Role;
 import com.dh.digitalBooking.repository.RoleRepository;
 import com.dh.digitalBooking.util.RoleUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +16,11 @@ import java.util.stream.Collectors;
  */
 @Service
 public class RoleService {
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     /**
      Saves the given RoleDTO entity to the database.
