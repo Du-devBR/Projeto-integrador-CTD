@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,5 +24,22 @@ public class Product implements Serializable {
     private String name;
 
     private String description;
+
+
+    @ManyToMany
+    @JoinTable(name = "produto-imagem",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_image"))
+    private List<Image> image;
+
+    @ManyToMany
+    @JoinTable(name = "produto-caracteristica",
+                    joinColumns = @JoinColumn(name = "id"),
+                    inverseJoinColumns = @JoinColumn(name = "id_caracteristic"))
+    private List<Caracteristic> caracteristic;
+
+    @ManyToOne
+    @JoinColumn(name="id_accommodation")
+    private Accommodation accommodation;
 
 }

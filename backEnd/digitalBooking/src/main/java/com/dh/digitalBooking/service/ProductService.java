@@ -6,6 +6,7 @@ import com.dh.digitalBooking.entity.Product;
 import com.dh.digitalBooking.repository.ProductRepository;
 import com.dh.digitalBooking.util.ProductUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,4 +39,5 @@ public class ProductService {
     public void deleteById(Long id){
         productRepository.deleteById(id);
     }
+
 }

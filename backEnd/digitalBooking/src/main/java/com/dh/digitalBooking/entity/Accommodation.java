@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +23,14 @@ public class Accommodation implements Serializable {
     private String name;
 
     private String qualification;
+
+    @ManyToOne
+    @JoinColumn(name = "id_city")
+    private City city;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
+
 }
