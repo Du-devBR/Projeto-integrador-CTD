@@ -1,29 +1,170 @@
-image: hashicorp/terraform:latest
-
-variables:
-  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-  AWS_DEFAULT_REGION: us-west-2
-
+# Define stages
 stages:
-  - terraform-plan
-  - terraform-apply
-  - build
-  - deploy
+  - build_back
+  - test_back
+  - deploy_back
+  - docker_build_back
+  - build_front
+  - test_front
+  - deploy_front
+  - docker_build_front
 
-terraform-plan:
-  stage: terraform-plan
+# Define variables
+variables:
+  # Define the Docker image name and tag
+  DOCKER_IMAGE_BACK: "gitlab.ctd.academy:5050/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-5/digital-booking-api"
+  DOCKER_IMAGE_FRONT: "gitlab.ctd.academy:5050/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-5/digital-booking-app"
+  DOCKER_IMAGE_TAG: "latest"
+  # Define the Maven command to build the project
+  MAVEN_BUILD_COMMAND: "mvn clean package -DskipTests=true"
+  # Define the branch to deploy for back-end
+  BACKEND_BRANCH: "backEnd"
+  # Define the branch to deploy for front-end
+  FRONTEND_BRANCH: "frontEnd"
+#
+#  Back-end section
+#
+# Define the build job
+build:
+  # Define the stage
+  stage: build_back
+  # Define the image to use
+  image: maven:3.9.0-amazoncorretto-17
+  # Define the type of runner
+  tags:
+    - maven
+  # Define the Maven build command
   script:
-    - cd terraform
-    - terraform init
-    - terraform plan -out=plan.out
+    - $MAVEN_BUILD_COMMAND
+  # Define the artifacts that we want to keep after the job is completed
   artifacts:
     paths:
-      - terraform/plan.out
+      - target/*.jar
 
-terraform-apply:
-  stage: terraform-apply
-  when: manual
+# Define the test job
+test:
+  # Define the stage
+  stage: test_back
+  # Define the image to use
+  image: maven:3.9.0-amazoncorretto-17
+  # Define the type of runner
+  tags:
+    - maven
+  # Define the Maven build command
   script:
-    - cd terraform
-    - terraform apply "plan.out"
+    - mvm test
+
+# Define the deploy job
+deploy:
+  # Define the stage
+  stage: deploy_back
+  # Define the image to use
+  image: maven:3.9.0-amazoncorretto-17
+  # Define the type of runner
+  tags:
+    - maven
+  # Define the Maven build command
+  script:
+    - mvn deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  # Define the conditions to run the job
+  only:
+    - $BACKEND_BRANCH
+
+  # Define the Docker build job
+docker_build_back:
+  # Define the image to use
+  image: docker:19.03.8
+  # Define the type of runner
+  tags:
+    - docker
+  # Define the services to use
+  services:
+    - docker:19.03.8-dind
+  # Define the script to run
+  script:
+    # Login to the Docker registry
+    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
+    # Build the Docker image
+    - docker build -t "$DOCKER_IMAGE_BACK:$DOCKER_IMAGE_TAG" .
+    # Push the Docker image to the registry
+    - docker push "$DOCKER_IMAGE_BACK:$DOCKER_IMAGE_TAG"
+
+
+#
+# Front-end section
+#
+cache:
+  paths:
+    - node_modules/
+
+# Define the build job for front-end
+build_front:
+  # Define the stage
+  stage: build_front
+  # Define the image to use
+  image: node:12.13.0
+  # Define the type of runner
+  tags:
+    - node
+  # Define the script to run
+  script:
+    # Install dependencies
+    - npm install
+    # Build the project
+    - npm run build
+
+# Define the test job for front-end
+test_front:
+  # Define the stage
+  stage: test_front
+  # Define the image to use
+  image: node:12.13.0
+  # Define the type of runner
+  tags:
+    - node
+  # Define the script to run
+  script:
+    # Install dependencies
+    - npm install
+    # Run the tests
+    - npm run test
+
+# Define the deploy job for front-end
+deploy_front:
+  # Define the stage
+  stage: deploy_front
+  # Define the image to use
+  image: node:12.13.0
+  # Define the type of runner
+  tags:
+    - node
+  # Define the script to run
+  script:
+    # Install dependencies
+    - npm install
+    # Deploy the project
+    - npm run deploy
+  # Define the conditions to run the job
+  only:
+    - $FRONTEND_BRANCH
+
+# Define the Docker build job for front-end
+  docker_build_front:
+    # Define the image to use
+    image: docker:19.03.8
+    # Define the type of runner
+    tags:
+      - docker
+      - node
+    # Define the services to use
+    services:
+      - docker:19.03.8-dind
+      - node:12.13.0
+    # Define the script to run
+    script:
+      # Login to the Docker registry
+      - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
+      # Build the Docker image
+      - docker build -t "$DOCKER_IMAGE_FRONT:$DOCKER_IMAGE_TAG" .
+      # Push the Docker image to the registry
+      - docker push "$DOCKER_IMAGE_FRONT:$DOCKER_IMAGE_TAG"
