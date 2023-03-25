@@ -5,7 +5,6 @@ import com.dh.digitalBooking.service.RegulationService;
 import com.dh.digitalBooking.util.RegulationUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,6 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/regulamentacao")
 public class RegulationController {
 
