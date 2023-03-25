@@ -5,7 +5,6 @@ import com.dh.digitalBooking.service.CategoryService;
 import com.dh.digitalBooking.util.CategoryUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,34 +12,36 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 /**
- * Esta classe representa o controlador responsável por gerenciar as requisições relacionadas a Categoria.
- * O controlador fornece rotas para listar todas as categorias, encontrar uma categoria por ID, salvar uma
- * nova categoria, atualizar uma categoria existente e excluir uma categoria existente.
- * As rotas fornecidas neste controlador são acessíveis através da API REST usando o protocolo HTTP.
+ * This class represents the controller responsible for managing requests related to Category.
+ * The controller provides routes to list all categories, find a category by ID, save a new category,
+ * update an existing category, and delete an existing category.
+ * The routes provided in this controller are accessible through the REST API using the HTTP protocol.
  */
 @Slf4j
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/categoria")
 public class CategoryController {
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     /**
-     Rota para salvar uma nova categoria.
-     @param categoryDTO um objeto CategoryDTO representando a categoria a ser salva.
-     @return um objeto CategoryDTO representando a categoria salva.
+     Route to save a new category.
+     @param categoryDTO a CategoryDTO object representing the category to be saved.
+     @return a CategoryDTO object representing the saved category.
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryDTO save(@Valid @RequestBody CategoryDTO categoryDTO) {
-        log.info("Creating Category: %s".formatted(categoryDTO.getDescription()));
+        log.info("Creating Category: %s".formatted(categoryDTO.getName()));
         return categoryService.save(categoryDTO);
     }
 
     /**
-     Rota para listar todas as categorias.
-     @return uma lista de objetos CategoryDTO representando todas as categorias.
+     Route to list all categories.
+     @return a list of CategoryDTO objects representing all categories.
      */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -50,10 +51,10 @@ public class CategoryController {
     }
 
     /**
-     Rota para encontrar uma categoria por ID.
-     @param id um Long representando o ID da categoria a ser encontrada.
-     @return um objeto CategoryDTO representando a categoria encontrada.
-     @throws ResponseStatusException se a categoria não for encontrada.
+     Route to find a category by ID.
+     @param id a Long representing the ID of the category to be found.
+     @return a CategoryDTO object representing the found category.
+     @throws ResponseStatusException if the category is not found.
      */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -65,9 +66,9 @@ public class CategoryController {
     }
 
     /**
-     Rota para excluir uma categoria existente.
-     @param id um Long representando o ID da categoria a ser excluída.
-     @throws ResponseStatusException se a categoria não for encontrada.
+     Route to delete an existing category.
+     @param id a Long representing the ID of the category to be deleted.
+     @throws ResponseStatusException if the category is not found.
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -81,10 +82,10 @@ public class CategoryController {
     }
 
     /**
-     Rota para atualizar uma categoria existente.
-     @param id um Long representando o ID da categoria a ser atualizada.
-     @param categoryDTO um objeto CategoryDTO representando a categoria atualizada.
-     @throws ResponseStatusException se a categoria não for encontrada.
+     Route to update an existing category.
+     @param id a Long representing the ID of the category to be updated.
+     @param categoryDTO a CategoryDTO object representing the updated category.
+     @throws ResponseStatusException if the category is not found.
      */
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
