@@ -3,7 +3,6 @@ stages:
   - build_back
   - test_back
   - deploy_back
-  - docker_build_back
   - build_front
   - test_front
   - deploy_front
@@ -69,24 +68,6 @@ deploy:
   only:
     - $BACKEND_BRANCH
 
-  # Define the Docker build job
-docker_build_back:
-  # Define the image to use
-  image: docker:19.03.8
-  # Define the type of runner
-  tags:
-    - docker
-  # Define the services to use
-  services:
-    - docker:19.03.8-dind
-  # Define the script to run
-  script:
-    # Login to the Docker registry
-    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
-    # Build the Docker image
-    - docker build -t "$DOCKER_IMAGE_BACK:$DOCKER_IMAGE_TAG" .
-    # Push the Docker image to the registry
-    - docker push "$DOCKER_IMAGE_BACK:$DOCKER_IMAGE_TAG"
 
 
 #
