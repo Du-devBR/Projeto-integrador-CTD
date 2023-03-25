@@ -5,7 +5,6 @@ import com.dh.digitalBooking.service.CategoryService;
 import com.dh.digitalBooking.util.CategoryUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,8 +22,11 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/categoria")
 public class CategoryController {
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     /**
      Route to save a new category.

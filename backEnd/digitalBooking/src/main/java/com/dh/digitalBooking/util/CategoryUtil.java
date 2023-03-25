@@ -5,7 +5,6 @@ import com.dh.digitalBooking.entity.Category;
 import com.dh.digitalBooking.entity.Image;
 import com.dh.digitalBooking.repository.ImageRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -16,12 +15,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryUtil {
 
-    @Autowired private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
     /**
      * A ModelMapper instance used for converting Category entities to CategoryDTO entities.
      */
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
+
+    public CategoryUtil(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
+    }
 
 
     /**

@@ -3,7 +3,6 @@ package com.dh.digitalBooking.util;
 import com.dh.digitalBooking.entity.*;
 import com.dh.digitalBooking.repository.*;
 import com.dh.digitalBooking.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,22 +11,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddDataOnDB implements ApplicationRunner {
 
-    @Autowired private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
+    private final ImageService imageService;
+    private final RoleRepository roleRepository;
+    private final RoleService roleService;
+    private final UserRepository userRepository;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
+    private final CityService cityService;
+    private final CityRepository cityRepository;
 
-    @Autowired private ImageService imageService;
+    public AddDataOnDB(RoleRepository roleRepository, ImageRepository imageRepository, ImageService imageService, RoleService roleService, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder, CategoryRepository categoryRepository, CategoryService categoryService, CityService cityService, CityRepository cityRepository) {
+        this.roleRepository = roleRepository;
+        this.imageRepository = imageRepository;
+        this.imageService = imageService;
+        this.roleService = roleService;
+        this.userRepository = userRepository;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
+        this.cityService = cityService;
+        this.cityRepository = cityRepository;
+    }
 
-    @Autowired private RoleRepository roleRepository;
-
-    @Autowired private RoleService roleService;
-    @Autowired private UserRepository userRepository;
-    @Autowired private UserService userService;
-    @Autowired private PasswordEncoder passwordEncoder;
-    @Autowired private CategoryRepository categoryRepository;
-
-    @Autowired private CategoryService categoryService;
-
-    @Autowired private CityService cityService;
-    @Autowired private CityRepository cityRepository;
     @Override
     public void run(ApplicationArguments args) {
 

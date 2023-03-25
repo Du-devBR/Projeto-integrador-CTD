@@ -4,7 +4,6 @@ import com.dh.digitalBooking.dto.CaracteristicDTO;
 import com.dh.digitalBooking.entity.Caracteristic;
 import com.dh.digitalBooking.repository.CaracteristicRepository;
 import com.dh.digitalBooking.util.CaracteristicUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class CaracteristicService {
 
-    @Autowired
-    private CaracteristicRepository caracteristicRepository;
+    private final CaracteristicRepository caracteristicRepository;
+
+    public CaracteristicService(CaracteristicRepository caracteristicRepository) {
+        this.caracteristicRepository = caracteristicRepository;
+    }
 
     public CaracteristicDTO save(CaracteristicDTO caracteristicDTO){
         Caracteristic caracteristic = CaracteristicUtil.convertToEntity(caracteristicDTO);

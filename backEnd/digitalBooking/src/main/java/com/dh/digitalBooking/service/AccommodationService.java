@@ -4,7 +4,6 @@ import com.dh.digitalBooking.dto.AccommodationDTO;
 import com.dh.digitalBooking.entity.Accommodation;
 import com.dh.digitalBooking.repository.AccommodationRepository;
 import com.dh.digitalBooking.util.AccommodationUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class AccommodationService {
 
-    @Autowired
-    private AccommodationRepository accommodationRepository;
+    private final AccommodationRepository accommodationRepository;
+
+    public AccommodationService(AccommodationRepository accommodationRepository) {
+        this.accommodationRepository = accommodationRepository;
+    }
 
     public AccommodationDTO save(AccommodationDTO accommodationDTO){
         Accommodation accommodation = AccommodationUtil.convertToEntity(accommodationDTO);

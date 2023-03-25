@@ -2,11 +2,9 @@ package com.dh.digitalBooking.controller;
 
 import com.dh.digitalBooking.dto.CaracteristicDTO;
 import com.dh.digitalBooking.service.CaracteristicService;
-import com.dh.digitalBooking.service.CategoryService;
 import com.dh.digitalBooking.util.CaracteristicUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,9 +23,15 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/caracteristica")
 public class CaracteristicController {
+    /**
+     O serviço de Caracteristica injetado para gerenciar as requisições.
+     */
 
-    @Autowired
-    private CaracteristicService caracteristicService;
+    private final CaracteristicService caracteristicService;
+
+    public CaracteristicController(CaracteristicService caracteristicService) {
+        this.caracteristicService = caracteristicService;
+    }
 
     /**
      Rota para salvar uma nova Caracteristica.
@@ -90,7 +94,7 @@ public class CaracteristicController {
      */
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void uṕdateCaracteristic(@PathVariable("id") Long id,
+    public void updateCaracteristic(@PathVariable("id") Long id,
                                     @Valid @RequestBody CaracteristicDTO caracteristicDTO){
         log.info("Update Caracteristic by ID: %d".formatted(id));
         caracteristicService.findById(id)

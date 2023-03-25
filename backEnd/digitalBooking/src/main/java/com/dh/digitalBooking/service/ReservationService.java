@@ -4,7 +4,6 @@ import com.dh.digitalBooking.dto.ReservationDTO;
 import com.dh.digitalBooking.entity.Reservation;
 import com.dh.digitalBooking.repository.ReservationRepository;
 import com.dh.digitalBooking.util.ReservationUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class ReservationService {
 
-    @Autowired
-    private ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
+
+    public ReservationService(ReservationRepository reservationRepository) {
+        this.reservationRepository = reservationRepository;
+    }
 
     public ReservationDTO save(ReservationDTO reservationDTO){
         Reservation reservation = ReservationUtil.convertToEntity(reservationDTO);

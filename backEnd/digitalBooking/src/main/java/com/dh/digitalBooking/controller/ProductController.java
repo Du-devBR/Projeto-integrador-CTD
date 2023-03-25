@@ -2,14 +2,11 @@ package com.dh.digitalBooking.controller;
 
 
 import com.dh.digitalBooking.dto.ProductDTO;
-import com.dh.digitalBooking.entity.Product;
 import com.dh.digitalBooking.service.ProductService;
 import com.dh.digitalBooking.util.ProductUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,8 +24,11 @@ import java.util.List;
 @RequestMapping("/api/produto")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     /**
      Rota para salvar um novo produto.

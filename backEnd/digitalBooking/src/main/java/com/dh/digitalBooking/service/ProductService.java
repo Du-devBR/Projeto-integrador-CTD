@@ -5,8 +5,6 @@ import com.dh.digitalBooking.dto.ProductDTO;
 import com.dh.digitalBooking.entity.Product;
 import com.dh.digitalBooking.repository.ProductRepository;
 import com.dh.digitalBooking.util.ProductUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public ProductDTO save(ProductDTO productDTO){
         Product product = ProductUtil.convertToEntity(productDTO);
