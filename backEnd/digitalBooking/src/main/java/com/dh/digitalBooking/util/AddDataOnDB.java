@@ -8,6 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class AddDataOnDB implements ApplicationRunner {
 
@@ -24,8 +26,12 @@ public class AddDataOnDB implements ApplicationRunner {
     private final CityRepository cityRepository;
     private final AccommodationService accommodationService;
     private final AccommodationRepository accommodationRepository;
-
-
+    private final CaracteristicService caracteristicService;
+    private final CaracteristicRepository caracteristicRepository;
+    private final ProductRepository productRepository;
+    private final ProductService productService;
+    private final ReservationRepository reservationRepository;
+    private final ReservationService reservationService;
 
     public AddDataOnDB(RoleRepository roleRepository
             , ImageRepository imageRepository
@@ -39,7 +45,13 @@ public class AddDataOnDB implements ApplicationRunner {
             , CityService cityService
             , CityRepository cityRepository
             , AccommodationService accommodationService
-            , AccommodationRepository accommodationRepository) {
+            , AccommodationRepository accommodationRepository
+            , CaracteristicService caracteristicService
+            , CaracteristicRepository caracteristicRepository
+            , ProductRepository productRepository
+            , ProductService productService
+            , ReservationRepository reservationRepository
+            , ReservationService reservationService) {
         this.roleRepository = roleRepository;
         this.imageRepository = imageRepository;
         this.imageService = imageService;
@@ -53,6 +65,12 @@ public class AddDataOnDB implements ApplicationRunner {
         this.cityRepository = cityRepository;
         this.accommodationService = accommodationService;
         this.accommodationRepository = accommodationRepository;
+        this.caracteristicService = caracteristicService;
+        this.caracteristicRepository = caracteristicRepository;
+        this.productRepository = productRepository;
+        this.productService = productService;
+        this.reservationRepository = reservationRepository;
+        this.reservationService = reservationService;
     }
 
     @Override
@@ -84,6 +102,13 @@ public class AddDataOnDB implements ApplicationRunner {
                     .id(4L)
                     .description("Imagem Categoria Hotel Fazenda")
                     .url("https://uploads.metropoles.com/wp-content/uploads/2020/07/31185530/rancho_moreira_105942246_153467792952872_8742634874603910403_n-600x400.jpg")
+                    .build());
+
+        if(imageService.findById(5L).isEmpty())
+            imageRepository.save(Image.builder()
+                    .id(5L)
+                    .description("Imagem Wifi Icon")
+                    .url("https://bucket-digitalbooking-grupo05.s3.amazonaws.com/wp-content/image/icon/wifi_icon.png")
                     .build());
 
         if(roleService.findById(1L).isEmpty())
@@ -163,5 +188,31 @@ public class AddDataOnDB implements ApplicationRunner {
                     .category(categoryService.findById(1L).get())
                     .city(cityService.findById(2L).get()).build());
 
+        if(caracteristicService.findById(1L).isEmpty())
+            caracteristicRepository.save(Caracteristic.builder()
+                    .id(1L)
+                    .name("Wifi")
+                    .description("Wifi gratuito para crientes")
+                    .iconUrl(imageService.findById(5L).get()).build());
+
+        if(productService.findById(1L).isEmpty())
+            productRepository.save(Product.builder()
+                    .id(1L)
+                    .name("Quarto Simples")
+                    .description("Quarto com cama de casal")
+                    .price(100.00)
+                    .accommodation(accommodationService.findById(1L).get())
+                    .caracteristic(caracteristicService.findAll()
+                            .stream()
+                            .map(CaracteristicUtil::convertToEntity).toList()).build());
+
+        if(reservationService.findById(1L).isEmpty())
+            reservationRepository.save(Reservation.builder()
+                    .id(1L)
+                    .checkIn(LocalDateTime.now())
+                    .checkOut(LocalDateTime.now().plusDays(2))
+                    .finalPrice(200.00)
+                    .product(productService.findById(1L).get())
+                    .user(userService.findById(2L).get()).build());
     }
 }

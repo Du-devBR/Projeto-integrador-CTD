@@ -23,7 +23,7 @@ public class Reservation {
     private Long id;
 
     @Column(name = "data_hora_da_reserva")
-    private LocalDateTime dateHourReservation;
+    private LocalDateTime checkIn;
 
     @Column(name = "hora_da_reserva")
     private LocalTime hourReservation;
@@ -32,7 +32,7 @@ public class Reservation {
     private LocalDate dateReservation;
 
     @Column(name = "data_hora_final_da_reserva")
-    private LocalDateTime dateHourFinalReservation;
+    private LocalDateTime checkOut;
 
     @Column(name = "hora_final_da_reserva")
     private LocalTime hourFinalReservation;
@@ -40,6 +40,8 @@ public class Reservation {
     @Column(name = "data_final_da_reserva")
     private LocalDate dateFinalReservation;
 
+    @Column(name = "preco_final")
+    private Double finalPrice;
 
     @ManyToOne
     @JoinColumn(name = "fk_produto", referencedColumnName = "id_produto")
@@ -50,17 +52,17 @@ public class Reservation {
     private User user;
 
     public void setDateHourReservation(Timestamp dateHourReservation) {
-        this.dateHourReservation = Instant.ofEpochMilli(dateHourReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        this.checkIn = Instant.ofEpochMilli(dateHourReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-        this.dateReservation = this.dateHourReservation.toLocalDate();
-        this.hourReservation = this.dateHourReservation.toLocalTime();
+        this.dateReservation = this.checkIn.toLocalDate();
+        this.hourReservation = this.checkIn.toLocalTime();
 
     }
 
     public void setDateHourFinalReservation(Timestamp dateHourFinalReservation) {
-        this.dateHourFinalReservation = Instant.ofEpochMilli(dateHourFinalReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        this.checkOut = Instant.ofEpochMilli(dateHourFinalReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-        this.dateFinalReservation = this.dateHourFinalReservation.toLocalDate();
-        this.hourFinalReservation = this.dateHourFinalReservation.toLocalTime();
+        this.dateFinalReservation = this.checkOut.toLocalDate();
+        this.hourFinalReservation = this.checkOut.toLocalTime();
     }
 }

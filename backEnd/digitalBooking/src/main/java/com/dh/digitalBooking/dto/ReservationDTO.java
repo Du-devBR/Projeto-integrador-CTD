@@ -17,23 +17,15 @@ import java.time.LocalTime;
 @Builder
 
 public class ReservationDTO {
-
     private Long id;
-
-    private LocalDateTime dateHourReservation;
-
+    private LocalDateTime checkIn;
     private LocalTime hourReservation;
-
     private LocalDate dateReservation;
-
-    private LocalDateTime dateHourFinalReservation;
-
+    private LocalDateTime checkOut;
     private LocalTime hourFinalReservation;
-
     private LocalDate dateFinalReservation;
-
+    private Double finalPrice;
     private Product product;
-
     private User user;
 
 }
