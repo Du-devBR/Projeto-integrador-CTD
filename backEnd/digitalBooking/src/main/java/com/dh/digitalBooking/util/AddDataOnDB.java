@@ -22,8 +22,24 @@ public class AddDataOnDB implements ApplicationRunner {
     private final CategoryService categoryService;
     private final CityService cityService;
     private final CityRepository cityRepository;
+    private final AccommodationService accommodationService;
+    private final AccommodationRepository accommodationRepository;
 
-    public AddDataOnDB(RoleRepository roleRepository, ImageRepository imageRepository, ImageService imageService, RoleService roleService, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder, CategoryRepository categoryRepository, CategoryService categoryService, CityService cityService, CityRepository cityRepository) {
+
+
+    public AddDataOnDB(RoleRepository roleRepository
+            , ImageRepository imageRepository
+            , ImageService imageService
+            , RoleService roleService
+            , UserRepository userRepository
+            , UserService userService
+            , PasswordEncoder passwordEncoder
+            , CategoryRepository categoryRepository
+            , CategoryService categoryService
+            , CityService cityService
+            , CityRepository cityRepository
+            , AccommodationService accommodationService
+            , AccommodationRepository accommodationRepository) {
         this.roleRepository = roleRepository;
         this.imageRepository = imageRepository;
         this.imageService = imageService;
@@ -35,6 +51,8 @@ public class AddDataOnDB implements ApplicationRunner {
         this.categoryService = categoryService;
         this.cityService = cityService;
         this.cityRepository = cityRepository;
+        this.accommodationService = accommodationService;
+        this.accommodationRepository = accommodationRepository;
     }
 
     @Override
@@ -59,6 +77,13 @@ public class AddDataOnDB implements ApplicationRunner {
                     .id(3L)
                     .description("Imagem Categoria Hotel")
                     .url("https://hotelcenter.com.br/blog/wp-content/uploads/2016/11/como-e-definida-a-classificacao-por-estrelas-dos-hoteis--1000x563.jpg")
+                    .build());
+
+        if(imageService.findById(4L).isEmpty())
+            imageRepository.save(Image.builder()
+                    .id(4L)
+                    .description("Imagem Categoria Hotel Fazenda")
+                    .url("https://uploads.metropoles.com/wp-content/uploads/2020/07/31185530/rancho_moreira_105942246_153467792952872_8742634874603910403_n-600x400.jpg")
                     .build());
 
         if(roleService.findById(1L).isEmpty())
@@ -101,6 +126,13 @@ public class AddDataOnDB implements ApplicationRunner {
                     .name("Hotel")
                     .imageURL(imageService.findById(3L).get()).build());
 
+        if(categoryService.findById(2L).isEmpty())
+            categoryRepository.save(Category.builder()
+                    .id(2L)
+                    .name("Hotel Fazenda")
+                    .imageURL(imageService.findById(4L).get()).build());
+
+
         if(cityService.findById(1L).isEmpty())
             cityRepository.save(City.builder()
                     .id(1L)
@@ -108,12 +140,28 @@ public class AddDataOnDB implements ApplicationRunner {
                     .state("RJ")
                     .country("Brasil").build());
 
-        if(cityService.findById(1L).isEmpty())
+        if(cityService.findById(2L).isEmpty())
             cityRepository.save(City.builder()
                     .id(2L)
                     .name("São Paulo")
                     .state("SP")
                     .country("Brasil").build());
+
+        if(accommodationService.findById(1L).isEmpty())
+            accommodationRepository.save(Accommodation.builder()
+                    .id(1L)
+                    .name("Hotel Rio")
+                    .qualification("Hotel de luxo")
+                    .category(categoryService.findById(1L).get())
+                    .city(cityService.findById(1L).get()).build());
+
+        if(accommodationService.findById(2L).isEmpty())
+            accommodationRepository.save(Accommodation.builder()
+                    .id(2L)
+                    .name("Hotel São Paulo")
+                    .qualification("Hotel de luxo")
+                    .category(categoryService.findById(1L).get())
+                    .city(cityService.findById(2L).get()).build());
 
     }
 }
