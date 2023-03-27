@@ -1,0 +1,54 @@
+@use '../../Style/variables'
+
+@media screen and (max-width: 501px)
+
+  .container-reservation
+
+    .header-product-detail
+      padding: 1rem
+
+    .container-info-reservation
+      padding: 1rem
+
+      .container-form
+        flex-direction: column
+
+        .container-form-reservation
+
+          form
+            background: none
+            padding: 0
+            box-shadow: none
+
+            .flex-row
+
+              .input-name, .input-lastname, .input-email, .input-city
+
+                input
+                  padding: 0.613rem 1rem
+                  border: none
+                  background: variables.$gray0
+                  border-radius: 0.5rem
+
+
+            .flex-row
+              flex-direction: column
+
+          .container-select-data
+
+          .container-checkin
+
+            .info-time-checkin
+
+              .select-checkin
+                max-width: 100%
+
+      .container-product-policies
+        padding: 4rem 1rem
+
+        .product-policies
+          grid-template-columns: repeat(1, 1fr)
+          gap: 2rem
+
+          .rules, .healths, .cancellation
+            gap: 1rem
