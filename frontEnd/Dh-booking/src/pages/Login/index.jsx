@@ -1,11 +1,16 @@
-import { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useId, useState } from 'react'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import './style.sass'
 import './responsive.sass'
 import {userTeste} from '../../assets/js-mock/userTeste'
 import {Eye, EyeSlash} from 'phosphor-react'
 import jwt_decode from 'jwt-decode'
 import { UserContext } from '../../hooks/userLogin'
+import { sweetAlertSuccess } from '../../hooks/sweetAlert'
+import { apiUrl } from '../../mainApi'
+
+
+// import Swal from 'sweetalert2'
 
 export function Login(){
 
@@ -19,9 +24,9 @@ export function Login(){
     const [enableLogin, setEnableLogin] = useState(false)
     const [viewPassword, setViewPassword] = useState(false)
     const navigate = useNavigate()
-
+    const location = useLocation()
+    const {id} = useParams()
     const { login } = useContext(UserContext)
-
     const isFormValid = email && password
 
     const submitForm = (event) => {
@@ -45,7 +50,7 @@ export function Login(){
         event.preventDefault()
         if(emailRegex.test(email) && password.length >= 6){
 
-            fetch('http://localhost:8080/api/login', requestConfig)
+            fetch(`${apiUrl}api/login`, requestConfig)
             .then(res =>{
                 console.log(res)
                 if(res.ok){
@@ -54,12 +59,14 @@ export function Login(){
                     .then(token => {
                         const decodeToken = jwt_decode(token)
                         console.log(decodeToken)
-                        alert('ok')
                         localStorage.setItem('token', token)
-                        login(decodeToken.nome, decodeToken.sobrenome)
+                        login(decodeToken.nome, decodeToken.sobrenome, decodeToken.sub)
+                        sweetAlertSuccess('Login feito com sucesso')
+                        // aqui podemos verificar se redirecionamos o usuario logado para home ou para reserva utilizando o location
                         setTimeout(() => {
-                            navigate("/")
-                        }, 1000);
+                            navigate(location.state?.from ||"/")
+
+                        }, 2000);
                     })
                 }else{
                     setMessageError(true)
@@ -170,7 +177,7 @@ export function Login(){
             <div className='register'>
                 <span>Ainda não possui uma conta?</span>
                 <Link
-                    to={'/register'}
+                    to={{pathname: '/register', state: { from: `/produto/${id}/reserva` }}}
                     className='register-button'
                     >
                         Criar conta

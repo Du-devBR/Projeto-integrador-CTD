@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom'
 export function CardProduct(props){
   return(
     <div className='card-product'>
-      <img src={props.data.img} alt="" />
+      <img src={props.data.image[0].url} alt="" />
       <div className="content-product">
         <div className="header-product">
           <div className="info-product">
-            <span className='category-product'>{props.data.category}</span>
-            <h1 className='name-product'>{props.data.title}</h1>
+            <span className='category-product'>{props.data.accommodation.category.name}</span>
+            <h1 className='name-product'>{props.data.accommodation.name}</h1>
           </div>
           <div className="reputation-product">
             <div className='rating-scale-product'>
@@ -20,7 +20,7 @@ export function CardProduct(props){
           </div>
         </div>
         <div className="location-product">
-          <span>{`${props.data.location} - `}</span>
+          <span>{`${props.data.accommodation.city.name} - `}</span>
           <button className='btn-location-map'>Mostrar no mapa</button>
         </div>
         <div className="description-product">

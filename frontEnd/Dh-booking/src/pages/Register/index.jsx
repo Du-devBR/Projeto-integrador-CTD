@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import './style.sass'
 import './responsive.sass'
 import {Eye, EyeSlash} from 'phosphor-react'
+import { sweetAlertSuccess } from '../../hooks/sweetAlert'
+import { apiUrl } from '../../mainApi'
 
 export function Register(){
 
@@ -24,6 +26,9 @@ export function Register(){
 
     const isFormValid = name && lastname && email && password && confirmPassword;
 
+    const {id} = useParams()
+    const navigate = useNavigate()
+
     const submitNewUser = (event) => {
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         event.preventDefault()
@@ -31,7 +36,9 @@ export function Register(){
             name: name,
             lastName: lastname,
             login: email,
-            password: password
+            password: password,
+            imageId: 2,
+            roleId: 2
         }
         const requestHeaders = {
             'Content-Type': 'application/json'
@@ -41,17 +48,26 @@ export function Register(){
             body: JSON.stringify(newUser),
             headers: requestHeaders,
         }
+
         if(name.length >= 2 && lastname.length >= 2 && emailRegex.test(email) && password.length >= 6 && (password === confirmPassword)){
-            fetch('http://localhost:8080/api/usuario/registro', requestConfig)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            fetch(`${apiUrl}api/usuario/registro`, requestConfig)
+            .then(res => {
+                console.log(res)
+                if(res.ok){
+                    res.json()
+                    .then(data => {
+                        console.log(data)
+                        sweetAlertSuccess('Usuario cadastrado com sucesso!')
+                        setTimeout(() => {
+                            navigate("/login")
+                        }, 2000);
+                    })
+                }
             })
+
         }else{
             error()
         }
-
-
     }
 
     const toogleViewPassword = () => {
@@ -105,9 +121,7 @@ export function Register(){
             setErrorCheckPasswordInput(false)
 
         }
-
     }
-
 
     return(
     <div className="register-container">
@@ -213,7 +227,7 @@ export function Register(){
             <div className='register'>
                 <span>Já tem conta?</span>
                 <Link
-                    to={'/login'}
+                    to={{pathname: '/login', state: { from: `/produto/${id}/reserva` }}}
                     className='register-button'
                     >
                         Iniciar sessão

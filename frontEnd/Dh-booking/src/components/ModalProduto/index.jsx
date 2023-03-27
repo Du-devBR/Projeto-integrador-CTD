@@ -5,13 +5,15 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 export function ModalProduto(props){
 
+  console.log(props)
+
   return(
     <div className="container-modal">
       <Carousel>
         {
           props.data.map(pictures => (
             <div>
-              <img src={pictures} alt="" />
+              <img src={pictures.url} alt="" />
             </div>
           ))
         }

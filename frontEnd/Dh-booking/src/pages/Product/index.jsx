@@ -1,25 +1,49 @@
 import './style.sass'
 import {ArrowUUpLeft, ShareNetwork, Heart, MapPin} from 'phosphor-react'
 import './responsive.sass'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ModalProduto } from '../../components/ModalProduto'
-import { product } from '../../assets/js-mock/products'
 import { Calender } from '../../components/Calender'
 import {MapContainer, TileLayer, Popup, Marker} from 'react-leaflet'
 import { useEffect, useState } from 'react'
+import { apiUrl } from '../../mainApi'
 
 
 export function Product(){
 
   const [openModal, setOpenModal] = useState(false)
   const {id} = useParams()
+  const navigate = useNavigate()
   const [coordinates, setCoordinates] = useState([51.505, -0.09]);
 
-  console.log(coordinates)
+  const [dataProduct, setDataProduct] = useState({})
+  const [product, setProduct] = useState()
+  const [saveData, setSaveData] = useState(false)
+
+   useEffect(() => {
+    async function fetchData(){
+      try{
+        const response = fetch(`${apiUrl}api/produto/${id}`)
+        const data = await (await response).json()
+        setDataProduct(data)
+        setSaveData(true)
+
+      }catch(error){
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [id])
+
+  useEffect(() => {
+    if(saveData){
+      setProduct(dataProduct)
+    }
+  }, [dataProduct])
 
   const getCoordinates = (event) =>{
     event.preventDefault()
-      fetch(`https://nominatim.openstreetmap.org/search?q=${product[`${id}` -1].location}&format=json&limit=1`)
+      fetch(`https://nominatim.openstreetmap.org/search?q=${product?.accommodation?.city?.name}&format=json&limit=1`)
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
@@ -29,6 +53,16 @@ export function Product(){
       .catch((error) => console.error(error));
   }
 
+  const redirectReservation = () => {
+    const token = localStorage.getItem("token")
+
+    console.log(token)
+    if(token === null){
+      navigate('/login', { state: { from: `/produto/${id}/reserva` } })
+    }else{
+      navigate(`/produto/${id}/reserva`)
+    }
+  }
   return(
     <div className={!openModal ? "container-product-detail": "container-open-modal"}>
       {
@@ -37,8 +71,8 @@ export function Product(){
         <>
           <div className="header-product-detail">
             <div className="title-product-detail">
-              <span>{product[`${id}` - 1].category}</span>
-              <h1>{product[`${id}` - 1].title}</h1>
+              <span>{product?.accommodation?.category?.name}</span>
+              <h1>{product?.accommodation?.name}</h1>
             </div>
             <div className="header-links">
               <span><Heart size={24} color="#fafafa" weight="light" /></span>
@@ -54,7 +88,7 @@ export function Product(){
             <div className="location-product">
               <MapPin size={24} color="#005df4" weight="duotone" />
               <div className="location-data">
-                <span>{product[`${id}` - 1].location}</span>
+                <span>{product?.accommodation?.city?.name}</span>
                 <button
                   onClick={getCoordinates}
                   className='button-view-location-map'
@@ -72,12 +106,12 @@ export function Product(){
           </div>
           <div className="container-picture-product">
             {
-              <img className='principal-picture-view' src={product[`${id}` - 1].img} alt="" />
+              <img className='principal-picture-view' src={product?.image[0]?.url} alt="" />
             }
             <div className="carousel-picture">
               {
-                product[`${id}` - 1].pictures.map(pictures => (
-                  <img src={pictures} alt="" />
+                product?.image.map(pictures => (
+                  <img src={pictures.url} alt="" />
                 ))
               }
             </div>
@@ -89,15 +123,15 @@ export function Product(){
             </button>
           </div>
           <div className="container-description">
-            <h2>{product[`${id}` - 1].title}</h2>
-            <p>{product[`${id}` - 1].description}</p>
+            <h2>{product?.accommodation?.name}</h2>
+            <p>{product?.description}</p>
           </div>
           <div className='container-characteristics'>
-            <h2>O que {product[`${id}` - 1].title} oferece?</h2>
+            <h2>O que {product?.accommodation?.name} oferece?</h2>
             <ul>
               {
-                product[`${id}` - 1].offers.map(offer => (
-                  <li>{offer}</li>
+                product?.caracteristic.map(offer => (
+                  <li>{offer.description}</li>
                 ))
               }
             </ul>
@@ -110,7 +144,8 @@ export function Product(){
               </div>
               <div className='start-reservation'>
                 <span>Adicione as data da sua viagem para obter preços exatos.</span>
-                <Link to={`/produto/${id}/reserva`} className='btn-reservation'>Iniciar reserva</Link>
+                {/* <Link to={`/produto/${id}/reserva`} className='btn-reservation'>Iniciar reserva</Link> */}
+                <button onClick={redirectReservation} className='btn-reservation'>Iniciar reserva</button>
               </div>
             </div>
           </div>
@@ -132,40 +167,40 @@ export function Product(){
             <div className="product-policies">
               <div className="rules">
                 <h3>Regras</h3>
-                <ul>
+                {/* <ul>
                   {
                   product[`${id}` - 1].policies.rules.map(rule => (
                     <p>{rule}</p>
                   ))
                 }
-                </ul>
+                </ul> */}
               </div>
               <div className="healths">
                 <h3>Saude e Segurança</h3>
-                <ul>
+                {/* <ul>
                   {
                   product[`${id}` - 1].policies.health.map(healths => (
                     <p>{healths}</p>
                   ))
                 }
-                </ul>
+                </ul> */}
               </div>
               <div className="cancellation">
                 <h3>Politica de Cancelamento</h3>
-                <ul>
+                {/* <ul>
                   {
                   product[`${id}` - 1].policies.cancellation.map(cancellations => (
                     <p>{cancellations}</p>
                   ))
                 }
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
         </>
           ):(
             <ModalProduto
-              data={product[`${id}` - 1].pictures}
+              data={product?.image}
               onCloseModal={() => setOpenModal(false)}
             />
           )

@@ -3,13 +3,14 @@ import './responsive.sass'
 import logotipo from '../../assets/img/logo.svg'
 import { useContext, useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import twitter from '../../assets/img/twitter.svg'
 import linkedn from '../../assets/img/linkedn.svg'
 import instagram from '../../assets/img/instagram.svg'
 import facebook from '../../assets/img/facebook.svg'
 import copyright from '../../assets/img/copyright.svg'
 import { UserContext } from '../../hooks/userLogin'
+import { sweetAlertCancel } from '../../hooks/sweetAlert'
 
 
 export function MainLayout(){
@@ -18,8 +19,11 @@ export function MainLayout(){
   const [toggle, setToggle] = useState(false)
   const [nameUser, setNameUser] = useState(null)
   const [lastNameUser, setLastNameUser] = useState(null)
+  const [loggedLocal, setLoggedLocal] = useState(false)
 
-  const { login, logged, logout } = useContext(UserContext)
+  const { login, logged, logoutContext } = useContext(UserContext)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const userLocal = localStorage.getItem('nameUser')
@@ -28,6 +32,28 @@ export function MainLayout(){
     setLastNameUser(JSON.parse(lastNameLocal))
   }, [login])
 
+  useEffect(() => {
+    const localStorageUser = localStorage.getItem('token')
+    if(localStorageUser){
+      setLoggedLocal(true)
+    }else{
+      setLoggedLocal(false)
+    }
+  }, [])
+
+  async function logout(){
+    const confirm = await sweetAlertCancel('Gostaria de deslogar da conta?')
+    if(confirm){
+      localStorage.removeItem("nameUser")
+      localStorage.removeItem("lastName")
+      localStorage.removeItem("token")
+      localStorage.removeItem("email")
+      setLoggedLocal(false)
+      navigate('/')
+      logoutContext()
+    }
+
+  }
 
   function menuToggle(){
     if(toggle){
@@ -36,6 +62,7 @@ export function MainLayout(){
       setToggle(true)
     }
   }
+
 
   return(
     <div className={toggle && isMobile ? 'container-active' : 'container'}>
@@ -49,7 +76,7 @@ export function MainLayout(){
             &&
             <nav className='container-menu-nav'>
               {
-                logged ? (
+                logged || loggedLocal ? (
                   <div className="user-logged">
                     <div className="avatar-user">
                       {nameUser && <span>{nameUser.charAt(0)}</span>}
@@ -67,7 +94,6 @@ export function MainLayout(){
                   </div>
                 ):(
                   <>
-                  {/* incrementar rota ao clicar em login ou cadastrar, utlizar react-router-dom */}
                     <Link to={'login'} className='btn-signIn'>Login</Link>
                     <Link to={'register'} className='btn-signUp'>Cadastrar</Link>
                   </>
@@ -82,7 +108,7 @@ export function MainLayout(){
               <div className='hamburgue-mobile'  onClick={menuToggle}></div>
               <div className='info-use-logged'>
               {
-                logged && toggle ? (
+                (logged || loggedLocal) && toggle ? (
                   <div className="user-logged">
                     <div className="avatar-user">
                       {nameUser && <span>{nameUser.charAt(0)}</span>}

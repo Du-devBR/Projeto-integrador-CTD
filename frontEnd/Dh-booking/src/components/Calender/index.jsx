@@ -3,14 +3,14 @@ import './responsive.sass'
 import { Calendar } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 export function Calender(props){
 
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
   const { selectedRange, onSelectedData } = props;
 
   const minDate = new Date()
-
-
 
   function handleDateChange(value) {
 
@@ -18,15 +18,16 @@ export function Calender(props){
 
   }
   return(
-        <div className='calendar'>
-          <Calendar
-            selectRange={true}
-            value={selectedRange}
-            onChange={handleDateChange}
-            showDoubleView={true}
-            minDate= {minDate}
+    <div className='container-calendar'>
+      <Calendar
+        selectRange={true}
+        value={selectedRange}
+        onChange={handleDateChange}
+        showDoubleView={isMobile ? false : true}
+        minDate= {minDate}
 
-          />
-        </div>
+      />
+
+    </div>
   )
 }

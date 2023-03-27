@@ -8,10 +8,11 @@ import { SelectLocation } from '../../components/Select';
 import { CardCategoria } from '../../components/CardCategoria';
 import moment from 'moment'
 import 'moment/min/locales'
+import {apiUrl} from '../../mainApi'
 
 //****** */ imports para teste sem api ******
 // import {category} from '../../assets/js-mock/category'
-import { product } from '../../assets/js-mock/products'
+// import { product } from '../../assets/js-mock/products'
 import { CardProduct } from '../../components/CardProduto';
 import {MapPin, Calendar} from 'phosphor-react'
 
@@ -36,10 +37,10 @@ export function Home(){
   const [inputSelect, setInputSelect] = useState(true)
   const [valueInputSelect, setValueInputSelect] = useState('')
 
-  // const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/categoria')
+    fetch(`${apiUrl}api/categoria`)
     .then(res => {
       res.json()
       .then(data => {
@@ -50,7 +51,7 @@ export function Home(){
 
   useEffect(() =>{
     if(showDestination){
-      fetch('http://localhost:8080/api/cidade')
+      fetch(`${apiUrl}api/cidade`)
       .then(res => {
         res.json()
         .then(data => {
@@ -60,15 +61,17 @@ export function Home(){
     }
   }, [showDestination])
 
-  // useEffect(() => {
-  //   fetch('http://localhost:8080/api/produto')
-  //   .then(res => {
-  //     res.json()
-  //     .then(data => {
-  //       setProducts(data)
-  //     })
-  //   })
-  // }, [])
+  useEffect(() => {
+    fetch(`${apiUrl}api/produto`)
+    .then(res => {
+      // console.log(res)
+      res.json()
+      .then(data => {
+        setProducts(data)
+      })
+    })
+  }, [])
+
 
   const getValueInputSelect = (event) => {
     setValueInputSelect(event.target.value)
@@ -91,13 +94,15 @@ export function Home(){
   )
 
   const filterProductBySelect = () => {
-    const filterObjects = product.filter((object) => object.cidade.toLowerCase().includes(valueInputSelect.toLowerCase()))
+    const filterObjects = products.filter((object) => object.accommodation.city.name.toLowerCase().includes(valueInputSelect.toLowerCase()))
     return filterObjects
   }
 
+  // console.log(products)
+
   const filterProductByCategory = (currentCategory) => {
 
-    const filterCategory = product.filter((object) => object.category === currentCategory)
+    const filterCategory = products.filter((object) => object.accommodation.category.name === currentCategory)
     setObjectFilter(filterCategory)
     setListProduct(false)
     setSelectCategory(true)
@@ -109,21 +114,19 @@ export function Home(){
     // event.preventDefault()
     const dataInitial = moment(startDate[0], 'YYYY-MM-DD').format('YYYY-MM-DD')
     const dataFinal = moment(startDate[1], 'YYYY-MM-DD').format('YYYY-MM-DD')
-    const filterProduct = product.filter(result =>
+    const filterProduct = products.filter(result =>
       moment(result.date, 'MMM DD YYYY HH:mm:ss [GMT]ZZ').isBetween(dataInitial, dataFinal, null, '[]')
     )
     setObjectFilter(filterProduct)
     setListProduct(false)
   }
 
-  console.log(objectFilter)
+  // console.log(objectFilter)
 
   const searchDestinationSelect = (event) => {
     // event.preventDefault()
     if(valueInputSelect !== null){
-      setSearchDestination(
-        valueInputSelect
-      )
+      setSearchDestination(valueInputSelect)
       const objFilter = filterProductBySelect()
         setObjectFilter(objFilter)
         setListProduct(false)
@@ -139,7 +142,6 @@ export function Home(){
   const searchProduct = (event) => {
     event.preventDefault()
 
-    if(startDate){
       const objFilterBySelect = filterProductBySelect()
       const objFilterByDate = searchDestinationWithData(startDate)
 
@@ -147,7 +149,7 @@ export function Home(){
 
       console.log(filteredProducts)
       setListProduct(false)
-    }
+
     // else if (startDate) {
     //   searchDestinationWithData()
     // }else if (valueInputSelect) {
@@ -255,7 +257,7 @@ export function Home(){
                   }
                 </div>
             </div>
-            <button className='submit-search' onClick={event =>  searchProduct(event)}>Pesquisar</button>
+            <button className='submit-search' onClick={event =>  searchDestinationSelect(event)}>Pesquisar</button>
           </div>
         </div>
       </div>
@@ -277,17 +279,17 @@ export function Home(){
         {
           listProduct ?
           (
-            <h2>Lista de produtos</h2>
+            <h2>Acomodações em alta</h2>
           ):selectCategory ? (
-            <h2>{objectFilter[0].category}</h2>
+            <h2>{objectFilter[0].accommodation.category.name}</h2>
           ): selectCity ? (
-            <h2>{objectFilter[0].cidade}</h2>
+            <h2>{objectFilter[0].accommodation.city.name}</h2>
           ): ''
         }
         <div className="list-products">
           {
             listProduct ? (
-            product.map((products, index) => (
+            products.map((products, index) => (
               <CardProduct
                 id={index.length}
                 data={products}
