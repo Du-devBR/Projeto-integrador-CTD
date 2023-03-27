@@ -30,7 +30,7 @@ build:
   image: maven:3.9.0-amazoncorretto-17
   # Define the type of runner
   tags:
-    - maven
+    - docker
   # Define the Maven build command
   script:
     - $MAVEN_BUILD_COMMAND
@@ -47,7 +47,7 @@ test:
   image: maven:3.9.0-amazoncorretto-17
   # Define the type of runner
   tags:
-    - maven
+    - docker
   # Define the Maven build command
   script:
     - mvm test
@@ -60,7 +60,7 @@ deploy:
   image: maven:3.9.0-amazoncorretto-17
   # Define the type of runner
   tags:
-    - maven
+    - docker
   # Define the Maven build command
   script:
     - mvn deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V
@@ -85,7 +85,7 @@ build_front:
   image: node:12.13.0
   # Define the type of runner
   tags:
-    - node
+    - docker
   # Define the script to run
   script:
     # Install dependencies
@@ -101,7 +101,7 @@ test_front:
   image: node:12.13.0
   # Define the type of runner
   tags:
-    - node
+    - docker
   # Define the script to run
   script:
     # Install dependencies
@@ -117,7 +117,7 @@ deploy_front:
   image: node:12.13.0
   # Define the type of runner
   tags:
-    - node
+    - docker
   # Define the script to run
   script:
     # Install dependencies
