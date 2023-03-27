@@ -50,22 +50,6 @@ test:
   script:
     - mvm test
 
-# Define the deploy job
-deploy:
-  # Define the stage
-  stage: deploy_back
-  # Define the image to use
-  image: maven:3.9.0-amazoncorretto-17
-  # Define the type of runner
-  tags:
-    - docker
-  # Define the Maven build command
-  script:
-    - mvn deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  # Define the conditions to run the job
-  only:
-    - $BACKEND_BRANCH
-
 
 
 #
@@ -107,21 +91,3 @@ test_front:
     # Run the tests
     - npm run test
 
-# Define the deploy job for front-end
-deploy_front:
-  # Define the stage
-  stage: deploy_front
-  # Define the image to use
-  image: node:12.13.0
-  # Define the type of runner
-  tags:
-    - docker
-  # Define the script to run
-  script:
-    # Install dependencies
-    - npm install
-    # Deploy the project
-    - npm run deploy
-  # Define the conditions to run the job
-  only:
-    - $FRONTEND_BRANCH
