@@ -5,7 +5,6 @@ stages:
   - deploy_back
   - build_front
   - test_front
-  - deploy_front
 
 # Define variables
 variables:
