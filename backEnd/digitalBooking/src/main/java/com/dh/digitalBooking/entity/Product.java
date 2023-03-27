@@ -28,6 +28,9 @@ public class Product implements Serializable {
     @Column(name = "descricao")
     private String description;
 
+    @Column(name = "preco")
+    private Double price;
+
 
     @ManyToMany
     @JoinTable(name = "produto-imagem",

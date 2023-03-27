@@ -20,6 +20,9 @@ public class Caracteristic implements Serializable {
     @Column(name = "id_caracteristica")
     private Long id;
 
+    @Column(name = "nome")
+    private String name;
+
     @Column(name = "descricao")
     private String description;
 

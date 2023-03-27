@@ -76,17 +76,19 @@ public class SecurityConfiguration {
      @return a SecurityFilterChain object for configuring the HttpSecurity object
      @throws Exception if an error occurs while configuring security settings
      */
-     @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http
+                .csrf().disable()
+                .cors().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
-                    .requestMatchers(HttpMethod.GET, "/api/login").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/usuario/registro").permitAll()
+                    .requestMatchers(
+                            request -> request.getRequestURI().endsWith("/api/login"),
+                            request -> request.getRequestURI().endsWith("/api/usuario/registro")
+                    ).permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
-                    .requestMatchers(HttpMethod.GET, "/api/produto/**").hasAnyAuthority("ADMIN", "USER")
                     .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("ADMIN")
                     .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("ADMIN")
                     .anyRequest().authenticated().and()
