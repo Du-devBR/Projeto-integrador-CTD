@@ -131,6 +131,7 @@ export function Register(){
                 <div className="input-name-user">
                     <label htmlFor="">Nome</label>
                     <input
+                        id='id_nameRegister'
                         className={errorNameInput ? 'input-error' : ''}
                         onChange={(event) => setName(event.target.value)}
                         type="text"
@@ -145,6 +146,7 @@ export function Register(){
                 <div className="input-lastname-user">
                     <label htmlFor="">Sobrenome</label>
                     <input
+                        id='id_lastnameRegister'
                         className={errorLastnameInput ? 'input-error' : ''}
                         onChange={(event) => setLastname(event.target.value)}
                         type="text"
@@ -161,6 +163,7 @@ export function Register(){
             <div className="input-email">
                 <label htmlFor="">Email</label>
                 <input
+                    id='id_emailLRegister'
                     onChange={(event) => setEmail(event.target.value)}
                     className={errorEmailInput ? 'input-error' : ''}
                     type="text"
@@ -176,6 +179,7 @@ export function Register(){
                 <label htmlFor="">Senha</label>
                 <div className="input">
                     <input
+                        id='id_passwordRegister'
                         onChange={(event) => setPassword(event.target.value)}
                         className={errorPasswordInput ? 'input-error' : ''}
                         type={!viewPassword ? 'password' : 'text'}
@@ -199,6 +203,7 @@ export function Register(){
                 <label htmlFor="">Confirma senha</label>
                 <div className="input">
                     <input
+                        id='id_passwordConfirm'
                         onChange={(event) => setConfirmPassword(event.target.value)}
                         className={errorCheckPasswordInput ? 'input-error' : ''}
                         type={!viewPassword ? 'password' : 'text'}
@@ -219,6 +224,7 @@ export function Register(){
                 }
             </div>
             <button
+                id='id_submitRegister'
                 disabled={!isFormValid}
                 className='login-button'
                 >

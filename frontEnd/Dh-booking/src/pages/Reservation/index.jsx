@@ -21,6 +21,9 @@ export function Reservation(){
   const [nameUser, setNameUser] = useState()
   const [lastNameUser, setLastNameUser] = useState()
   const [email, setEmail] = useState()
+  const [city, setCity] = useState('')
+  const [hour, setHour] = useState('')
+
   const {login} = useContext(UserContext)
 
   const {id} = useParams()
@@ -73,37 +76,44 @@ export function Reservation(){
   }
 
   const submitForm = (event) => {
-    event.preventDefault()
-    const newReservation = {
-      dateHourReservation: startDate[0],
-      dateHourFinalReservation: startDate[1] ,
-      product: { id: id},
-      user: {id: 1}
-    }
 
-    const requestHeaders = {
-      'Content-Type': 'application/json',
-
-  }
-  const requestConfig = {
-      method: 'POST',
-      body: JSON.stringify(newReservation),
-      headers: requestHeaders,
-  }
-
-  console.log(requestConfig)
-
-  fetch(`${apiUrl}api/reserva`, requestConfig)
-  .then(res => {
-    if(res.ok){
-        res.json()
-        .then(data => {
-            console.log(data)
-            sweetAlertSuccess('Usuario cadastrado com sucesso!')
-        })
+    if((hour !== '' || null) && (city !== '' || null)){
+      event.preventDefault()
+      const newReservation = {
+        dateHourReservation: startDate[0],
+        dateHourFinalReservation: startDate[1] ,
+        product: { id: id},
+        user: {id: 1}
       }
-    })
+
+      const requestHeaders = {
+        'Content-Type': 'application/json',
+
+      }
+      const requestConfig = {
+          method: 'POST',
+          body: JSON.stringify(newReservation),
+          headers: requestHeaders,
+      }
+
+      console.log(requestConfig)
+
+      fetch(`${apiUrl}api/reserva`, requestConfig)
+      .then(res => {
+        if(res.ok){
+            res.json()
+            .then(data => {
+                console.log(data)
+                sweetAlertSuccess('Usuario cadastrado com sucesso!')
+            })
+          }
+      })
+    }else{
+      console.log("Cidado ou hora vazia")
+    }
   }
+
+  console.log(hour)
 
   return(
     <div className="container-reservation">
@@ -142,7 +152,7 @@ export function Reservation(){
                 </div>
                 <div className="input-city">
                   <label htmlFor="">Cidade</label>
-                  <input type="text" placeholder='Digite sua cidade' />
+                  <input id='id_selectCity' type="text" placeholder='Digite sua cidade' onChange={event => setCity(event.target.value)}/>
                 </div>
               </div>
             </form>
@@ -160,32 +170,32 @@ export function Reservation(){
                 <p>Escolha um horário de check-in para que possamos deixar tudo preparado.</p>
                 <div className="select-checkin">
                   <label htmlFor="">Selecione a sua hora prevista de chegada</label>
-                  <select name="" id="" >
+                  <select name="" id="id_selectCity" onChange={event => setHour(event.target.value)}>
                     <option value=""></option>
-                    <option value="">00:00</option>
-                    <option value="">01:00</option>
-                    <option value="">02:00</option>
-                    <option value="">03:00</option>
-                    <option value="">04:00</option>
-                    <option value="">05:00</option>
-                    <option value="">06:00</option>
-                    <option value="">07:00</option>
-                    <option value="">08:00</option>
-                    <option value="">09:00</option>
-                    <option value="">10:00</option>
-                    <option value="">11:00</option>
-                    <option value="">12:00</option>
-                    <option value="">13:00</option>
-                    <option value="">14:00</option>
-                    <option value="">15:00</option>
-                    <option value="">16:00</option>
-                    <option value="">17:00</option>
-                    <option value="">18:00</option>
-                    <option value="">19:00</option>
-                    <option value="">20:00</option>
-                    <option value="">21:00</option>
-                    <option value="">22:00</option>
-                    <option value="">23:00</option>
+                    <option value="00:00">00:00</option>
+                    <option value="01:00">01:00</option>
+                    <option value="02:00">02:00</option>
+                    <option value="03:00">03:00</option>
+                    <option value="04:00">04:00</option>
+                    <option value="05:00">05:00</option>
+                    <option value="06:00">06:00</option>
+                    <option value="07:00">07:00</option>
+                    <option value="08:00">08:00</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                    <option value="21:00">21:00</option>
+                    <option value="22:00">22:00</option>
+                    <option value="23:00">23:00</option>
                   </select>
                 </div>
               </div>
@@ -204,8 +214,12 @@ export function Reservation(){
               <span>{selectDate ? formatDate(startDate) : ''}</span>
             </div>
             <button
-            onClick={event => submitForm(event)}
-              className='btn-confirm-reservation'>Confirmar Reserva</button>
+              onClick={event => submitForm(event)}
+              className='btn-confirm-reservation'
+              id='id_submitRervation '
+                >
+                  Confirmar Reserva
+              </button>
           </div>
         </div>
         <div className="container-product-policies">

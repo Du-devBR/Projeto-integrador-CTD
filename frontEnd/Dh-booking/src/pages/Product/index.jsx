@@ -148,7 +148,13 @@ export function Product(){
               <div className='start-reservation'>
                 <span>Adicione as data da sua viagem para obter preços exatos.</span>
                 {/* <Link to={`/produto/${id}/reserva`} className='btn-reservation'>Iniciar reserva</Link> */}
-                <button onClick={redirectReservation} className='btn-reservation'>Iniciar reserva</button>
+                <button
+                  onClick={redirectReservation}
+                  className='btn-reservation'
+                  id='id_submitReservation'
+                    >
+                      Iniciar reserva
+                  </button>
               </div>
             </div>
           </div>

@@ -121,6 +121,7 @@ export function Login(){
                 <label htmlFor="">Email</label>
                 <div className="input">
                     <input
+                        id='id_emailLogin'
                         onChange={(event) => setEmail(event.target.value)}
                         className={errorEmailInput ? 'input-error' : ''}
                         placeholder='projeto-integrador@dh.com.br'
@@ -132,6 +133,7 @@ export function Login(){
                 <label htmlFor="">Password</label>
                 <div className='input'>
                     <input
+                        id='id_passwordLogin'
                         onChange={(event) => setPassword(event.target.value)}
                         className={errorPasswordInput ? 'input-error' : ''}
                         type={!viewPassword ? 'password' : 'text'}
@@ -168,6 +170,7 @@ export function Login(){
                 <label for="check">Lembrar-me</label>
             </div>
             <button
+                id='id_submitLogin'
                 onClick={(event) => error(event)}
                 className='login-button'
                 disabled={!isFormValid}

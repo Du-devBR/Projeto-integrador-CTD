@@ -94,8 +94,8 @@ export function MainLayout(){
                   </div>
                 ):(
                   <>
-                    <Link to={'login'} className='btn-signIn'>Login</Link>
-                    <Link to={'register'} className='btn-signUp'>Cadastrar</Link>
+                    <Link id='id_login' to={'login'} className='btn-signIn'>Login</Link>
+                    <Link id='id_logout' to={'register'} className='btn-signUp'>Cadastrar</Link>
                   </>
                 )
               }

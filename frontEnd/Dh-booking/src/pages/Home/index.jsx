@@ -195,6 +195,7 @@ export function Home(){
             <div className="select-location">
               <div className="input">
                 <input
+                id='id_inputSelect'
                   className='input-select-location'
                   onClick={toogleLocation}
                   onChange={getValueInputSelect}
@@ -257,7 +258,13 @@ export function Home(){
                   }
                 </div>
             </div>
-            <button className='submit-search' onClick={event =>  searchDestinationSelect(event)}>Pesquisar</button>
+            <button
+              id='id_search'
+              className='submit-search'
+              onClick={event =>  searchDestinationSelect(event)}
+              >
+                Pesquisar
+            </button>
           </div>
         </div>
       </div>
@@ -289,7 +296,7 @@ export function Home(){
         <div className="list-products">
           {
             listProduct ? (
-            products.map((products, index) => (
+            products.slice(0, 10).map((products, index) => (
               <CardProduct
                 id={index.length}
                 data={products}

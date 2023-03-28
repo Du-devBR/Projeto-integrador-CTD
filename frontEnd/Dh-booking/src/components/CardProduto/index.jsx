@@ -25,9 +25,18 @@ export function CardProduct(props){
         </div>
         <div className="description-product">
           <p>{props.data.description}</p>
-          <button className='btn-view-more-description'>...mais</button>
+          <button
+            className='btn-view-more-description'
+              >...mais
+            </button>
         </div>
-        <Link to={`/produto/${props.data.id}`} className='btn-view-more-product'>Ver mais</Link>
+        <Link
+          to={`/produto/${props.data.id}`}
+          className='btn-view-more-product'
+          id='id_viewMore'
+            >
+              Ver mais
+        </Link>
       </div>
     </div>
   )
