@@ -131,7 +131,10 @@ export function Product(){
             <ul>
               {
                 product?.caracteristic.map(offer => (
-                  <li>{offer.description}</li>
+                  <div className='caracteristic'>
+                    <img src={offer.iconUrl.url} alt="" />
+                    <li>{offer.description}</li>
+                  </div>
                 ))
               }
             </ul>
