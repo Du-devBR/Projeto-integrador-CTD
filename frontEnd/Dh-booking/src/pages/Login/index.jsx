@@ -61,7 +61,7 @@ export function Login(){
                         console.log(decodeToken)
                         localStorage.setItem('token', token)
                         login(decodeToken.nome, decodeToken.sobrenome, decodeToken.sub)
-                        sweetAlertSuccess('Login feito com sucesso')
+                        sweetAlertSuccess('Login feito com sucesso', 1500)
                         // aqui podemos verificar se redirecionamos o usuario logado para home ou para reserva utilizando o location
                         setTimeout(() => {
                             navigate(location.state?.from ||"/")

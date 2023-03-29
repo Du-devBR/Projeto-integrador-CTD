@@ -7,6 +7,7 @@ import { Calender } from '../../components/Calender'
 import {MapContainer, TileLayer, Popup, Marker} from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { apiUrl } from '../../mainApi'
+import { products } from '../../assets/js-mock/products'
 
 
 export function Product(){
@@ -176,33 +177,33 @@ export function Product(){
             <div className="product-policies">
               <div className="rules">
                 <h3>Regras</h3>
-                {/* <ul>
+                <ul>
                   {
-                  product[`${id}` - 1].policies.rules.map(rule => (
+                  products[`${id}` - 1].policies.rules.map(rule => (
                     <p>{rule}</p>
                   ))
                 }
-                </ul> */}
+                </ul>
               </div>
               <div className="healths">
                 <h3>Saude e Segurança</h3>
-                {/* <ul>
+                <ul>
                   {
-                  product[`${id}` - 1].policies.health.map(healths => (
+                  products[`${id}` - 1].policies.health.map(healths => (
                     <p>{healths}</p>
                   ))
                 }
-                </ul> */}
+                </ul>
               </div>
               <div className="cancellation">
                 <h3>Politica de Cancelamento</h3>
-                {/* <ul>
+                <ul>
                   {
-                  product[`${id}` - 1].policies.cancellation.map(cancellations => (
+                  products[`${id}` - 1].policies.cancellation.map(cancellations => (
                     <p>{cancellations}</p>
                   ))
                 }
-                </ul> */}
+                </ul>
               </div>
             </div>
           </div>

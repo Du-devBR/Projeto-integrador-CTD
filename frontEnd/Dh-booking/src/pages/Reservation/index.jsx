@@ -1,13 +1,14 @@
 import './style.sass'
 import './responsive.sass'
 
-import { product } from '../../assets/js-mock/products'
-import { Link, useParams } from 'react-router-dom'
+import { products } from '../../assets/js-mock/products'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ArrowUUpLeft } from 'phosphor-react'
 import { Calender } from '../../components/Calender'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../hooks/userLogin'
 import { apiUrl } from '../../mainApi'
+import { sweetAlertSuccess } from '../../hooks/sweetAlert'
 
 export function Reservation(){
 
@@ -27,6 +28,8 @@ export function Reservation(){
   const {login} = useContext(UserContext)
 
   const {id} = useParams()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData(){
@@ -88,6 +91,7 @@ export function Reservation(){
 
       const requestHeaders = {
         'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
 
       }
       const requestConfig = {
@@ -104,8 +108,13 @@ export function Reservation(){
             res.json()
             .then(data => {
                 console.log(data)
-                sweetAlertSuccess('Usuario cadastrado com sucesso!')
+                sweetAlertSuccess('Parabens!!!', 'Reserva cadastrado com sucesso!', 3000)
+                setTimeout(() => {
+                  navigate("/home")
+                }, 3500);
             })
+          }else {
+            console.log('Erro ao realizar post')
           }
       })
     }else{
@@ -228,31 +237,31 @@ export function Reservation(){
               <div className="rules">
                 <h3>Regras</h3>
                 <ul>
-                  {/* {
-                    product[`${id}` - 1].policies.rules.map(rule => (
+                  {
+                    products[`${id}` - 1].policies.rules.map(rule => (
                       <p>{rule}</p>
                     ))
-                  } */}
+                  }
                 </ul>
               </div>
               <div className="healths">
                 <h3>Saude e Segurança</h3>
                 <ul>
-                  {/* {
-                  product[`${id}` - 1].policies.health.map(healths => (
+                  {
+                  products[`${id}` - 1].policies.health.map(healths => (
                     <p>{healths}</p>
                   ))
-                } */}
+                }
                 </ul>
               </div>
               <div className="cancellation">
                 <h3>Politica de Cancelamento</h3>
                 <ul>
-                  {/* {
-                  product[`${id}` - 1].policies.cancellation.map(cancellations => (
+                  {
+                  products[`${id}` - 1].policies.cancellation.map(cancellations => (
                     <p>{cancellations}</p>
                   ))
-                } */}
+                }
                 </ul>
               </div>
             </div>

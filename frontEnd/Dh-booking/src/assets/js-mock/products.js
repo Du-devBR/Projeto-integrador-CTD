@@ -1,4 +1,4 @@
-export const product = [
+export const products = [
   {
     id: 1,
     date: 'Apr 07 2023 00:00:00 GMT-0300 (Horário Padrão de Brasília)',

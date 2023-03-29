@@ -57,7 +57,7 @@ export function Register(){
                     res.json()
                     .then(data => {
                         console.log(data)
-                        sweetAlertSuccess('Usuario cadastrado com sucesso!')
+                        sweetAlertSuccess('Usuario cadastrado com sucesso!', 1500)
                         setTimeout(() => {
                             navigate("/login")
                         }, 2000);

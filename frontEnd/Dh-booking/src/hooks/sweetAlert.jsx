@@ -1,11 +1,12 @@
 import Swal from 'sweetalert2'
 import '../Style/variables.sass'
 
-export const sweetAlertSuccess = (message) => {
+export const sweetAlertSuccess = (title, message, timer) => {
   Swal.fire({
+    title: title,
     icon: 'success',
     text: message,
-    timer: 1500,
+    timer: timer,
   })
 }
 
