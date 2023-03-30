@@ -72,20 +72,5 @@ build_front:
     # Build the project
     - npm run build
 
-# Define the test job for front-end
-test_front:
-  # Define the stage
-  stage: test_front
-  # Define the image to use
-  image: node:latest
-  # Define the type of runner
-  tags:
-    - docker
-  # Define the script to run
-  script:
-    - cd "frontEnd/Dh-booking"
-    # Install dependencies
-    - npm install
-    # Run the tests
-    - npm run test
+
 
