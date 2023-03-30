@@ -10,13 +10,8 @@ variables:
   # Define the Docker image name and tag
   DOCKER_IMAGE_BACK: "gitlab.ctd.academy:5050/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-5/digital-booking-api"
   DOCKER_IMAGE_FRONT: "gitlab.ctd.academy:5050/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-5/digital-booking-app"
-  DOCKER_IMAGE_TAG: "latest"
-  # Define the Maven command to build the project
-  MAVEN_BUILD_COMMAND: "mvn clean package -DskipTests=true"
-  # Define the branch to deploy for back-end
-  BACKEND_BRANCH: "backEnd"
-  # Define the branch to deploy for front-end
-  FRONTEND_BRANCH: "frontEnd"
+  DOCKER_IMAGE_TAG: "latest" 
+
 #
 #  Back-end section
 #
@@ -32,7 +27,7 @@ build:
   # Define the Maven build command
   script:
     - cd "backEnd/digitalBooking"
-    - $MAVEN_BUILD_COMMAND
+    - mvn clean package -DskipTests=true
   # Define the artifacts that we want to keep after the job is completed
   artifacts:
     paths:
@@ -50,7 +45,7 @@ test:
   # Define the Maven build command
   script:
     - cd "backEnd/digitalBooking"
-    - mvm test
+    - mvn test
 
 
 
