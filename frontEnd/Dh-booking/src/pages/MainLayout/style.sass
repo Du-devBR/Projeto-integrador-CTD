@@ -1,0 +1,128 @@
+@use '../../Style/variables'
+@use '../../Style/mixins'
+
+.container
+  display: grid
+  position: relative
+  width: 100%
+  grid-template-areas: 'header header' 'main main' 'footer footer'
+  min-height: 100vh
+
+  .container-header
+    grid-area: header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    background-color: variables.$gray0
+    width: 100%
+    height: 5rem
+    padding: 0 2rem
+    position: sticky
+    top: 0
+    left: 0
+    z-index: 1
+
+    .container-logo-visibility
+      display: flex
+      gap: 0.5rem
+      align-items: center
+
+      .slogan
+        font-size: variables.$h2-20px
+        font-weight: variables.$font-sm
+        color: variables.$gray800
+        font-style: italic
+
+    .container-menu-nav
+      display: flex
+      gap: 1rem
+
+      .btn-signIn, .btn-signUp
+        @include mixins.button-not-bgColor
+        transition: 0.6s
+
+      .btn-signIn:hover, .btn-signUp:hover
+        background: variables.$gray100
+        transition: 0.6s
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6)
+
+      .user-logged
+        display: flex
+        gap: 1rem
+
+        .avatar-user
+          display: flex
+          align-items: center
+          justify-content: center
+          width: 2.31rem
+          height: 2.31rem
+          background-color: variables.$primary-color
+          border-radius: 50%
+
+          span
+            font-size: variables.$h2-20px
+            color: variables.$gray0
+            text-transform: uppercase
+
+        .name-user
+          display: flex
+          flex-direction: column
+
+          span
+            color: variables.$gray800
+            font-size: variables.$h3-16px
+            font-weight: variables.$font-xs
+
+          :nth-child(2)
+            color: variables.$primary-color
+
+        .btn-logout
+          background-color: variables.$gray800
+          border: none
+          width: 0.125rem
+          height: 1rem
+          transform: rotate(45deg)
+          margin: 0 0 0 1rem
+          cursor: pointer
+
+        .btn-logout::before
+          display: inline-block
+          content: ''
+          width: 0.125rem
+          height: 1rem
+          background-color: variables.$gray800
+          transform: rotate(90deg)
+
+  .section-desktop
+    grid-area: main
+    display: flex
+    flex-direction: column
+    position: relative
+    width: 100%
+    height: 100%
+
+  .container-footer-desktop
+    grid-area: footer
+    display: block
+    z-index: 1
+    width: 100%
+    padding: 1rem 2rem
+    background: variables.$primary-color
+    position: relative
+
+    .footer-copyright
+      display: flex
+      justify-content: space-between
+      align-items: center
+
+
+      .nav-social-newtork
+        display: flex
+        align-items: center
+        gap: 2rem
+
+        li
+
+          img
+            width: 25px
+            height: 25px

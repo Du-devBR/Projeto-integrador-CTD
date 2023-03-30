@@ -1,0 +1,48 @@
+@use 'variables'
+
+@mixin button-not-bgColor
+  padding: 0.75rem 2rem
+  font-size: variables.$btn-16px
+  font-weight: variables.$font-xs
+  color: variables.$primary-color
+  background-color: transparent
+  border: solid 0.063rem variables.$primary-color
+  border-radius: 0.313rem
+  cursor: pointer
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15)
+
+@mixin button-bgColor
+  padding: 0.75rem 4rem
+  font-size: variables.$btn-16px
+  font-weight: variables.$font-xs
+  color: variables.$gray0
+  background-color: variables.$primary-color
+  border: none
+  cursor: pointer
+  border-radius: 0.313rem
+  box-shadow: 0 2px 4px rgba(1, 1, 1, 0.7)
+
+@mixin button-search
+  padding: 0.75rem 2rem
+  font-size: variables.$btn-16px
+  font-weight: variables.$font-xs
+  color: variables.$gray0
+  background-color: variables.$primary-color
+  border: none
+  border-radius: 0.313rem
+  cursor: pointer
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6)
+
+@mixin button-location
+  font-size: variables.$p-14px
+  font-weight: variables.$font-md
+  color: variables.$primary-color
+  background: none
+  border: none
+  cursor: pointer
+
+@mixin button-view-more
+  background: none
+  border: none
+  font-size: variables.$btn-14px
+  cursor: pointer

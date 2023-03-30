@@ -1,0 +1,71 @@
+@use '../../Style/variables'
+@use '../../Style/mixins'
+
+@media screen and (max-width: 1080px)
+
+  .container-product-detail
+
+    .container-picture-product
+
+      .principal-picture-view
+        width: 60%
+
+    .container-product-policies
+
+      .product-policies
+        grid-template-columns: repeat(2, 1fr)
+        gap: 2rem
+
+        .rules, .healths, .cancellation
+          gap: 1rem
+
+@media screen and (max-width: 501px)
+
+  .container-product-detail
+
+    .header-product-detail, .container-location
+      padding: 1rem
+
+    .container-picture-product
+      flex-direction: column
+      padding: 1rem
+
+      .principal-picture-view
+        width: 100%
+
+      .carousel-picture
+        grid-template-columns: repeat(4, 1fr)
+        grid-template-rows: none
+
+      .view-more-picture
+        bottom: 1rem
+        right: 1.5rem
+
+    .container-characteristics
+
+      ul
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        gap: 2rem
+
+
+    .container-schedule
+
+      .container-calendar
+        flex-direction: column
+
+        .start-reservation
+          width: 100%
+
+    .container-product-policies
+
+      .product-policies
+        grid-template-columns: repeat(1, 1fr)
+        gap: 2rem
+
+        .rules, .healths, .cancellation
+          gap: 1rem
+
+  .container-open-modal
+    width: 100%
+    height: calc( 100vh - 158px )

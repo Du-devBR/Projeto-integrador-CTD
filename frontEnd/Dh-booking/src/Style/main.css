@@ -1,0 +1,9 @@
+@use 'variables' {}* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: va;
+  text-decoration: none;
+}

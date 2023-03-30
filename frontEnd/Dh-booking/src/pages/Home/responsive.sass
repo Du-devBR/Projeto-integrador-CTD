@@ -1,0 +1,40 @@
+@use '../../Style/variables'
+
+@media screen and (max-width: 501px)
+
+  .container-home
+
+    .container-search-motor
+      padding: 2rem 1rem
+
+      .content-search
+
+        h1
+          font-size: variables.$h1-24px
+
+        .inputs-search
+          flex-direction: column
+
+    .container-category
+      padding: 1rem
+
+    .container-product
+      width: 100%
+      height: auto
+      padding: 1rem
+      gap: 1rem
+
+      h2
+        font-size: variables.$h1-24px
+        font-weight: variables.$font-xs
+        color: variables.$gray800
+
+      .list-products
+        display: grid
+        flex-wrap: wrap
+        justify-content: space-between
+        gap: 1rem
+        width: 100%
+        height: 100%
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+        object-fit: cover

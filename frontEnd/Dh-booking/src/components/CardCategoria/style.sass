@@ -1,0 +1,32 @@
+@use '../../Style/variables'
+
+.card-category
+  display: flex
+  flex-direction: column
+  max-width: 100%
+  height: 350px
+  border-radius: 0.625rem
+  background: variables.$gray100
+  overflow: hidden
+
+  img
+    width: 100%
+    height: 70%
+    object-fit: cover
+
+  .content-category
+    display: flex
+    flex-direction: column
+    padding: 1rem
+    gap: 0.313rem
+    cursor: pointer
+
+    p
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray800
+
+    span
+      font-size: variables.$p-12px
+      font-weight: variables.$font-xs
+      color: variables.$gray600

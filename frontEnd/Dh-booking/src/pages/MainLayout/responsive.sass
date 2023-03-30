@@ -1,0 +1,300 @@
+@use '../../Style/variables'
+.container
+
+  .container-header-mobile
+    grid-area: header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    background-color: variables.$gray0
+    width: 100%
+    height: 5rem
+    padding: 3rem 1rem
+    position: sticky
+    top: 0
+    left: 0
+    z-index: 1
+    transition: 0.6s
+
+    .container-logo-visibility
+      display: flex
+      gap: 0.5rem
+      align-items: center
+      flex-direction: column
+      align-items: flex-start
+
+      .slogan
+        font-size: variables.$h4-14px
+        font-weight: variables.$font-sm
+        color: variables.$gray800
+        font-style: italic
+
+    .container-nav
+      display: flex
+      cursor: pointer
+      display: inline-block
+      margin-left: auto
+
+      .hamburgue-mobile
+        display: flex
+        width: 1.875rem
+        height: 0.24rem
+        background-color: black
+        display: block
+        flex-direction: column
+        transition: 0.6s
+
+
+      .hamburgue-mobile::after
+        content: ''
+        margin: -0.625rem 0
+        position: absolute
+        width: 1.875rem
+        height: 0.24rem
+        background-color: black
+        display: inline-block
+        transition: 0.6s
+
+      .hamburgue-mobile::before
+        content: ''
+        position: absolute
+        margin: 0.625rem 0
+        width: 1.875rem
+        height: 0.25rem
+        background-color: black
+        display: inline-block
+        transition: 0.6s
+
+  .section-mobile
+    grid-area: main
+    display: flex
+    flex-direction: column
+    position: relative
+    width: 100%
+    height: 100%
+
+  .container-footer-mobile
+    grid-area: footer
+    display: block
+    z-index: 1
+    width: 100%
+    padding: 1rem
+    background: variables.$primary-color
+    position: relative
+
+    .footer-copyright
+      display: flex
+      justify-content: space-between
+      align-items: center
+
+
+      .nav-social-newtork
+        display: flex
+        align-items: center
+        gap: 1rem
+
+        li
+
+          img
+            width: 20px
+            height: 20px
+
+.container-active
+
+  position: relative
+  height: 100vh
+  width: 100%
+
+  .container-header-mobile
+    padding: 2rem 1rem
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
+    height: calc( 100vh - 56px)
+    background-color: variables.$primary-color
+    transition: 0.6s
+    position: absolute
+
+    .container-logo-noVisibility
+      display: none
+      transition: 0.6s
+
+    .container-nav-open
+      display: flex
+      flex-direction: column
+      transition: 0.6s
+      position: relative
+      margin: 2rem 0
+      gap: 2rem
+      height: 100%
+      width: 100%
+
+      .hamburgue-mobile
+        width: 1.875rem
+        height: 0.25rem
+        background-color: none
+        flex-direction: column
+        transition: 0.6s
+        cursor: pointer
+
+      .hamburgue-mobile::after
+        content: ''
+        top: -0.25rem
+        transform: rotate(-135deg)
+        position: relative
+        width: 1.25rem
+        height: 0.25rem
+        background-color: black
+        display: block
+        transition: 0.6s
+
+      .hamburgue-mobile::before
+        content: ''
+        transform: rotate(135deg)
+        position: relative
+        width: 1.25rem
+        height: 0.25rem
+        background-color: black
+        display: block
+        transition: 0.6s
+
+      .info-use-logged
+        display: flex
+        right: 0
+
+        .user-logged
+          display: flex
+          flex-direction: column
+          align-items: flex-end
+          gap: 1rem
+          height: 100%
+          width: 100%
+
+          .avatar-user
+            display: flex
+            align-items: center
+            justify-content: center
+            width: 2.31rem
+            height: 2.31rem
+            background-color: variables.$gray0
+            border-radius: 50%
+
+            span
+              font-size: variables.$h2-20px
+              color: variables.$primary-color
+              text-transform: uppercase
+
+          .name-user
+            display: flex
+            flex-direction: column
+            align-items: flex-end
+
+            span
+              color: variables.$gray800
+              font-size: variables.$h3-16px
+              font-weight: variables.$font-xs
+
+            :nth-child(2)
+              color: variables.$gray0
+
+          .button-logout
+            position: absolute
+            bottom: 0
+            gap: 0.125rem
+            margin-bottom: 0.5rem
+            border-bottom: solid 1px variables.$gray0
+            padding: 0 0 1rem 0
+            width: 100%
+            display: flex
+            gap: 0.188rem
+            align-items: center
+            justify-content: flex-end
+
+            span
+              font-size: variables.$p-12px
+              font-weight: variables.$font-xs
+              color: variables.$gray800
+
+            .btn-logout
+              color: variables.$gray0
+              font-size: variables.$btn-14px
+              background: none
+              border: none
+              cursor: pointer
+
+        .menu-nav-mobile
+          display: flex
+          flex-direction: column
+          align-items: center
+          gap: 2rem
+          width: 100%
+          height: 100%
+          transition: 0.6s
+
+          h1
+            font-size: variables.$h2-20px
+            font-weight: variables.$font-xs
+            text-transform: uppercase
+            color: variables.$gray0
+
+          .nav-list
+            display: flex
+            flex-direction: column
+            gap: 1rem
+            width: 100%
+
+            li
+              display: flex
+              justify-content: center
+              width: 100%
+              padding: 0 0 1rem 0
+              border-bottom: solid 0.125rem #c2c2c2
+
+              .btn-signIn,.btn-signUp
+                background: none
+                border: none
+                color: variables.$gray800
+                font-size: variables.$h3-16px
+                font-weight: variables.$font-xs
+                cursor: pointer
+
+  .container-footer-mobile
+    grid-area: footer
+    display: block
+    bottom: 0
+    z-index: 1
+    width: 100vw
+    padding: 1rem
+    background: variables.$second-color
+    position: absolute
+
+    .footer-copyright
+      display: flex
+      justify-content: flex-end
+      align-items: center
+
+      .copyright
+        display: none
+
+      .nav-social-newtork
+        display: flex
+        align-items: center
+        gap: 1rem
+
+        li
+
+          img
+            width: 20px
+            height: 20px
+
+
+@media screen and (max-width: 778px)
+
+  .container
+    .container-header
+
+      .container-logo-visibility
+
+        .slogan
+          font-size: variables.$p-12px

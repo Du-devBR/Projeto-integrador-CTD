@@ -1,0 +1,107 @@
+@use '../../Style/variables'
+@use '../../Style/mixins'
+.card-product
+  display: flex
+  width: 100%
+  height: 100%
+  background: #fff
+  border-radius: 0.5rem
+  overflow: hidden
+  justify-content: space-between
+  // object-fit: cover
+
+  img
+    width: 50%
+    height: 100%
+    object-fit: cover
+    border-radius: 0 0.5rem 0.5rem 0
+
+  .content-product
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: 100%
+    height: 100%
+    padding: 1rem
+    gap: 1rem
+
+    .header-product
+      width: 100%
+      display: flex
+      justify-content: space-between
+
+      .info-product
+        display: flex
+        width: 100%
+        flex-direction: column
+        gap: 0.313rem
+
+        .category-product
+          font-size: variables.$h4-14px
+          font-weight: variables.$font-xs
+          color: variables.$gray300
+          text-transform: uppercase
+
+        .name-product
+          font-size: variables.$h1-24px
+          font-weight: variables.$font-xs
+          color: variables.$gray800
+
+      .reputation-product
+        display: flex
+        width: 100%
+        flex-direction: column
+        align-items: flex-end
+        gap: 0.313rem
+
+        .rating-scale-product
+          display: flex
+          background: variables.$primary-color
+          border-radius: 0.5rem
+          padding: 0.5rem
+          width: 30px
+          height: 24px
+          align-items: center
+          justify-content: center
+
+          span
+            font-weight: variables.$font-xs
+            color: variables.$gray0
+
+        .name-rating-product
+          font-size: variables.$p-14px
+          font-weight: variables.$font-xs
+          color: variables.$primary-color
+
+    .location-product
+      display: flex
+      align-items: center
+      gap: 0.313rem
+
+      span
+        font-size: variables.$p-14px
+        font-weight: variables.$font-md
+        color: variables.$gray800
+
+      .btn-location-map
+        @include mixins.button-location
+
+    .description-product
+
+      p
+        font-size: variables.$p-14px
+        font-weight: variables.$font-md
+        color: variables.$gray800
+        height: 2rem
+        overflow: hidden
+
+      .btn-view-more-description
+        @include mixins.button-view-more
+        color: variables.$primary-color
+
+
+    .btn-view-more-product
+      @include mixins.button-bgColor
+      cursor: pointer
+      text-align: center
+      align-self: flex-end
