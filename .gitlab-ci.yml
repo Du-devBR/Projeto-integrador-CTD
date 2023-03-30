@@ -3,7 +3,6 @@ stages:
   - build_back
   - test_back
   - build_front
-  - test_front
 
 # Define variables
 variables:
@@ -61,7 +60,7 @@ build_front:
   # Define the stage
   stage: build_front
   # Define the image to use
-  image: node:12.13.0
+  image: node:latest
   # Define the type of runner
   tags:
     - docker
@@ -78,7 +77,7 @@ test_front:
   # Define the stage
   stage: test_front
   # Define the image to use
-  image: node:12.13.0
+  image: node:latest
   # Define the type of runner
   tags:
     - docker
