@@ -31,6 +31,7 @@ build:
     - docker
   # Define the Maven build command
   script:
+    - cd "backEnd/digitalBooking"
     - $MAVEN_BUILD_COMMAND
   # Define the artifacts that we want to keep after the job is completed
   artifacts:
@@ -48,6 +49,7 @@ test:
     - docker
   # Define the Maven build command
   script:
+    - cd "backEnd/digitalBooking"
     - mvm test
 
 
@@ -70,6 +72,7 @@ build_front:
     - docker
   # Define the script to run
   script:
+    - cd "frontEnd/Dh-booking"
     # Install dependencies
     - npm install
     # Build the project
@@ -86,6 +89,7 @@ test_front:
     - docker
   # Define the script to run
   script:
+    - cd "frontEnd/Dh-booking"
     # Install dependencies
     - npm install
     # Run the tests
