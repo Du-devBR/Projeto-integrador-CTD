@@ -10,7 +10,7 @@ import instagram from '../../assets/img/instagram.svg'
 import facebook from '../../assets/img/facebook.svg'
 import copyright from '../../assets/img/copyright.svg'
 import { UserContext } from '../../hooks/userLogin'
-import { sweetAlertCancel } from '../../hooks/sweetAlert'
+import { sweetAlertWarning } from '../../hooks/sweetAlert'
 
 
 export function MainLayout(){
@@ -42,7 +42,7 @@ export function MainLayout(){
   }, [])
 
   async function logout(){
-    const confirm = await sweetAlertCancel('Gostaria de deslogar da conta?')
+    const confirm = await sweetAlertWarning('Gostaria de deslogar da conta?', 'Sair da conta', 'Sair', 'Continuar logado','#eaeaea', '#ff9800')
     if(confirm){
       localStorage.removeItem("nameUser")
       localStorage.removeItem("lastName")

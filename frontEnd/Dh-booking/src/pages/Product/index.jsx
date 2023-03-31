@@ -8,6 +8,7 @@ import {MapContainer, TileLayer, Popup, Marker} from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { apiUrl } from '../../mainApi'
 import { products } from '../../assets/js-mock/products'
+import { sweetAlertWarning } from '../../hooks/sweetAlert'
 
 
 export function Product(){
@@ -54,12 +55,13 @@ export function Product(){
       .catch((error) => console.error(error));
   }
 
-  const redirectReservation = () => {
+  async function redirectReservation ()  {
     const token = localStorage.getItem("token")
-
-    console.log(token)
-    if(token === null){
-      navigate('/login', { state: { from: `/produto/${id}/reserva` } })
+    const confirm = await sweetAlertWarning('Fazer login e continuar sua reserva', '', 'Ir para login', 'Continuar pesquisando', '#ff9800', '#eaeaea')
+    if(token === null || token === ''){
+      if(confirm){
+        navigate('/login', { state: { from: `/produto/${id}/reserva` } })
+      }
     }else{
       navigate(`/produto/${id}/reserva`)
     }
