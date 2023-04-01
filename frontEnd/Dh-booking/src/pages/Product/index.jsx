@@ -1,5 +1,5 @@
 import './style.sass'
-import {ArrowUUpLeft, ShareNetwork, Heart, MapPin} from 'phosphor-react'
+import {ArrowUUpLeft, ShareNetwork, Heart, MapPin, InstagramLogo} from 'phosphor-react'
 import './responsive.sass'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ModalProduto } from '../../components/ModalProduto'
@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { apiUrl } from '../../mainApi'
 import { products } from '../../assets/js-mock/products'
 import { sweetAlertWarning } from '../../hooks/sweetAlert'
+import instragram from '../../assets/img/instagram.svg'
 
 
 export function Product(){
@@ -21,6 +22,9 @@ export function Product(){
   const [dataProduct, setDataProduct] = useState({})
   const [product, setProduct] = useState()
   const [saveData, setSaveData] = useState(false)
+  const [shareProduct, setShareProduct] = useState(false)
+  const [url, setUrl] = useState('')
+  const [copyUrl, setCopyUrl] = useState('')
 
    useEffect(() => {
     async function fetchData(){
@@ -57,8 +61,8 @@ export function Product(){
 
   async function redirectReservation ()  {
     const token = localStorage.getItem("token")
-    const confirm = await sweetAlertWarning('Fazer login e continuar sua reserva', '', 'Ir para login', 'Continuar pesquisando', '#ff9800', '#eaeaea')
     if(token === null || token === ''){
+      const confirm = await sweetAlertWarning('Fazer login e continuar sua reserva', '', 'Ir para login', 'Continuar pesquisando', '#ff9800', '#eaeaea')
       if(confirm){
         navigate('/login', { state: { from: `/produto/${id}/reserva` } })
       }
@@ -66,6 +70,42 @@ export function Product(){
       navigate(`/produto/${id}/reserva`)
     }
   }
+
+  function shareProductSocialNetwork ()  {
+    if(shareProduct){
+      setShareProduct(false)
+    }else{
+      setShareProduct(true)
+    }
+  }
+
+  useEffect(() => {
+
+    setUrl(window.location.href)
+
+  }, [shareProduct])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if(window.scrollY > 50){
+        setShareProduct(false)
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const copyUrlProduct = () => {
+    const input = document.getElementById('inputCopy')
+    input.select()
+    document.execCommand('copy')
+    setCopyUrl(input.value)
+  }
+
   return(
     <div className={!openModal ? "container-product-detail": "container-open-modal"}>
       {
@@ -79,14 +119,42 @@ export function Product(){
             </div>
             <div className="header-links">
               <span><Heart size={24} color="#fafafa" weight="light" /></span>
-              <span><ShareNetwork size={24} color="#fafafa" weight="light" /></span>
+              <button
+                className='btn-share-product'
+                onClick={shareProductSocialNetwork}
+                >
+                  <ShareNetwork size={24} color="#fafafa" weight="light" />
+              </button>
               <Link
                 to={'/home'}
                 className='btn-back-to-home'>
                   <ArrowUUpLeft size={32} color="#fafafa" weight="fill" />
               </Link>
+              {
+                shareProduct
+                &&
+                <div className='container-share-product'>
+                  <div className="share">
+                    <button
+                      className='btn-close-share'
+                      onClick={() => setShareProduct(false)}
+                      >
+                        X
+                    </button>
+                    <h3>Compartilhe sua alegria com os amigos.</h3>
+                    <ul>
+                      <li><InstagramLogo size={32} color='#736D6D' alt='Instagram'/></li>
+                    </ul>
+                    <div className="share-link-product">
+                      <input type="text" value={url} id='inputCopy'/>
+                      <button onClick={copyUrlProduct} >Copiar Link</button>
+                    </div>
+                  </div>
+                </div>
+              }
             </div>
           </div>
+
           <div className="container-location">
             <div className="location-product">
               <MapPin size={24} color="#005df4" weight="duotone" />
