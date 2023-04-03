@@ -78,10 +78,12 @@ public class SecurityConfiguration {
      */
      @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http
+                .csrf().disable()
+                .cors().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
-                    .requestMatchers("/**").permitAll()
+                    .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
