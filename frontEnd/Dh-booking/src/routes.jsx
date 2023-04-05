@@ -6,6 +6,7 @@ import { MainLayout } from "./pages/MainLayout"
 import { Product } from "./pages/Product"
 import { Register } from "./pages/Register"
 import { Reservation } from "./pages/Reservation"
+import { AdministrationPanel } from "./pages/Administration"
 
 
 export function Routes(){
@@ -35,6 +36,9 @@ export function Routes(){
         },{
           path:'produto/:id/reserva',
           element: <Reservation />
+        },{
+          path:'administration',
+          element: <AdministrationPanel />
         }
       ]
     }
