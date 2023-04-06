@@ -1,0 +1,259 @@
+@use '../../Style/variables'
+@use '../../Style/mixins'
+
+.container-administration
+  display: flex
+  flex-direction: column
+  width: 100%
+  padding: 2rem
+  gap: 2rem
+  align-items: center
+  background: variables.$gray100
+
+  .title-administration
+    margin-bottom: 2rem
+
+    h1
+      font-size: variables.$h1-24px
+      font-weight: variables.$font-xs
+      color: variables.$gray800
+
+  .container-crete-accommodation
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    width: 100%
+    padding: 2rem
+    background: variables.$gray0
+    border-radius: 0.5rem
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray700
+
+    form
+      display: flex
+      flex-direction: column
+      gap: 1rem
+      width: 100%
+      align-items: center
+
+      .input-name-accommodation,
+      .input-name-accommodation,
+      .input-qualification-accommodation,
+      .input-category-accommodation,
+      .input-city-accommodation
+        display: flex
+        flex-direction: column
+        gap: 0.5rem
+        width: 100%
+
+        label
+          font-size: variables.$h3-16px
+          font-weight: variables.$font-xs
+          color: variables.$gray700
+
+        input, select
+          padding: 0.5rem 1rem
+          border-radius: 0.5rem
+          border: none
+          font-size: variables.$p-14px
+          color: variables.$gray800
+          border: solid 1px variables.$gray300
+
+      .submit-accommodation
+        @include mixins.button-bgColor
+        align-self: flex-end
+
+  .container-create-policies
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    width: 100%
+    padding: 2rem
+    background: variables.$gray0
+    border-radius: 0.5rem
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray700
+
+    form
+      display: flex
+      flex-direction: column
+      gap: 1rem
+      width: 100%
+      align-items: center
+
+      .input-rules,
+      .input-security,
+      .input-policie-cancellation
+        width: 100%
+        display: flex
+        flex-direction: column
+        gap: 1rem
+
+        label
+          font-size: variables.$h3-16px
+          font-weight: variables.$font-xs
+          color: variables.$gray700
+
+        .input
+          display: flex
+          width: 100%
+
+          input
+            width: 100%
+            padding: 0.5rem 1rem
+            border-radius: 0.5rem 0 0 0.5rem
+            border: none
+            font-size: variables.$p-14px
+            color: variables.$gray800
+            border: solid 1px variables.$gray300
+
+          button
+            @include mixins.button-create-add
+
+      .submit-policies
+        @include mixins.button-bgColor
+        align-self: flex-end
+
+  .container-create-image
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    width: 100%
+    padding: 2rem
+    background: variables.$gray0
+    border-radius: 0.5rem
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray700
+
+    form
+      display: flex
+      flex-direction: column
+      gap: 1rem
+      width: 100%
+      align-items: center
+
+      .input-urlImg-add
+        display: flex
+        flex-direction: column
+        width: 100%
+        gap: 1rem
+
+        label
+          font-size: variables.$h3-16px
+          font-weight: variables.$font-xs
+          color: variables.$gray700
+
+        .urlImg-product
+          display: flex
+
+          input
+            width: 100%
+            padding: 0.5rem 1rem
+            border-radius: 0.5rem
+            border: none
+            font-size: variables.$p-14px
+            color: variables.$gray800
+            border: solid 1px variables.$gray300
+            border-radius: 0.5rem 0 0 0.5rem
+
+          button
+            @include mixins.button-create-add
+
+  .container-create-product
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    width: 100%
+    padding: 2rem
+    background: variables.$gray0
+    border-radius: 0.5rem
+
+    h2
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-xs
+      color: variables.$gray700
+
+    form
+      display: flex
+      flex-direction: column
+      gap: 1rem
+      width: 100%
+      align-items: center
+
+      .input-name-product,
+      .input-description-product,
+      .input-select-accommodation,
+      .input-select-policies,
+      .input-urlImg-product
+        display: flex
+        flex-direction: column
+        width: 100%
+        gap: 1rem
+
+        label
+          font-size: variables.$h3-16px
+          font-weight: variables.$font-xs
+          color: variables.$gray700
+
+        input, select
+          width: 100%
+          padding: 0.5rem 1rem
+          border-radius: 0.5rem
+          border: none
+          font-size: variables.$p-14px
+          color: variables.$gray800
+          border: solid 1px variables.$gray300
+
+        .urlImg-product
+          display: flex
+
+          select
+            border-radius: 0.5rem 0 0 0.5rem
+
+          button
+            @include mixins.button-create-add
+
+      .input-caracteristic-product
+        display: flex
+        width: 100%
+        flex-direction: column
+        gap: 1rem
+
+        label
+          font-size: variables.$h3-16px
+          font-weight: variables.$font-xs
+          color: variables.$gray700
+
+        .checkbox-caracteristic
+          display: flex
+          flex-wrap: wrap
+          gap: 1rem
+
+          .checkbox
+            display: flex
+            gap: 0.313rem
+            justify-content: center
+            align-items: center
+
+            span
+              color: variables.$gray600
+              font-size: variables.$h3-16px
+              font-weight: variables.$font-xs
+
+            input
+              width: 20px
+              height: 20px
+
+
+      .submit-product
+        @include mixins.button-bgColor
+        align-self: flex-end

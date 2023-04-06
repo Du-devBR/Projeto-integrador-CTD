@@ -154,9 +154,56 @@ export function AdministrationPanel(){
           <button className='submit-accommodation'>Cadastrar Hospedagem</button>
         </form>
       </div>
+      <div className="container-create-policies">
+        <h2>Criar politicas</h2>
+        <form action="">
+          <div className="input-rules">
+            <label htmlFor="">Regras da acomodação</label>
+            <div className="input">
+              <input type="text" />
+              <button>+</button>
+            </div>
+          </div>
+          <div className="input-security">
+            <label htmlFor="">Saude e Segurança</label>
+            <div className="input">
+              <input type="text" />
+              <button>+</button>
+            </div>
+          </div>
+          <div className="input-policie-cancellation">
+            <label htmlFor="">Politicas de Cancelamento</label>
+            <div className="input">
+              <input type="text" />
+              <button>+</button>
+            </div>
+          </div>
+          <button className='submit-policies'>Cadastrar Politicas</button>
+        </form>
+      </div>
+      <div className="container-create-image">
+        <h2>Adicionar Imagens</h2>
+        <form action="">
+          <div className="input-urlImg-add">
+              <label htmlFor="">Cole a Url da imagem</label>
+              <div className="urlImg-product">
+                <input type="text" placeholder='htttp://urlImagem'/>
+                <button>+</button>
+              </div>
+            </div>
+        </form>
+      </div>
       <div className="container-create-product">
         <h2>Crie um novo produto</h2>
         <form action="">
+          <div className="input-name-product">
+            <label htmlFor="">Nome do produto</label>
+            <input type="text" />
+          </div>
+          <div className="input-description-product">
+            <label htmlFor="">Descrição do produto</label>
+            <input type="text" />
+          </div>
           <div className="input-select-accommodation">
             <label htmlFor="">Escolha a hospedagem que você criou</label>
             <select name="" id="">
@@ -167,22 +214,40 @@ export function AdministrationPanel(){
               }
             </select>
           </div>
-          <div className="input-caracteristic-product">
-            <h3 htmlFor="">Selecione as caracteristicas do produto</h3>
-            {
-              caracteristics.map((caracteristic, index) => (
-                <div key={index}>
-                  <label htmlFor="">{caracteristic.description}</label>
-                  <input
-                    type="checkbox"
-                    id={caracteristic.description}
-                    caracteristic={caracteristic.description}
-                    value={caracteristic.description}
-                  />
-                </div>
-              ))
-            }
+          <div className="input-select-policies">
+            <label htmlFor="">Escolha as Politicas que você criou</label>
+            <select name="" id="">
+              <option value="">Politicas</option>
+            </select>
           </div>
+          <div className="input-caracteristic-product">
+            <label htmlFor="">Selecione as caracteristicas do produto</label>
+            <div className="checkbox-caracteristic">
+              {
+                caracteristics.map((caracteristic, index) => (
+                  <div className='checkbox' key={index}>
+                    <span htmlFor="">{caracteristic.description}</span>
+                    <input
+                      type="checkbox"
+                      id={caracteristic.description}
+                      caracteristic={caracteristic.description}
+                      value={caracteristic.description}
+                    />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div className="input-urlImg-product">
+            <label htmlFor="">Escolha as imagens para o produto</label>
+            <div className="urlImg-product">
+              <select name="" id="">
+                <option value="">Produto</option>
+              </select>
+              <button>+</button>
+            </div>
+          </div>
+          <button className='submit-product'>Cadastrar produto</button>
         </form>
       </div>
     </div>
