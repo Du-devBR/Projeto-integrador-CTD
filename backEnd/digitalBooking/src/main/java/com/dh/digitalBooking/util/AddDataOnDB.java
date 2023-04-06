@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Component
@@ -209,8 +210,8 @@ public class AddDataOnDB implements ApplicationRunner {
         if(reservationService.findById(1L).isEmpty())
             reservationRepository.save(Reservation.builder()
                     .id(1L)
-                    .checkIn(LocalDateTime.now())
-                    .checkOut(LocalDateTime.now().plusDays(2))
+                    .checkIn(Timestamp.valueOf(LocalDateTime.now()))
+                    .checkOut(Timestamp.valueOf(LocalDateTime.now().plusDays(2)))
                     .finalPrice(200.00)
                     .product(productService.findById(1L).get())
                     .user(userService.findById(2L).get()).build());
