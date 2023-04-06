@@ -1,16 +1,10 @@
 package com.dh.digitalBooking.security;
 
 import com.dh.digitalBooking.service.AuthService;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -20,11 +14,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.List;
 
 /**
  A configuration class that provides basic security configuration for the application.
@@ -103,42 +92,4 @@ public class SecurityConfiguration {
                 .build();
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*")
-                        .allowedOrigins("")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*");
-            }
-        };
-    }
-
-    @Configuration
-    @EnableWebMvc
-    public class WebMvcConfig implements WebMvcConfigurer {
-
-        @Override
-        public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-            mapper.addMixIn(Object.class, IgnoreHibernatePropertiesInSerialization.class);
-
-            converters.add(new MappingJackson2HttpMessageConverter(mapper));
-        }
-
-        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-        abstract class IgnoreHibernatePropertiesInSerialization {}
-    }
-
-    @Configuration
-    public class JacksonConfig {
-        @Bean
-        public ObjectMapper objectMapper() {
-            return new ObjectMapper()
-                    .registerModule(new JavaTimeModule());
-        }
-    }
 }
