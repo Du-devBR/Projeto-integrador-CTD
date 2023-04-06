@@ -28,20 +28,19 @@ public class Product implements Serializable {
     @Column(name = "descricao")
     private String description;
 
-    @Column(name = "preco")
-    private Double price;
-
 
     @ManyToMany
     @JoinTable(name = "produto-imagem",
-            joinColumns = @JoinColumn(name = "fk_produto"),
+            joinColumns = @JoinColumn(name = "fk_produto",
+                            referencedColumnName = "id_produto"),
             inverseJoinColumns = @JoinColumn(name = "fk_imagem",
                             referencedColumnName = "id_imagem"))
     private List<Image> image;
 
     @ManyToMany
     @JoinTable(name = "produto-caracteristica",
-                    joinColumns = @JoinColumn(name = "fk_produto"),
+                    joinColumns = @JoinColumn(name = "fk_produto",
+                                    referencedColumnName = "id_produto"),
                     inverseJoinColumns = @JoinColumn(name = "fk_caracteristica",
                                     referencedColumnName = "id_caracteristica"))
     private List<Caracteristic> caracteristic;

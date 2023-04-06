@@ -25,7 +25,8 @@ public class Regulation {
 
     @ManyToMany
     @JoinTable(name = "hospedagem-regulamentacao",
-                    joinColumns = @JoinColumn(name = "fk_regulamentacao"),
+                    joinColumns = @JoinColumn(name = "fk_regulamentacao",
+                                    referencedColumnName = "id_regulamentacao"),
                     inverseJoinColumns = @JoinColumn(name = "fk_hospedagem",
                                     referencedColumnName = "id_hospedagem"))
     private List<Accommodation> accommodation;
