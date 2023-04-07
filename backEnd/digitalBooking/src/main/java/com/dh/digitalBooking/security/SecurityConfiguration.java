@@ -96,6 +96,7 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
                     .requestMatchers(HttpMethod.GET, "/api/produto/**").hasAnyAuthority("ADMIN", "USER")
                     .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/usuario/registro").permitAll()
                     .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("ADMIN")
                     .anyRequest().authenticated().and().csrf().disable()
                 .addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)

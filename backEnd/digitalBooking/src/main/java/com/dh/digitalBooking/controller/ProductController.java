@@ -2,6 +2,9 @@ package com.dh.digitalBooking.controller;
 
 
 import com.dh.digitalBooking.dto.ProductDTO;
+import com.dh.digitalBooking.entity.Category;
+import com.dh.digitalBooking.entity.City;
+import com.dh.digitalBooking.entity.Product;
 import com.dh.digitalBooking.service.ProductService;
 import com.dh.digitalBooking.util.ProductUtil;
 import jakarta.validation.Valid;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Esta classe representa o controlador responsável por gerenciar as requisições relacionadas ao Produto.
@@ -106,6 +111,53 @@ public class ProductController {
                     productService.save(productDTO);
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+    }
+
+    /**
+     Rota para encontrar um produto por Cidade.
+     @param cityName uma String representando o nome da cidade para encontrar uma lista de produto.
+     @return uma lista productDTO representando a lista de produtos encontrado.
+     @throws ResponseStatusException se o produto não for encontrado.
+     */
+
+    @GetMapping("/buscaPorCidade")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductDTO> getProductByCity(@RequestParam("cityName") String cityName){
+        if(cityName == null) {
+            throw new IllegalArgumentException("City name cannot be null");
+        }
+        log.info("Find Product by City: %s".formatted(cityName));
+        List<Product> productList = productService.getProductsByCityName(cityName);
+        if (productList.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found" + cityName);
+        }
+        return productList.stream()
+                .map(ProductUtil::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     Rota para encontrar um produto por Categoria.
+     @param categoryName uma String representando o nome da categoria para encontrar uma lista de produto.
+     @return uma lista productDTO representando a lista de produtos encontrado.
+     @throws ResponseStatusException se o produto não for encontrado.
+     */
+    @GetMapping("/buscaPorCategoria")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductDTO> getProductByCategory(@RequestParam("categoryName") String categoryName){
+        if(categoryName == null) {
+            throw new IllegalArgumentException("Category name cannot be null");
+        }
+        log.info("Find Product by Category: %s".formatted(categoryName));
+        List<Product> productList = productService.getProductsByCategoryName(categoryName);
+        if (productList.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found" + categoryName);
+        }
+        return productList.stream()
+                .map(ProductUtil::convertToDTO)
+                .collect(Collectors.toList());
     }
 
 }

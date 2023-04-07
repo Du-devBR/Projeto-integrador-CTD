@@ -2,6 +2,8 @@ package com.dh.digitalBooking.service;
 
 
 import com.dh.digitalBooking.dto.ProductDTO;
+import com.dh.digitalBooking.entity.Category;
+import com.dh.digitalBooking.entity.City;
 import com.dh.digitalBooking.entity.Product;
 import com.dh.digitalBooking.repository.ProductRepository;
 import com.dh.digitalBooking.util.ProductUtil;
@@ -39,6 +41,14 @@ public class ProductService {
 
     public void deleteById(Long id){
         productRepository.deleteById(id);
+    }
+
+    public List<Product> getProductsByCityName(String cityName){
+        return productRepository.findProductsByCityName(cityName);
+    }
+
+    public List<Product> getProductsByCategoryName(String categoryName){
+        return productRepository.findProductsByCategoryName(categoryName);
     }
 
 }
