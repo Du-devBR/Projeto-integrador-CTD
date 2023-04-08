@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 @Data
 @AllArgsConstructor
@@ -19,13 +19,9 @@ import java.time.LocalTime;
 public class ReservationDTO {
     private Long id;
     private Timestamp checkIn;
-    private LocalTime hourReservation;
-    private LocalDate dateReservation;
     private Timestamp checkOut;
-    private LocalTime hourFinalReservation;
-    private LocalDate dateFinalReservation;
     private Double finalPrice;
-    private Product product;
-    private User user;
+    private ProductDTO product;
+    private UserDTO user;
 
 }

@@ -23,23 +23,11 @@ public class Reservation implements Serializable {
     @Column(name = "id_reserva")
     private Long id;
 
-    @Column(name = "data_hora_da_reserva")
+    @Column(name = "data_da_reserva")
     private Timestamp checkIn;
 
-    @Column(name = "hora_da_reserva")
-    private LocalTime hourReservation;
-
-    @Column(name = "data_da_reserva")
-    private LocalDate dateReservation;
-
-    @Column(name = "data_hora_final_da_reserva")
-    private Timestamp checkOut;
-
-    @Column(name = "hora_final_da_reserva")
-    private LocalTime hourFinalReservation;
-
     @Column(name = "data_final_da_reserva")
-    private LocalDate dateFinalReservation;
+    private Timestamp checkOut;
 
     @Column(name = "preco_final")
     private Double finalPrice;
@@ -52,18 +40,4 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
     private User user;
 
-    public void setDateHourReservation(Timestamp dateHourReservation) {
-        this.checkIn = Timestamp.valueOf(Instant.ofEpochMilli(dateHourReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime());
-
-        this.dateReservation = LocalDate.from(this.checkIn.toLocalDateTime());
-        this.hourReservation = LocalTime.from(this.checkIn.toLocalDateTime());
-
-    }
-
-    public void setDateHourFinalReservation(Timestamp dateHourFinalReservation) {
-        this.checkOut = Timestamp.valueOf(Instant.ofEpochMilli(dateHourFinalReservation.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime());
-
-        this.dateFinalReservation = LocalDate.from(this.checkOut.toLocalDateTime());
-        this.hourFinalReservation = LocalTime.from(this.checkOut.toLocalDateTime());
-    }
 }
