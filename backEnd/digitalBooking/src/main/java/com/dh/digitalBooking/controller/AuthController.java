@@ -1,5 +1,6 @@
 package com.dh.digitalBooking.controller;
 
+import com.dh.digitalBooking.dto.AuthResponseDTO;
 import com.dh.digitalBooking.dto.UserAuthDTO;
 import com.dh.digitalBooking.entity.User;
 import com.dh.digitalBooking.service.TokenService;
@@ -25,12 +26,15 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody @Valid UserAuthDTO userAuthDTO) {
+    public AuthResponseDTO login(@RequestBody @Valid UserAuthDTO userAuthDTO) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(userAuthDTO.getLogin(), userAuthDTO.getPassword());
         Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         var user = (User) authenticate.getPrincipal();
-        return tokenService.generatorToken(user);
+        String token = tokenService.generatorToken(user);
+        Long userId = user.getId();
+        Long roleId = user.getRole().getId();
+        return new AuthResponseDTO(token, userId, roleId);
     }
 }

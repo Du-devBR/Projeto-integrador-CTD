@@ -26,4 +26,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     abstract static class IgnoreHibernatePropertiesInSerialization {}
+
+
 }
