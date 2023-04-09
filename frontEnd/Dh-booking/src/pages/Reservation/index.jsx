@@ -167,8 +167,6 @@ export function Reservation(){
           headers: requestHeaders,
       }
 
-      console.log(requestConfig)
-
       fetch(`${apiUrl}api/reserva`, requestConfig)
       .then(res => {
         if(res.ok){
@@ -181,7 +179,7 @@ export function Reservation(){
                 }, 3500);
             })
           }else {
-            console.log('Erro ao realizar post')
+            navigate('/login', { state: { from: `/produto/${id}/reserva` } })
           }
       })
     }else{
