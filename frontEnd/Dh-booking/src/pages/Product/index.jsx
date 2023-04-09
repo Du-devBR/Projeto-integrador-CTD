@@ -10,6 +10,7 @@ import { apiUrl } from '../../mainApi'
 import { products } from '../../assets/js-mock/products'
 import { sweetAlertWarning } from '../../hooks/sweetAlert'
 import instragram from '../../assets/img/instagram.svg'
+import Calendar from 'react-calendar'
 
 
 export function Product(){
@@ -21,6 +22,8 @@ export function Product(){
 
   const [dataProduct, setDataProduct] = useState({})
   const [product, setProduct] = useState()
+  const [reservation, setReservation ] = useState([])
+  const [disbaledDate, setDisabledDate ] = useState([])
   const [saveData, setSaveData] = useState(false)
   const [shareProduct, setShareProduct] = useState(false)
   const [url, setUrl] = useState('')
@@ -33,13 +36,34 @@ export function Product(){
         const data = await (await response).json()
         setDataProduct(data)
         setSaveData(true)
-
       }catch(error){
         console.error(error)
       }
     }
     fetchData()
   }, [id])
+
+  useEffect(() => {
+
+    fetch(`${apiUrl}api/reserva`)
+      .then(res => res.json())
+      .then(data => {
+        setReservation(data)
+
+        const filterReserv = reservation.filter(reserv => reserv.product.id === product.id)
+        const eventos = filterReserv.map(reserv => {
+          return{
+            id: reserv.id,
+            start: new Date(reserv.checkIn),
+            end: new Date(reserv.checkOut),
+            color: '#DB2828'
+          }
+        })
+    setDisabledDate(eventos)
+    // setBlockedRanges(eventos)
+    })
+
+  }, [product])
 
   useEffect(() => {
     if(saveData){
@@ -60,7 +84,7 @@ export function Product(){
   }
 
   async function redirectReservation ()  {
-    const token = localStorage.getItem("token")
+    const token = JSON.parse(localStorage.getItem("dados"))
     if(token === null || token === ''){
       const confirm = await sweetAlertWarning('Fazer login e continuar sua reserva', '', 'Ir para login', 'Continuar pesquisando', '#ff9800', '#eaeaea')
       if(confirm){
@@ -98,6 +122,10 @@ export function Product(){
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const dataSelecionada = () => {
+    console.log('Sem aplicação no momento')
+  }
 
   const copyUrlProduct = () => {
     const input = document.getElementById('inputCopy')
@@ -229,7 +257,10 @@ export function Product(){
             <h2>Datas disponíveis</h2>
             <div className="container-calendar">
               <div className="calendar">
-                <Calender />
+                <Calender
+                  onDisbaledDate={disbaledDate}
+                  onSelectedData={dataSelecionada}
+                />
               </div>
               <div className='start-reservation'>
                 <span>Adicione as data da sua viagem para obter preços exatos.</span>

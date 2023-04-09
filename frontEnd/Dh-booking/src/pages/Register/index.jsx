@@ -49,6 +49,8 @@ export function Register(){
             headers: requestHeaders,
         }
 
+        console.log(requestConfig)
+
         if(name.length >= 2 && lastname.length >= 2 && emailRegex.test(email) && password.length >= 6 && (password === confirmPassword)){
             fetch(`${apiUrl}api/usuario/registro`, requestConfig)
             .then(res => {

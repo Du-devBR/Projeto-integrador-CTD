@@ -54,21 +54,27 @@ export function Login(){
 
             fetch(`${apiUrl}api/login`, requestConfig)
             .then(res =>{
-                console.log(res)
                 if(res.ok){
                     setMessageError(false)
-                    res.text()
+                    res.json()
                     .then(token => {
-                        const decodeToken = jwt_decode(token)
-                        console.log(decodeToken)
-                        localStorage.setItem('token', token)
+                        console.log(token)
+                        localStorage.setItem('dados', JSON.stringify(token))
+                        const decodeToken = jwt_decode(token.token)
+                        // localStorage.setItem('token', token.token)
                         login(decodeToken.nome, decodeToken.sobrenome, decodeToken.sub)
                         sweetAlertSuccess('Login feito com sucesso')
                         // aqui podemos verificar se redirecionamos o usuario logado para home ou para reserva utilizando o location
-                        setTimeout(() => {
-                            navigate(location.state?.from ||"/")
+                        if(token.roleId === 2){
+                            setTimeout(() => {
+                                navigate(location.state?.from ||"/")
 
-                        }, 2000);
+                            }, 2000);
+                        }if(token.roleId === 1){
+                            setTimeout(() => {
+                                navigate(location.state?.from ||"/administration")
+                            }, 2000);
+                        }
                     })
                 }else{
                     setMessageError(true)
@@ -178,10 +184,10 @@ export function Login(){
                 &&
                 <span className='message-error'>Senha precisa ser maior que 6 digitos</span>
             }
-            <div className='checkbox-input'>
+            {/* <div className='checkbox-input'>
                 <input type="checkbox" id="check"/>
                 <label for="check">Lembrar-me</label>
-            </div>
+            </div> */}
             <button
                 id='id_submitLogin'
                 onClick={(event) => error(event)}

@@ -20,8 +20,8 @@ export function CardProduct(props){
           </div>
         </div>
         <div className="location-product">
-          <span>{`${props.data.accommodation.city.name} - `}</span>
-          <button className='btn-location-map'>Mostrar no mapa</button>
+          <span>{`${props.data.accommodation.city.name}`}</span>
+          {/* <button className='btn-location-map'>Mostrar no mapa</button> */}
         </div>
         <div className="description-product">
           <p>{props.data.description}</p>

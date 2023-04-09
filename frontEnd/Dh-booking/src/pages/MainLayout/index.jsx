@@ -20,6 +20,7 @@ export function MainLayout(){
   const [nameUser, setNameUser] = useState(null)
   const [lastNameUser, setLastNameUser] = useState(null)
   const [loggedLocal, setLoggedLocal] = useState(false)
+  const [userAdmin, setUserAdmin] = useState(false)
 
   const { login, logged, logoutContext } = useContext(UserContext)
 
@@ -28,25 +29,35 @@ export function MainLayout(){
   useEffect(() => {
     const userLocal = localStorage.getItem('nameUser')
     const lastNameLocal = localStorage.getItem('lastName')
+    // const localStorageUser = localStorage.getItem('dados')
+
     setNameUser(JSON.parse(userLocal))
     setLastNameUser(JSON.parse(lastNameLocal))
+
   }, [login])
 
   useEffect(() => {
-    const localStorageUser = localStorage.getItem('token')
+    const localStorageUser = localStorage.getItem("dados")
+    const userObject = JSON.parse(localStorageUser)
     if(localStorageUser){
       setLoggedLocal(true)
+      if(userObject.roleId === 1 ){
+        setUserAdmin(true)
+      }else{
+        setUserAdmin(false)
+      }
     }else{
       setLoggedLocal(false)
     }
-  }, [])
+
+  }, [login])
 
   async function logout(){
     const confirm = await sweetAlertWarning('Gostaria de deslogar da conta?', 'Sair da conta', 'Sair', 'Continuar logado','#eaeaea', '#ff9800')
     if(confirm){
       localStorage.removeItem("nameUser")
       localStorage.removeItem("lastName")
-      localStorage.removeItem("token")
+      localStorage.removeItem("dados")
       localStorage.removeItem("email")
       setLoggedLocal(false)
       navigate('/')
@@ -77,7 +88,13 @@ export function MainLayout(){
             <nav className='container-menu-nav'>
               {
                 logged || loggedLocal ? (
+
                   <div className="user-logged">
+                    {
+                      userAdmin ? (
+                        <Link to={'administration'} className='title-admin'>Administrador</Link>
+                      ): ''
+                    }
                     <div className="avatar-user">
                       {nameUser && <span>{nameUser.charAt(0)}</span>}
                       {lastNameUser && <span>{lastNameUser.charAt(0)}</span>}
@@ -117,6 +134,11 @@ export function MainLayout(){
                     <div className="name-user">
                       <span>Olá,</span>
                       <span>{`${nameUser} ${lastNameUser}`}</span>
+                      {
+                        userAdmin ? (
+                          <Link to={'administration'} className='title-admin'>Administrador</Link>
+                        ): ''
+                      }
                     </div>
                     <div className="button-logout">
                       <span>Deseja</span>

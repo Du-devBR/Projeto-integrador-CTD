@@ -5,21 +5,10 @@ import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-export function Calender(props){
+export function CalenderHome(props){
 
   const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
-  const { selectedRange, onSelectedData, onDisbaledDate} = props;
-
-  function isDateBlocked(date, onDisbaledDate) {
-    for (let i = 0; i < onDisbaledDate.length; i++) {
-      const { start, end } = onDisbaledDate[i];
-      if (date >= start && date <= end) {
-        return true;
-      }
-    }
-    return false;
-  }
-
+  const { selectedRange, onSelectedData} = props;
   const minDate = new Date()
 
   function handleDateChange(value) {
@@ -35,13 +24,6 @@ export function Calender(props){
         onChange={handleDateChange}
         showDoubleView={isMobile ? false : true}
         minDate= {minDate}
-        tileDisabled={({ date }) => isDateBlocked(date, onDisbaledDate)}
-        events={onDisbaledDate}
-        startAccessor="start"
-        endAccessor="end"
-        titleAccessor="title"
-        defaultView="month"
-
       />
 
     </div>

@@ -91,6 +91,10 @@
                 color: variables.$gray800
                 font-weight: variables.$font-xs
 
+              .input-error
+                background: variables.$erro-opacity
+                border: solid 1px variables.$error
+
               input::placeholder
                 color: variables.$gray600
 
@@ -151,6 +155,10 @@
                 border: solid 1px variables.$primary-color
                 outline: none
 
+              .input-error
+                background: variables.$erro-opacity
+                border: solid 1px variables.$error
+
                 option
                   color: variables.$gray600
                   font-weight: variables.$font-xs
@@ -176,13 +184,22 @@
           flex-direction: column
           gap: 0.5rem
 
+          .name-price-product
+            display: flex
+            align-items: center
+            justify-content: space-between
+
           span
             color: variables.$gray300
             font-size: variables.$h4-14px
             font-weight: variables.$font-xs
 
-          h2
-            color: variables.$gray100
+          .price-product
+            font-size: variables.$h2-20px
+            color: variables.$gray700
+
+          h3
+            color: variables.$gray800
             font-size: variables.$h1-24px
             font-weight: variables.$font-xs
 
@@ -200,8 +217,29 @@
             color: variables.$gray600
             font-size: variables.$h4-14px
 
+        .total-price-product
+          display: flex
+          flex-direction: column
+          gap: 1rem
+
+          span
+            font-size: variables.$h3-16px
+            font-weight: variables.$font-xs
+            color: variables.$gray800
+
+          .total-cost
+            display: flex
+            justify-content: space-between
+            align-items: center
+            border-top: solid 1px variables.$gray300
+            padding-top: 1rem
+
         .btn-confirm-reservation
           @include mixins.button-bgColor
+
+      .message-error-data
+        font-size: variables.$p-14px
+        color: variables.$error
 
   .container-product-policies
     display: flex

@@ -19,11 +19,23 @@ export function Reservation(){
   const [startDate, setStartDate] = useState([null, null])
   const [selectDate, setSelectDate] = useState(false)
 
+  const [reservation, setReservation ] = useState([])
+  const [disbaledDate, setDisabledDate ] = useState([])
+
+  const [initial, setInitial] = useState('')
+  const [final, setFinal] = useState('')
+
+  const [errorCity, setErrorCity] = useState(false)
+  const [erroHour, setErrorHour] = useState(false)
+  const [messagerErrorData, setMessageErrorData] = useState(false)
   const [nameUser, setNameUser] = useState()
   const [lastNameUser, setLastNameUser] = useState()
   const [email, setEmail] = useState()
   const [city, setCity] = useState('')
   const [hour, setHour] = useState('')
+
+  console.log(startDate)
+
 
   const {login} = useContext(UserContext)
 
@@ -38,6 +50,7 @@ export function Reservation(){
         const data = await (await response).json()
         setDataProduct(data)
         setSaveData(true)
+        console.log(data)
 
       }catch(error){
         console.error(error)
@@ -45,6 +58,28 @@ export function Reservation(){
     }
     fetchData()
   }, [id])
+
+  useEffect(() => {
+
+    fetch(`${apiUrl}api/reserva`)
+      .then(res => res.json())
+      .then(data => {
+        setReservation(data)
+
+        const filterReserv = reservation.filter(reserv => reserv.product.id === product.id)
+        const eventos = filterReserv.map(reserv => {
+          return{
+            id: reserv.id,
+            start: new Date(reserv.checkIn),
+            end: new Date(reserv.checkOut),
+            color: '#DB2828'
+          }
+        })
+    setDisabledDate(eventos)
+    // setBlockedRanges(eventos)
+    })
+
+  }, [product])
 
   useEffect(() => {
     if(saveData){
@@ -65,33 +100,65 @@ export function Reservation(){
   const dataSelecionada = (range) => {
     setStartDate(range)
     setSelectDate(true)
+    setMessageErrorData(false)
+    formatDate(range)
+    calculateBookingDays()
+    calculateTotalCost()
+  }
 
+  const calculateBookingDays = () => {
+    const checkin = new Date(startDate[0])
+    const timeStampCheckin = checkin.getTime()
+    const checkout = new Date(startDate[1])
+    const timeStampCheckout = checkout.getTime()
+
+    const differenceTimeStamp = timeStampCheckout - timeStampCheckin
+
+    const differenceDays = Math.ceil(differenceTimeStamp / (1000 * 60 * 60 * 24))
+
+    return differenceDays
+  }
+
+  const calculateTotalCost = () => {
+    const priceAccommodation = product?.price
+
+    return priceAccommodation * calculateBookingDays()
   }
 
   const formatDate = (range) => {
     if (!range) {
       return '';
     }
-
     const startDay = range[0].toLocaleString('pt-BR', { day: '2-digit' });
     const startMonth = range[0].toLocaleString('pt-BR', { month: 'short' });
-    return `${startDay} de ${startMonth}`;
+    const finalDay = range[1].toLocaleString('pt-BR', { day: '2-digit' });
+    const finalMonth = range[1].toLocaleString('pt-BR', { month: 'short' });
+
+    setInitial(`${startDay} de ${startMonth}`)
+    setFinal(`${finalDay} de ${finalMonth}`)
   }
 
   const submitForm = (event) => {
 
-    if((hour !== '' || null) && (city !== '' || null)){
+    const checkin = new Date(startDate[0])
+    const timeStampCheckin = checkin.getTime()
+    const checkout = new Date(startDate[1])
+    const timeStampCheckout = checkout.getTime()
+    const localStorageUser = JSON.parse(localStorage.getItem("dados"))
+
+    if((hour !== '' || null) && (city !== '' || null) && selectDate === true){
       event.preventDefault()
       const newReservation = {
-        dateHourReservation: startDate[0],
-        dateHourFinalReservation: startDate[1] ,
+        checkIn: timeStampCheckin,
+        checkOut: timeStampCheckout,
+        finalPrice: calculateTotalCost(),
         product: { id: id},
-        user: {id: 1}
+        user: {id: localStorageUser.userId}
       }
 
       const requestHeaders = {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': `Bearer ${localStorageUser.token}`
 
       }
       const requestConfig = {
@@ -118,11 +185,26 @@ export function Reservation(){
           }
       })
     }else{
-      console.log("Cidado ou hora vazia")
+      error()
+      console.log('erro')
     }
   }
 
-  console.log(hour)
+  const error = () => {
+    if(city.length <= 3){
+      setErrorCity(true)
+    }else{
+      setErrorCity(false)
+    }if(hour.length === 0){
+      setErrorHour(true)
+    }else{
+      setErrorHour(false)
+    }if(selectDate === false){
+      setMessageErrorData(true)
+    }else{
+      setMessageErrorData(false)
+    }
+  }
 
   return(
     <div className="container-reservation">
@@ -161,7 +243,7 @@ export function Reservation(){
                 </div>
                 <div className="input-city">
                   <label htmlFor="">Cidade</label>
-                  <input id='id_selectCity' type="text" placeholder='Digite sua cidade' onChange={event => setCity(event.target.value)}/>
+                  <input id='id_selectCity' className={errorCity ? 'input-error' : ''} type="text" placeholder='Digite sua cidade' onChange={event => setCity(event.target.value)}/>
                 </div>
               </div>
             </form>
@@ -171,6 +253,7 @@ export function Reservation(){
                   id={startDate}
                   onSelectedData={dataSelecionada}
                   selectedRange={startDate}
+                  onDisbaledDate={disbaledDate}
                 />
             </div>
             <div className="container-checkin">
@@ -179,7 +262,7 @@ export function Reservation(){
                 <p>Escolha um horário de check-in para que possamos deixar tudo preparado.</p>
                 <div className="select-checkin">
                   <label htmlFor="">Selecione a sua hora prevista de chegada</label>
-                  <select name="" id="id_selectCity" onChange={event => setHour(event.target.value)}>
+                  <select className={erroHour ? 'input-error' : ''} name="" id="id_selectCity" onChange={event => setHour(event.target.value)}>
                     <option value=""></option>
                     <option value="00:00">00:00</option>
                     <option value="01:00">01:00</option>
@@ -214,14 +297,34 @@ export function Reservation(){
             <h2>Detalhes da reserva</h2>
             <img src={product?.image[0]?.url} alt="" />
             <div className="info-product">
-              <span>{product?.accommodation?.category?.name}</span>
-              <h1>{product?.accommodation?.name}</h1>
+              <div className="name-price-product">
+                <span>{product?.accommodation?.category?.name}</span>
+                <span className='price-product'>R${product?.price} noite</span>
+              </div>
+              <h3>{product?.accommodation?.name}</h3>
               <span>{product?.accommodation?.city?.name}</span>
             </div>
+              {
+                messagerErrorData ? (
+                  <span className='message-error-data'>Selecione uma data para reserva</span>
+                ): ''
+              }
             <div className="info-checkin">
               <h3>Check in</h3>
-              <span>{selectDate ? formatDate(startDate) : ''}</span>
+              <span>{selectDate ? initial : ''}</span>
             </div>
+            <div className="info-checkin">
+              <h3>Check out</h3>
+              <span>{selectDate ? final : ''}</span>
+            </div>
+            <div className="total-price-product">
+              <span>{selectDate ? `R$${product?.price} x ${calculateBookingDays()} noites` : ''}</span>
+              <div className="total-cost">
+                <span>{selectDate ? 'Total da Reserva' : ''}</span>
+                <span>{selectDate ? `R$${calculateTotalCost()}` : ''}</span>
+              </div>
+            </div>
+
             <button
               onClick={event => submitForm(event)}
               className='btn-confirm-reservation'

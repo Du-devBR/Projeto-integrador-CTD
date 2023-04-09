@@ -9,7 +9,7 @@ export function UserProvider({children}){
   const [email, setEmail] = useState(null)
 
   useEffect(() => {
-    const localStorageUser = localStorage.getItem("user")
+    const localStorageUser = localStorage.getItem("dados")
     if(localStorageUser){
       setUsername(JSON.parse(localStorageUser))
     }
