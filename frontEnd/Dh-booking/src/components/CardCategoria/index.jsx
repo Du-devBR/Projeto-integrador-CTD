@@ -18,8 +18,9 @@ export function CardCategoria(props){
 
   return(
     <div className="card-category" onClick={() => props.onSelectCategory(props.data.name)}>
-      <img src={imgUrl} alt="" />
-      <div className="content-category">
+        <img src={`src/assets/img/${props.data.name}.svg`} className="category-icon"/>
+        <img src={imgUrl} alt="" />
+        <div className="content-category">
         <p>{props.data.name}</p>
         {/* <span>{`${props.data.qtd} ${props.data.descripition}`}</span> */}
       </div>
