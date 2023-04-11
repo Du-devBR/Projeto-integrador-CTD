@@ -89,7 +89,9 @@ export function MainLayout(){
               {
                 logged || loggedLocal ? (
 
+
                   <div className="user-logged">
+                    <Link className='btn-myReservations' to={'userId/reservas'}>Minhas Reservas</Link>
                     {
                       userAdmin ? (
                         <Link to={'administration'} className='title-admin'>Administrador</Link>

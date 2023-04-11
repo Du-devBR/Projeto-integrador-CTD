@@ -7,6 +7,7 @@ import { Product } from "./pages/Product"
 import { Register } from "./pages/Register"
 import { Reservation } from "./pages/Reservation"
 import { AdministrationPanel } from "./pages/Administration"
+import { MyReservation } from "./pages/MyReservation"
 
 
 export function Routes(){
@@ -36,6 +37,10 @@ export function Routes(){
         },{
           path:'produto/:id/reserva',
           element: <Reservation />
+        },
+        {
+          path:'userId/reservas',
+          element: <MyReservation />
         },{
           path:'administration',
           element: <AdministrationPanel />

@@ -48,8 +48,21 @@
 
       .user-logged
         display: flex
-        align-items: center
+        // align-items: flex-start
         gap: 1rem
+
+        .btn-myReservations
+          color: variables.$gray600
+          font-size: variables.$h3-16px
+          align-self: flex-end
+          font-weight: variables.$font-xs
+
+        .btn-myReservations:after
+          display: block
+          content: ''
+          width: 100%
+          height: 2px
+          background: variables.$gray600
 
         .title-admin
           font-size: variables.$h3-16px
