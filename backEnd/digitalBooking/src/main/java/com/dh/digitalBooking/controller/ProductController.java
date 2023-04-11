@@ -167,4 +167,20 @@ public class ProductController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/buscaPorCidadeEDatas")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductDTO> getProductsByCityAndDates(@RequestParam("cityName") String cityName,
+                                                      @RequestParam("startDate") java.sql.Timestamp startDate,
+                                                      @RequestParam("endDate") java.sql.Timestamp endDate) {
+        if(cityName == null) {
+            throw new IllegalArgumentException("City name cannot be null");
+        }
+        log.info("Find Product by City: %s, %d ".formatted(cityName, startDate, endDate ));
+        List<Product> productList = productService.findProductByCityAndDates(cityName, startDate, endDate);
+        return productList.stream()
+                .map(ProductUtil::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -9,6 +9,7 @@ import com.dh.digitalBooking.repository.ProductRepository;
 import com.dh.digitalBooking.util.ProductUtil;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,10 @@ public class ProductService {
 
     public List<Product> getProductsByCategoryName(String categoryName){
         return productRepository.findProductsByCategoryName(categoryName);
+    }
+
+    public List<Product> findProductByCityAndDates(String cityName, Timestamp startDate, Timestamp endDate) {
+        return productRepository.findProductByCityAndDates(cityName, startDate, endDate);
     }
 
 }
