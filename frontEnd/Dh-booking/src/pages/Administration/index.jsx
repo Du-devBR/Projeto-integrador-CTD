@@ -121,7 +121,7 @@ export function AdministrationPanel(){
           <div className="input-qualification-accommodation">
             <label htmlFor="">Qualificação da hospedagem</label>
             <select name="" id="" onChange={(event) => setSelectQualification(event.target.value)} onSubmit={formsAccommodation}>
-              <option value="">Slecione uma qualificação</option>
+              <option value="">Selecione uma qualificação</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -155,7 +155,7 @@ export function AdministrationPanel(){
         </form>
       </div>
       <div className="container-create-policies">
-        <h2>Criar politicas</h2>
+        <h2>Criar políticas</h2>
         <form action="">
           <div className="input-rules">
             <label htmlFor="">Regras da acomodação</label>
@@ -165,20 +165,20 @@ export function AdministrationPanel(){
             </div>
           </div>
           <div className="input-security">
-            <label htmlFor="">Saude e Segurança</label>
+            <label htmlFor="">Saúde e Segurança</label>
             <div className="input">
               <input type="text" />
               <button>+</button>
             </div>
           </div>
           <div className="input-policie-cancellation">
-            <label htmlFor="">Politicas de Cancelamento</label>
+            <label htmlFor="">Políticas de Cancelamento</label>
             <div className="input">
               <input type="text" />
               <button>+</button>
             </div>
           </div>
-          <button className='submit-policies'>Cadastrar Politicas</button>
+          <button className='submit-policies'>Cadastrar Políticas</button>
         </form>
       </div>
       <div className="container-create-image">
@@ -215,13 +215,13 @@ export function AdministrationPanel(){
             </select>
           </div>
           <div className="input-select-policies">
-            <label htmlFor="">Escolha as Politicas que você criou</label>
+            <label htmlFor="">Escolha as Políticas que você criou</label>
             <select name="" id="">
-              <option value="">Politicas</option>
+              <option value="">Políticas</option>
             </select>
           </div>
           <div className="input-caracteristic-product">
-            <label htmlFor="">Selecione as caracteristicas do produto</label>
+            <label htmlFor="">Selecione as características do produto</label>
             <div className="checkbox-caracteristic">
               {
                 caracteristics.map((caracteristic, index) => (
