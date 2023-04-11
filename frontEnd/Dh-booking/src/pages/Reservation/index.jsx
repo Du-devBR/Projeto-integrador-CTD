@@ -34,9 +34,6 @@ export function Reservation(){
   const [city, setCity] = useState('')
   const [hour, setHour] = useState('')
 
-  console.log(startDate)
-
-
   const {login} = useContext(UserContext)
 
   const {id} = useParams()
@@ -50,8 +47,6 @@ export function Reservation(){
         const data = await (await response).json()
         setDataProduct(data)
         setSaveData(true)
-        console.log(data)
-
       }catch(error){
         console.error(error)
       }
@@ -60,26 +55,31 @@ export function Reservation(){
   }, [id])
 
   useEffect(() => {
-
-    fetch(`${apiUrl}api/reserva`)
+    if(saveData){
+      fetch(`${apiUrl}api/reserva`)
       .then(res => res.json())
       .then(data => {
         setReservation(data)
+      })
+    }
+  }, [saveData])
 
-        const filterReserv = reservation.filter(reserv => reserv.product.id === product.id)
-        const eventos = filterReserv.map(reserv => {
-          return{
-            id: reserv.id,
-            start: new Date(reserv.checkIn),
-            end: new Date(reserv.checkOut),
-            color: '#DB2828'
-          }
-        })
-    setDisabledDate(eventos)
-    // setBlockedRanges(eventos)
-    })
-
-  }, [product])
+  useEffect(() => {
+    if (product && reservation.length > 0) {
+      const filterReserv = reservation.filter(
+        (reserv) => reserv.product.id === product.id
+      );
+      const eventos = filterReserv.map((reserv) => {
+        return {
+          id: reserv.id,
+          start: new Date(reserv.checkIn),
+          end: new Date(reserv.checkOut),
+          color: "#DB2828",
+        }
+      })
+      setDisabledDate(eventos)
+    }
+  }, [product, reservation])
 
   useEffect(() => {
     if(saveData){
@@ -172,7 +172,6 @@ export function Reservation(){
         if(res.ok){
             res.json()
             .then(data => {
-                console.log(data)
                 sweetAlertSuccess('Parabens!!!', 'Reserva cadastrado com sucesso!', 3000)
                 setTimeout(() => {
                   navigate("/home")

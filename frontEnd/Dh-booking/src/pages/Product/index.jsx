@@ -44,26 +44,31 @@ export function Product(){
   }, [id])
 
   useEffect(() => {
-
-    fetch(`${apiUrl}api/reserva`)
+    if(saveData){
+      fetch(`${apiUrl}api/reserva`)
       .then(res => res.json())
       .then(data => {
         setReservation(data)
+      })
+    }
+  }, [saveData])
 
-        const filterReserv = reservation.filter(reserv => reserv.product.id === product.id)
-        const eventos = filterReserv.map(reserv => {
-          return{
-            id: reserv.id,
-            start: new Date(reserv.checkIn),
-            end: new Date(reserv.checkOut),
-            color: '#DB2828'
-          }
-        })
-    setDisabledDate(eventos)
-    // setBlockedRanges(eventos)
-    })
-
-  }, [product])
+  useEffect(() => {
+    if (product && reservation.length > 0) {
+      const filterReserv = reservation.filter(
+        (reserv) => reserv.product.id === product.id
+      )
+      const eventos = filterReserv.map((reserv) => {
+        return {
+          id: reserv.id,
+          start: new Date(reserv.checkIn),
+          end: new Date(reserv.checkOut),
+          color: "#DB2828",
+        }
+      })
+      setDisabledDate(eventos)
+    }
+  }, [product, reservation])
 
   useEffect(() => {
     if(saveData){

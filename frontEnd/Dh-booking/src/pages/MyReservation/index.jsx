@@ -20,6 +20,7 @@ export function MyReservation(){
             if(dados){
               setReservations(dados)
               setUserReservation(true)
+              console.log(reservations)
             }
           })
       }
@@ -46,6 +47,7 @@ export function MyReservation(){
                       </div>
                       <span className='price-product'>{`R$${reservation.finalPrice}`}</span>
                     </div>
+                    <img src={reservation.product.image[0].url} alt="" />
                     <div className="info-product">
                       <h3 className='name-product'>{reservation.product.name}</h3>
                       <span>{reservation.product.accommodation.city.name}</span>

@@ -134,6 +134,27 @@ export function Home(){
     }
   }
 
+  // const searchDestinationSelect = (event) => {
+  //   // event.preventDefault()
+  //   // if(valueInputSelect !== null){
+  //     const timeStampInit = startDate[0]
+  //     const timeStampFinal = startDate[1]
+  //     const initial = timeStampInit.getTime()
+  //     const final = timeStampFinal.getTime()
+
+  //     console.log(initial)
+  //     fetch(`${apiUrl}api/produto/buscaPorCidadeEDatas?cityName=${valueInputSelect}&startDate=${initial}&endDate=${final}`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProducts(data)
+  //       setSelectCity(true)
+  //       setSelectCategory(false)
+  //     })
+  //   // }else{
+  //   //   console.log('errro')
+  //   // }
+  // }
+
   const searchProduct = (event) => {
     event.preventDefault()
 
@@ -142,7 +163,7 @@ export function Home(){
 
       const filteredProducts = objFilterBySelect.filter(product => objFilterByDate.includes(product))
 
-      console.log(filteredProducts)
+      // console.log(filteredProducts)
       setListProduct(false)
 
     // else if (startDate) {
@@ -160,6 +181,8 @@ export function Home(){
   function toogleLocation(){
     setShowDestination(!showDestination)
   }
+
+  console.log(startDate)
 
   const dataSelecionada = (range) => {
     setStartDate(range)
