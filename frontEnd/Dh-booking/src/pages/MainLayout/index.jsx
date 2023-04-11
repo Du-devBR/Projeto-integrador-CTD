@@ -8,7 +8,7 @@ import twitter from '../../assets/img/twitter.svg'
 import linkedn from '../../assets/img/linkedn.svg'
 import instagram from '../../assets/img/instagram.svg'
 import facebook from '../../assets/img/facebook.svg'
-import copyright from '../../assets/img/copyright.svg'
+import submark from '../../assets/img/submark.svg'
 import { UserContext } from '../../hooks/userLogin'
 import { sweetAlertWarning } from '../../hooks/sweetAlert'
 
@@ -80,7 +80,7 @@ export function MainLayout(){
       <header className= {isMobile ? 'container-header-mobile' : 'container-header'}>
         <Link to={''} className={toggle && isMobile ? 'container-logo-noVisibility' : 'container-logo-visibility'}>
           <img className='img-logo' src={logotipo} alt="" />
-          <span className='slogan'>Reserve seu proximo destino.</span>
+          <span className='slogan'>Um novo jeito de descobrir o mundo.</span>
         </Link>
         {
           !isMobile
@@ -184,7 +184,8 @@ export function MainLayout(){
       <footer className={isMobile ? 'container-footer-mobile' :'container-footer-desktop'}>
         <div className="footer-copyright">
           <div className="copyright">
-            <img src={copyright} alt="" />
+            <img src={submark} alt="" />
+            <p>© 2023 Nômade Virtual</p>
           </div>
           <ul className='nav-social-newtork'>
             <li><img src={facebook} alt="" /></li>

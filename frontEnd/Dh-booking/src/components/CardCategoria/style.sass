@@ -6,13 +6,28 @@
   max-width: 100%
   height: 350px
   border-radius: 0.625rem
-  background: variables.$gray100
   overflow: hidden
+  filter: drop-shadow(0 0rem 0.5rem variables.$second-color)
+  padding:0.5rem
+
+  .category-icon
+    display: absolute
+    border-radius: 50%
+    height: 6rem
+    width: 6rem
+    marging: 5px
+    filter: drop-shadow(0 0.3rem 0.3rem variables.$second-color)
+    background-color: variables.$gray0
+    margin-bottom: -3rem
+    align-self: center
+    z-index: 1
 
   img
     width: 100%
     height: 70%
     object-fit: cover
+    border-radius: 0.625rem 0.625rem 0 0
+    overflow: hidden
 
   .content-category
     display: flex
@@ -20,6 +35,8 @@
     padding: 1rem
     gap: 0.313rem
     cursor: pointer
+    background: variables.$gray0
+    border-radius: 0 0 0.625rem 0.625rem
 
     p
       font-size: variables.$h2-20px
