@@ -113,7 +113,6 @@ export function AdministrationPanel(){
       res.json()
       .then(data => {
         console.log(data)
-        sweetAlertSuccess('Regras criadas')
         setRegulations(data)
       })
     })
@@ -334,6 +333,7 @@ export function AdministrationPanel(){
                 console.log(res)
                 if(res.ok){
                   console.log('ok')
+                  sweetAlertSuccess('Regras criadas')
                   updateRegulamentation()
                 }else{
                     console.timeLog('erro na api')
