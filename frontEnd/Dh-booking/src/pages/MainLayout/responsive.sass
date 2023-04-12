@@ -7,6 +7,10 @@
     align-items: center
     justify-content: space-between
     background-color: variables.$gray0
+    background-image: url('./src/assets/img/header.png')
+    background-position: right
+    background-repeat: no-repeat
+    background-size: cover
     width: 100%
     height: 5rem
     padding: 3rem 1rem
@@ -22,9 +26,15 @@
       align-items: center
       flex-direction: column
       align-items: flex-start
+      color: variables.$gray800
+      padding: 2rem 0
+
+      .img-logo
+        height: 40px
+        width: auto
 
       .slogan
-        font-size: variables.$h4-14px
+        font-size: variables.$p-12px
         font-weight: variables.$font-sm
         color: variables.$gray800
         font-style: italic
@@ -86,6 +96,15 @@
       display: flex
       justify-content: space-between
       align-items: center
+
+      .copyright
+        display: flex
+        gap: 0.5rem
+        align-items: center
+
+        img
+          width: 30px
+          height: 30px
 
 
       .nav-social-newtork
@@ -170,6 +189,39 @@
           gap: 1rem
           height: 100%
           width: 100%
+
+          .btn-myReservations
+            color: variables.$gray700
+            font-size: variables.$h3-16px
+            align-self: flex-end
+            font-weight: variables.$font-xs
+            transition: 0.6s
+            margin: 1rem 0
+
+          .btn-myReservations:after
+            content: ''
+            width: 0
+            height: 2px
+            background: variables.$gray800
+            display: block
+            transition: 0.6s
+
+
+          .btn-myReservations:hover:after
+            content: ''
+            width: 100%
+            height: 2px
+            background: variables.$gray800
+            transition: 0.6s
+
+          .title-admin
+            font-size: variables.$h3-16px
+            font-weight: variables.$font-xs
+            color: variables.$gray600
+            border: solid 1px variables.$gray800
+            padding: 0.5rem
+            border-radius: 0.5rem
+            margin: 1rem 0 0 0
 
           .avatar-user
             display: flex
@@ -295,6 +347,10 @@
     .container-header
 
       .container-logo-visibility
+        flex-direction: column
 
         .slogan
           font-size: variables.$p-12px
+
+      .container-menu-nav
+        .user-logged

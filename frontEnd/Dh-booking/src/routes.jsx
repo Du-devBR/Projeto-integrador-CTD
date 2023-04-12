@@ -1,11 +1,13 @@
-import { BrowserRouter, createBrowserRouter, Navigate, RouterProvider} from "react-router-dom"
-import { UserProvider } from "./hooks/userLogin"
-import { Home } from "./pages/Home"
-import { Login } from "./pages/Login"
-import { MainLayout } from "./pages/MainLayout"
-import { Product } from "./pages/Product"
-import { Register } from "./pages/Register"
-import { Reservation } from "./pages/Reservation"
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom"
+import {UserProvider} from "./hooks/userLogin"
+import {Home} from "./pages/Home"
+import {Login} from "./pages/Login"
+import {MainLayout} from "./pages/MainLayout"
+import {Product} from "./pages/Product"
+import {Register} from "./pages/Register"
+import {Reservation} from "./pages/Reservation"
+import {AdministrationPanel} from "./pages/Administration"
+import {MyReservation} from "./pages/MyReservation"
 
 
 export function Routes(){
@@ -35,6 +37,13 @@ export function Routes(){
         },{
           path:'produto/:id/reserva',
           element: <Reservation />
+        },
+        {
+          path:'userId/reservas',
+          element: <MyReservation />
+        },{
+          path:'administration',
+          element: <AdministrationPanel />
         }
       ]
     }

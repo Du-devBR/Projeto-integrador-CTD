@@ -5,13 +5,13 @@ FROM node:latest
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files
-COPY frontEnd/Dh-booking/package*.json ./
+COPY Dh-booking/package*.json ./
 
 # Install the application dependencies
 RUN npm install
 
 # Copy the rest of the application files
-COPY frontEnd/Dh-booking/. .
+COPY Dh-booking/. .
 
 # Build the app
 RUN npm run build

@@ -15,6 +15,7 @@ import {apiUrl} from '../../mainApi'
 // import { product } from '../../assets/js-mock/products'
 import { CardProduct } from '../../components/CardProduto';
 import {MapPin, Calendar} from 'phosphor-react'
+import { CalenderHome } from '../../components/CalenderHome';
 
 
 export function Home(){
@@ -31,7 +32,6 @@ export function Home(){
   const [objectFilter, setObjectFilter] = useState([]);
   const [listProduct, setListProduct] =useState(true)
   const [selectCity, setSelectCity] = useState(false)
-
   const [selectCategory, setSelectCategory] = useState(false)
 
   const [inputSelect, setInputSelect] = useState(true)
@@ -64,7 +64,6 @@ export function Home(){
   useEffect(() => {
     fetch(`${apiUrl}api/produto`)
     .then(res => {
-      // console.log(res)
       res.json()
       .then(data => {
         setProducts(data)
@@ -98,16 +97,15 @@ export function Home(){
     return filterObjects
   }
 
-  // console.log(products)
-
   const filterProductByCategory = (currentCategory) => {
 
-    const filterCategory = products.filter((object) => object.accommodation.category.name === currentCategory)
-    setObjectFilter(filterCategory)
-    setListProduct(false)
-    setSelectCategory(true)
-    setSelectCity(false)
-
+    fetch(`${apiUrl}api/produto/buscaPorCategoria?categoryName=${currentCategory}`)
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data)
+        setSelectCategory(true)
+        setSelectCity(false)
+      })
   }
 
   const searchDestinationWithData = (event) => {
@@ -121,23 +119,41 @@ export function Home(){
     setListProduct(false)
   }
 
-  // console.log(objectFilter)
-
   const searchDestinationSelect = (event) => {
     // event.preventDefault()
     if(valueInputSelect !== null){
-      setSearchDestination(valueInputSelect)
-      const objFilter = filterProductBySelect()
-        setObjectFilter(objFilter)
-        setListProduct(false)
-        setValueInputSelect('')
+      fetch(`${apiUrl}api/produto/buscaPorCidade?cityName=${valueInputSelect}`)
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data)
         setSelectCity(true)
         setSelectCategory(false)
-
+      })
     }else{
       console.log('errro')
     }
   }
+
+  // const searchDestinationSelect = (event) => {
+  //   // event.preventDefault()
+  //   // if(valueInputSelect !== null){
+  //     const timeStampInit = startDate[0]
+  //     const timeStampFinal = startDate[1]
+  //     const initial = timeStampInit.getTime()
+  //     const final = timeStampFinal.getTime()
+
+  //     console.log(initial)
+  //     fetch(`${apiUrl}api/produto/buscaPorCidadeEDatas?cityName=${valueInputSelect}&startDate=${initial}&endDate=${final}`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProducts(data)
+  //       setSelectCity(true)
+  //       setSelectCategory(false)
+  //     })
+  //   // }else{
+  //   //   console.log('errro')
+  //   // }
+  // }
 
   const searchProduct = (event) => {
     event.preventDefault()
@@ -147,7 +163,7 @@ export function Home(){
 
       const filteredProducts = objFilterBySelect.filter(product => objFilterByDate.includes(product))
 
-      console.log(filteredProducts)
+      // console.log(filteredProducts)
       setListProduct(false)
 
     // else if (startDate) {
@@ -165,6 +181,8 @@ export function Home(){
   function toogleLocation(){
     setShowDestination(!showDestination)
   }
+
+  console.log(startDate)
 
   const dataSelecionada = (range) => {
     setStartDate(range)
@@ -250,7 +268,7 @@ export function Home(){
                   {
                     showCalendar
                       &&
-                      <Calender
+                      <CalenderHome
                         id={startDate}
                         onSelectedData={dataSelecionada}
                         selectedRange={startDate}
@@ -286,11 +304,11 @@ export function Home(){
         {
           listProduct ?
           (
-            <h2>Acomodações em alta</h2>
-          ):selectCategory ? (
-            <h2>{objectFilter[0].accommodation.category.name}</h2>
-          ): selectCity ? (
-            <h2>{objectFilter[0].accommodation.city.name}</h2>
+            selectCategory ? (
+                <h2>{products[0].accommodation.category.name}</h2>
+            ): selectCity ? (
+              <h2>{products[0].accommodation.city.name}</h2>
+            ): <h2>Acomodações em alta</h2>
           ): ''
         }
         <div className="list-products">

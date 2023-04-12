@@ -8,9 +8,9 @@ import twitter from '../../assets/img/twitter.svg'
 import linkedn from '../../assets/img/linkedn.svg'
 import instagram from '../../assets/img/instagram.svg'
 import facebook from '../../assets/img/facebook.svg'
-import copyright from '../../assets/img/copyright.svg'
+import submark from '../../assets/img/submark.svg'
 import { UserContext } from '../../hooks/userLogin'
-import { sweetAlertCancel } from '../../hooks/sweetAlert'
+import { sweetAlertWarning } from '../../hooks/sweetAlert'
 
 
 export function MainLayout(){
@@ -20,6 +20,7 @@ export function MainLayout(){
   const [nameUser, setNameUser] = useState(null)
   const [lastNameUser, setLastNameUser] = useState(null)
   const [loggedLocal, setLoggedLocal] = useState(false)
+  const [userAdmin, setUserAdmin] = useState(false)
 
   const { login, logged, logoutContext } = useContext(UserContext)
 
@@ -28,25 +29,35 @@ export function MainLayout(){
   useEffect(() => {
     const userLocal = localStorage.getItem('nameUser')
     const lastNameLocal = localStorage.getItem('lastName')
+    // const localStorageUser = localStorage.getItem('dados')
+
     setNameUser(JSON.parse(userLocal))
     setLastNameUser(JSON.parse(lastNameLocal))
+
   }, [login])
 
   useEffect(() => {
-    const localStorageUser = localStorage.getItem('token')
+    const localStorageUser = localStorage.getItem("dados")
+    const userObject = JSON.parse(localStorageUser)
     if(localStorageUser){
       setLoggedLocal(true)
+      if(userObject.roleId === 1 ){
+        setUserAdmin(true)
+      }else{
+        setUserAdmin(false)
+      }
     }else{
       setLoggedLocal(false)
     }
-  }, [])
+
+  }, [login])
 
   async function logout(){
-    const confirm = await sweetAlertCancel('Gostaria de deslogar da conta?')
+    const confirm = await sweetAlertWarning('Gostaria de deslogar da conta?', 'Sair da conta', 'Sair', 'Continuar logado','#eaeaea', '#ff9800')
     if(confirm){
       localStorage.removeItem("nameUser")
       localStorage.removeItem("lastName")
-      localStorage.removeItem("token")
+      localStorage.removeItem("dados")
       localStorage.removeItem("email")
       setLoggedLocal(false)
       navigate('/')
@@ -69,7 +80,7 @@ export function MainLayout(){
       <header className= {isMobile ? 'container-header-mobile' : 'container-header'}>
         <Link to={''} className={toggle && isMobile ? 'container-logo-noVisibility' : 'container-logo-visibility'}>
           <img className='img-logo' src={logotipo} alt="" />
-          <span className='slogan'>Reserve seu proximo destino.</span>
+          <span className='slogan'>Um novo jeito de descobrir o mundo.</span>
         </Link>
         {
           !isMobile
@@ -77,7 +88,13 @@ export function MainLayout(){
             <nav className='container-menu-nav'>
               {
                 logged || loggedLocal ? (
+
                   <div className="user-logged">
+                    {
+                      userAdmin ? (
+                        <Link to={'administration'} className='title-admin'>Administrador</Link>
+                      ): <Link className='btn-myReservations' to={'userId/reservas'}>Minhas Reservas</Link>
+                    }
                     <div className="avatar-user">
                       {nameUser && <span>{nameUser.charAt(0)}</span>}
                       {lastNameUser && <span>{lastNameUser.charAt(0)}</span>}
@@ -117,6 +134,11 @@ export function MainLayout(){
                     <div className="name-user">
                       <span>Olá,</span>
                       <span>{`${nameUser} ${lastNameUser}`}</span>
+                      {
+                        userAdmin ? (
+                          <Link to={'administration'} className='title-admin'>Administrador</Link>
+                        ): <Link className='btn-myReservations' to={'userId/reservas'}>Minhas Reservas</Link>
+                      }
                     </div>
                     <div className="button-logout">
                       <span>Deseja</span>
@@ -162,13 +184,14 @@ export function MainLayout(){
       <footer className={isMobile ? 'container-footer-mobile' :'container-footer-desktop'}>
         <div className="footer-copyright">
           <div className="copyright">
-            <img src={copyright} alt="" />
+            <img src={submark} alt="" />
+            <p>© 2023 Nômade Virtual</p>
           </div>
           <ul className='nav-social-newtork'>
-            <li><img src={facebook} alt="" /></li>
-            <li><img src={twitter} alt="" /></li>
-            <li><img src={linkedn} alt="" /></li>
-            <li><img src={instagram} alt="" /></li>
+            <li><a href="https://pt-br.facebook.com/"><img src={facebook} alt=""/></a></li>
+            <li><a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoicHQifQ%3D%3D%22%7D"><img src={twitter} alt="" /></a></li>
+            <li><a href="https://www.linkedin.com"></a><img src={linkedn} alt="" /></li>
+            <li><a href="https://www.instagram.com/"><img src={instagram} alt="" /></a></li>
           </ul>
         </div>
       </footer>

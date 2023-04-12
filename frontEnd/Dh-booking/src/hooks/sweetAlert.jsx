@@ -10,15 +10,16 @@ export const sweetAlertSuccess = (title, message, timer) => {
   })
 }
 
-export const sweetAlertCancel = async (message) => {
+export const sweetAlertWarning = async (message, title, btnConfirmText, btnCancelText, btnConfirmColor, btnCancelColor) => {
   const sweet = await Swal.fire({
-    title: 'Sair da conta',
+    title: title,
     text: message,
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#ff9800',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Sim',
+    confirmButtonColor: btnConfirmColor,
+    cancelButtonColor: btnCancelColor,
+    cancelButtonText: btnCancelText,
+    confirmButtonText: btnConfirmText,
     position: 'top-end'
   })
   return sweet.isConfirmed

@@ -19,12 +19,12 @@
       gap: 0.313rem
 
       span
-        color: variables.$gray300
+        color: variables.$gray1000
         font-size: variables.$h4-14px
         font-weight: variables.$font-xs
 
       h1
-        color: variables.$gray100
+        color: variables.$gray0
         font-size: variables.$h1-24px
         font-weight: variables.$font-xs
 
@@ -33,10 +33,81 @@
       gap: 2rem
       align-items: center
       padding: 1rem 0
+      position: relative
+
+      .btn-share-product
+        background: none
+        border: none
+        cursor: pointer
+
+      .container-share-product
+          position: fixed
+          padding: 2rem
+          height: auto
+          right: 2rem
+          top: 150px
+          z-index: 100
+          background: variables.$gray0
+          transition: 0.6s
+          border-radius: 0.5rem
+          box-shadow: -1px 4px 10px 3px variables.$gray300
+
+          .share
+            display: flex
+            flex-direction: column
+            gap: 0.5rem
+
+            .btn-close-share
+              width: fit-content
+              align-self: flex-end
+              padding: 0.313rem 0.5rem
+              border-radius: 1rem
+              border: none
+              background: variables.$light-blue
+              cursor: pointer
+              color: variables.$gray800
+              font-weight: variables.$font-xs
+
+            h3
+              font-size: variables.$h3-16px
+              position: relative
+              color: variables.$gray800
+
+            ul
+
+              li
+                cursor: pointer
+
+            .share-link-product
+              display: flex
+              position: relative
+
+              input
+                padding: 0.5rem
+                width: 100%
+                border-radius: 0.5rem
+                position: relative
+                border: solid 1px variables.$gray300
+                color: variables.$gray600
+                font-weight: variables.$font-xs
+                font-size: variables.$p-12px
+
+              button
+                position: absolute
+                height: 100%
+                right: 0
+                border-radius: 0.5rem
+                padding: 0 0.5rem
+                cursor: pointer
+                border: none
+                background: variables.$primary-color
+                color: variables.$gray0
+                font-size: variables.$btn-14px
+
 
   .container-location
     display: flex
-    background: variables.$gray100
+    background: variables.$light-blue
     align-items: center
     padding: 1rem 2rem
     gap: 0.5rem
@@ -44,7 +115,7 @@
 
     .location-product
       display: flex
-      background: variables.$gray100
+      background: variables.$light-blue
       align-items: center
       gap: 0.5rem
       width: 100%
@@ -122,9 +193,12 @@
       bottom: 3rem
       right: 3rem
       @include mixins.button-view-more
-      color: variables.$gray600
+      color: variables.$gray0
       font-weight: variables.$font-xs
       transition: 0.6s
+      border: solid 1px variables.$primary-color
+      border-radius: 0.5rem
+      padding: 2px
 
     .view-more-picture:hover
       color: variables.$primary-color
@@ -184,7 +258,7 @@
         li
           font-size: variables.$p-14px
           font-weight: variables.$font-md
-          color: variables.$gray600
+          color: variables.$gray1000
           letter-spacing: 1px
 
   .container-schedule
@@ -222,15 +296,19 @@
         height: 100%
         flex-direction: column
         padding: 2rem 1rem
-        background: variables.$gray100
+        background: variables.$light-blue
         border-radius: 0.5rem
         gap: 1rem
         margin-right: 1rem
+        align-items: center
 
         .btn-reservation
           @include mixins.button-bgColor
           cursor: pointer
           text-align: center
+
+          link
+            color: variables.$gray0
 
   .container-map
     width: 100%
@@ -241,13 +319,19 @@
     // background: variables.$gray300
     padding:  2rem
 
+    .leaflet-map-pane
+      z-index: 0
+
+      .leaflet-control-container
+        z-index: 0
+
   .container-product-policies
     display: flex
     width: 100%
     height: auto
     flex-direction: column
     padding: 4rem 2rem
-    background: variables.$gray100
+    background: variables.$light-blue
     gap: 1rem
 
     h2
@@ -269,17 +353,21 @@
         h3
           font-size: variables.$h3-16px
           font-weight: variables.$font-xs
-          color: variables.$gray700
+          color: variables.$gray1000
 
         ul
           display: flex
           flex-direction: column
           gap: 1rem
 
-          p
-            font-size: variables.$p-14px
-            color: variables.$gray600
-            font-weight: variables.$font-md
+          li
+            display: flex
+            flex-direction: column
+            gap: 1rem
+            p
+              font-size: variables.$p-14px
+              color: variables.$gray800
+              font-weight: variables.$font-md
 
 .container-open-modal
   width: 100%

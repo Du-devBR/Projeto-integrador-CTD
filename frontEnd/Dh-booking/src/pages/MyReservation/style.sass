@@ -1,0 +1,105 @@
+@use '../../Style/variables'
+@use '../../Style/mixins'
+
+.container-myReservation
+  display: flex
+  width: 100%
+  padding: 2rem
+
+  .container-card-reservation
+    display: grid
+    gap: 1rem
+    max-width: 100%
+    grid-template-columns: repeat(auto-fit, minmax(410px, 1fr))
+
+    .card-product-reserved
+      display: flex
+      flex-direction: column
+      background: variables.$light-blue
+      border-radius: 0.5rem
+      padding: 1rem
+      gap: 0.5rem
+
+      .header-reserved
+        display: flex
+        align-items: center
+        gap: 0.5rem
+        justify-content: space-between
+        border-bottom: solid 1px variables.$gray600
+
+        .name-category
+          display: flex
+          gap: 0.5rem
+          align-items: center
+
+          span
+            font-size: variables.$p-14px
+            color: variables.$gray600
+            font-weight: variables.$font-xs
+
+          h2
+            font-size: variables.$h2-20px
+            color: variables.$gray800
+
+        .price-product
+          font-size: variables.$h1-24px
+          color: variables.$primary-color
+          font-weight: variables.$font-xs
+
+      img
+        max-width: 100%
+        height: 100%
+        border-radius: 0.5rem
+
+    .info-product
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+    .info-reserved
+      display: flex
+      justify-content: space-between
+
+      .checkin, .checkout
+        display: flex
+        flex-direction: column
+
+        h3
+          font-size: variables.$h3-16px
+          font-weight: variables.$font-xs
+          color: variables.$gray700
+
+        span
+          font-size: variables.$h3-16px
+          color: variables.$gray600
+          font-weight: variables.$font-xs
+
+      h3
+        font-size: variables.$h3-16px
+        font-weight: variables.$font-xs
+        color: variables.$gray800
+
+      span
+        font-size: variables.$h3-16px
+        font-weight: variables.$font-md
+        color: variables.$gray600
+
+  .unreserved-user
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: calc( 100vh - 141px )
+    align-items: center
+    justify-content: center
+    gap: 1rem
+
+    img
+      width: 100px
+
+    span
+      font-size: variables.$h2-20px
+      font-weight: variables.$font-md
+      color: variables.$gray800
+
+    .btn-back-to-home
+      @include mixins.button-not-bgColor
