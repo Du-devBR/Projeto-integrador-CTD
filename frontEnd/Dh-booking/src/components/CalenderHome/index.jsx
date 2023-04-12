@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 
 export function CalenderHome(props){
 
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 501px)' })
   const { selectedRange, onSelectedData} = props;
   const minDate = new Date()
 

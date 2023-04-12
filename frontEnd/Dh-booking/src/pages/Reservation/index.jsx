@@ -34,6 +34,9 @@ export function Reservation(){
   const [city, setCity] = useState('')
   const [hour, setHour] = useState('')
 
+  const [regulation, setRegulation] = useState([])
+  const [filterRegulation, setFilterRegulation] = useState([])
+
   const {login} = useContext(UserContext)
 
   const {id} = useParams()
@@ -80,6 +83,19 @@ export function Reservation(){
       setDisabledDate(eventos)
     }
   }, [product, reservation])
+
+  useEffect(() => {
+    fetch(`${apiUrl}api/regulamentacao`)
+    .then(res => res.json())
+    .then(data => {
+      setRegulation(data)
+    })
+  }, [])
+
+  useEffect(() => {
+    const filter = regulation.filter(regul => regul.accommodation[0].id === product?.accommodation?.id)
+    setFilterRegulation(filter)
+  }, [regulation])
 
   useEffect(() => {
     if(saveData){
@@ -337,31 +353,37 @@ export function Reservation(){
               <div className="rules">
                 <h3>Regras</h3>
                 <ul>
-                  {
-                    products[`${id}` - 1].policies.rules.map(rule => (
-                      <p>{rule}</p>
-                    ))
-                  }
+                  {filterRegulation.map((rule, index) => (
+                    <li key={index}>
+                      {rule.regrasCasa.map((ruleItem, index) => (
+                        <p key={index}>{ruleItem}</p>
+                      ))}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="healths">
                 <h3>Saude e Segurança</h3>
                 <ul>
-                  {
-                  products[`${id}` - 1].policies.health.map(healths => (
-                    <p>{healths}</p>
-                  ))
-                }
+                  {filterRegulation.map((rule, index) => (
+                    <li key={index}>
+                      {rule.regrasSaude.map((ruleItem, index) => (
+                        <p key={index}>{ruleItem}</p>
+                      ))}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="cancellation">
                 <h3>Politica de Cancelamento</h3>
                 <ul>
-                  {
-                  products[`${id}` - 1].policies.cancellation.map(cancellations => (
-                    <p>{cancellations}</p>
-                  ))
-                }
+                  {filterRegulation.map((rule, index) => (
+                    <li key={index}>
+                      {rule.regrasCancelamento.map((ruleItem, index) => (
+                        <p key={index}>{ruleItem}</p>
+                      ))}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

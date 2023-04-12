@@ -20,8 +20,6 @@ export function Calender(props){
     return false;
   }
 
-  console.log(onDisbaledDate)
-
   const minDate = new Date()
 
   function handleDateChange(value) {

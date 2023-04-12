@@ -89,13 +89,11 @@ export function MainLayout(){
               {
                 logged || loggedLocal ? (
 
-
                   <div className="user-logged">
-                    <Link className='btn-myReservations' to={'userId/reservas'}>Minhas Reservas</Link>
                     {
                       userAdmin ? (
                         <Link to={'administration'} className='title-admin'>Administrador</Link>
-                      ): ''
+                      ): <Link className='btn-myReservations' to={'userId/reservas'}>Minhas Reservas</Link>
                     }
                     <div className="avatar-user">
                       {nameUser && <span>{nameUser.charAt(0)}</span>}
@@ -139,7 +137,7 @@ export function MainLayout(){
                       {
                         userAdmin ? (
                           <Link to={'administration'} className='title-admin'>Administrador</Link>
-                        ): ''
+                        ): <Link className='btn-myReservations' to={'userId/reservas'}>Minhas Reservas</Link>
                       }
                     </div>
                     <div className="button-logout">
@@ -190,10 +188,10 @@ export function MainLayout(){
             <p>© 2023 Nômade Virtual</p>
           </div>
           <ul className='nav-social-newtork'>
-            <li><img src={facebook} alt="" /></li>
-            <li><img src={twitter} alt="" /></li>
-            <li><img src={linkedn} alt="" /></li>
-            <li><img src={instagram} alt="" /></li>
+            <li><a href="https://pt-br.facebook.com/"><img src={facebook} alt=""/></a></li>
+            <li><a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoicHQifQ%3D%3D%22%7D"><img src={twitter} alt="" /></a></li>
+            <li><a href="https://www.linkedin.com"></a><img src={linkedn} alt="" /></li>
+            <li><a href="https://www.instagram.com/"><img src={instagram} alt="" /></a></li>
           </ul>
         </div>
       </footer>
