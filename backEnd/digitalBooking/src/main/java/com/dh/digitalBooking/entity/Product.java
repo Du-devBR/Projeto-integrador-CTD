@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -34,17 +35,20 @@ public class Product implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "produto-imagem",
-            joinColumns = @JoinColumn(name = "fk_produto"),
+            joinColumns = @JoinColumn(name = "fk_produto",
+                    referencedColumnName = "id_produto"),
             inverseJoinColumns = @JoinColumn(name = "fk_imagem",
-                            referencedColumnName = "id_imagem"))
+                    referencedColumnName = "id_imagem"))
     private List<Image> image;
 
     @ManyToMany
     @JoinTable(name = "produto-caracteristica",
-                    joinColumns = @JoinColumn(name = "fk_produto"),
-                    inverseJoinColumns = @JoinColumn(name = "fk_caracteristica",
-                                    referencedColumnName = "id_caracteristica"))
+            joinColumns = @JoinColumn(name = "fk_produto",
+                    referencedColumnName = "id_produto"),
+            inverseJoinColumns = @JoinColumn(name = "fk_caracteristica",
+                    referencedColumnName = "id_caracteristica"))
     private List<Caracteristic> caracteristic;
+
 
     @ManyToOne
     @JoinColumn(name="fk_hospedagem", referencedColumnName = "id_hospedagem")

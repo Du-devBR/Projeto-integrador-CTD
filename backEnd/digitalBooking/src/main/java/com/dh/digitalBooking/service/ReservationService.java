@@ -4,6 +4,7 @@ import com.dh.digitalBooking.dto.ReservationDTO;
 import com.dh.digitalBooking.entity.Reservation;
 import com.dh.digitalBooking.repository.ReservationRepository;
 import com.dh.digitalBooking.util.ReservationUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ReservationService {
     public ReservationDTO save(ReservationDTO reservationDTO){
         Reservation reservation = ReservationUtil.convertToEntity(reservationDTO);
         return ReservationUtil.convertToDTO(reservationRepository.save(reservation));
+
     }
 
     public List<ReservationDTO> findAll(){
@@ -37,5 +39,9 @@ public class ReservationService {
 
     public void deleteById(Long id){
         reservationRepository.deleteById(id);
+    }
+
+    public  List<Reservation> getReservationByIdUser(Long idUser){
+        return reservationRepository.findReservationByIdUser(idUser);
     }
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,7 +16,11 @@ import java.util.List;
 public class RegulationDTO {
     private Long id;
 
-    private String description;
+    private List<String> regrasSaude = new ArrayList<>();
+
+    private List<String> regrasCasa = new ArrayList<>();
+
+    private List<String> regrasCancelamento = new ArrayList<>();
 
     private List<Accommodation> accommodation;
 }

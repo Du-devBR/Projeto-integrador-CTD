@@ -14,6 +14,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  A configuration class that provides basic security configuration for the application.
@@ -80,19 +88,36 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf().disable()
-                .cors().disable()
+                .cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
-                    .requestMatchers(
-                            request -> request.getRequestURI().endsWith("/api/login"),
-                            request -> request.getRequestURI().endsWith("/api/usuario/registro")
-                    ).permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
-                    .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("ADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("ADMIN")
-                    .anyRequest().authenticated().and()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/usuario/registro").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/produto/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/api/produto/**").hasAnyAuthority("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/api/produto/buscaPorCidadeEDatas?**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("ADMIN")
+                .anyRequest().authenticated().and().csrf().disable()
                 .addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedHeaders("*");
+            }
+        };
+    }
+
 }

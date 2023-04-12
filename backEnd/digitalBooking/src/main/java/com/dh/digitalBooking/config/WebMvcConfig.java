@@ -1,4 +1,4 @@
-package com.dh.digitalBooking.security;
+package com.dh.digitalBooking.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,4 +26,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     abstract static class IgnoreHibernatePropertiesInSerialization {}
+
+
 }
