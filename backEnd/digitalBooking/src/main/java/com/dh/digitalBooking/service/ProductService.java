@@ -2,15 +2,12 @@ package com.dh.digitalBooking.service;
 
 
 import com.dh.digitalBooking.dto.ProductDTO;
-import com.dh.digitalBooking.entity.Category;
-import com.dh.digitalBooking.entity.City;
 import com.dh.digitalBooking.entity.Product;
 import com.dh.digitalBooking.repository.ProductRepository;
 import com.dh.digitalBooking.util.ProductUtil;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

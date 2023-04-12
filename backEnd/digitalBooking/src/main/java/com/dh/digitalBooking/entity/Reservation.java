@@ -40,4 +40,5 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
     private User user;
 
+
 }

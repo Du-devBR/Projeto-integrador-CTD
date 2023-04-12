@@ -34,7 +34,7 @@ public class RegulationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RegulationDTO save(@Valid @RequestBody RegulationDTO regulationDTO){
-        log.info("Creating Regulation: %s".formatted(regulationDTO.getDescription()));
+        log.info("Creating Regulation: %s".formatted(regulationDTO.getRegrasCasa()));
         return regulationService.save(regulationDTO);
     }
 

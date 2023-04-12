@@ -38,6 +38,32 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                                             @Param("startDate") Timestamp startDate,
                                             @Param("endDate") Timestamp endDate);
 
+//    @Query("SELECT p FROM Product p " +
+//            "JOIN p.accommodation a " +
+//            "JOIN a.city c " +
+//            "JOIN p.reservations r " +
+//            "WHERE c.name = :cityName " +
+//            "AND r.checkIn >= :startDate " +
+//            "AND r.checkIn <= :endDate")
+//    List<Product> findProductByCityAndDates(@Param("cityName") String cityName,
+//                                                     @Param("startDate") Timestamp startDate,
+//                                                     @Param("endDate") Timestamp endDate);
+//
+//
+//    @Query("SELECT p FROM Product p " +
+//            "JOIN p.accommodation a " +
+//            "JOIN a.city c " +
+//            "WHERE c.name = :cityName " +
+//            "AND NOT EXISTS (" +
+//            "    SELECT r FROM Reservation r " +
+//            "    WHERE r.product = p " +
+//            "    AND ((r.checkIn <= :startDate AND r.checkOut >= :startDate) " +
+//            "         OR (r.checkIn <= :endDate AND r.checkOut >= :endDate) " +
+//            "         OR (r.checkIn >= :startDate AND r.checkOut <= :endDate)))")
+//    List<Product> findProductByCityAndDates(@Param("cityName") String cityName,
+//                                            @Param("startDate") Timestamp startDate,
+//                                            @Param("endDate") Timestamp endDate);
+//
 //    @Query("SELECT p FROM Reservation r " +
 //            "RIGHT JOIN r.product p " +
 //            "JOIN p.accommodation a " +
